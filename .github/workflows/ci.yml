@@ -46,3 +46,5 @@ jobs:
         run: python tools/gen_enums.py --check
       - name: Genesis -> tritrpc_envelope -> Q3 emission (end-to-end)
         run: pip install pytest && python -m pytest -q tools/test_emit_tritrpc.py
+      - name: Inception runtime (seed->twin, durable, replay, revoke, HTTP)
+        run: pip install fastapi httpx uvicorn && PYTHONPATH=src python -m pytest -q tests/test_inception.py

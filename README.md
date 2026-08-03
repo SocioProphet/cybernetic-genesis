@@ -78,3 +78,15 @@ MIT © 2026 SocioProphet. See `LICENSE`.
 - **Consumes semantic-serdes** (governance + truth_class; alignment gate proves a TwinEventEnvelope projects to a valid AgentMessage). No enum drift (`tools/check_enum_alignment.py` vs `vendor/semantic_serdes_canonical_enums.yaml`).
 - **Genesis → TritRPC → Q3 end-to-end** (`tools/emit_tritrpc.py`): a twin event emits AS a `tritrpc_envelope` (TritPack243), and `q3_roundtrip()` proves the canonical hash survives the qutrit leg (audit doesn't fork). Uses quantum-prophet if importable, else an identity qutrit leg.
 - **Multiscript / SBS-10T** alphabet layer given a home (`docs/multiscript-sbs10t.md` + `schemas/glyph.schema.json`, v0.1 sketch — needs the manuscript).
+
+## Running runtime (Inception)
+Not just schemas — a running service. `src/inception/` drives a GenesisSeed through the K3 twin lifecycle (SEEDED→VERIFYING→READY, fail-closed), emits each governed `TwinEventEnvelope` **as a `tritrpc_envelope` over the trit rail**, persists to a durable append-only log with hash-chained receipts, and supports replay + revoke (revoke closes the actuation gate).
+
+```bash
+pip install -e '.[runtime]'
+PYTHONPATH=src uvicorn inception.service:app --port 8731
+curl -X POST localhost:8731/twins/incept -d @examples/genesis_seed.valid.json  # -> twin READY
+curl localhost:8731/twins/<twin_id>/replay   # reconstructs the lifecycle from the log
+```
+
+Read-only only: a `ReadOnlyAdapter.dry_run` returns a PLAN with **effect NONE** and is refused once the twin is revoked. No world-changing adapter runs yet (plan Phases 4-6).
