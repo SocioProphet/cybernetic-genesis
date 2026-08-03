@@ -15,5 +15,7 @@ test: ## runtime + emission tests
 	python -m pytest -q tools/test_emit_tritrpc.py
 	PYTHONPATH=src python -m pytest -q tests/test_inception.py
 
-deploy-check: ## deploy overlay self-containment (INV-DEP-10)
+deploy-check: ## deploy overlay self-containment (INV-DEP-10) + mounts declared through the strategy
 	python tools/verify_deploy_self_contained.py
+	python tools/verify_deploy_mount_strategy.py
+	python -m pytest -q tests/test_deploy_mount_strategy.py

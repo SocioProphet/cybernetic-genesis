@@ -169,6 +169,9 @@ VALID_EXAMPLES = [
     "mount_strategy.userspace_volume.valid.json",
     "mount_strategy.chat_volume.valid.json",
     "mount_strategy.directory_bind.valid.json",
+    # LIVE instances: the running Inception deploy declares its real mounts through the contract.
+    "mount_strategy.inception_data.valid.json",  # /data durable log (PVC)  -> project volume
+    "mount_strategy.inception_tmp.valid.json",   # /tmp task scratch        -> tmpfs (ephemeral)
 ]
 
 INVALID_EXAMPLES = [

@@ -54,3 +54,7 @@ jobs:
         run: pip install fastapi httpx uvicorn && PYTHONPATH=src python -m pytest -q tests/test_inception.py
       - name: deploy overlay self-contained (INV-DEP-10)
         run: pip install pyyaml && python tools/verify_deploy_self_contained.py
+      - name: deploy mounts declared THROUGH the mount-strategy (durable->PVC, task->tmpfs; log durable)
+        run: python tools/verify_deploy_mount_strategy.py
+      - name: deploy mount-strategy teeth (pytest)
+        run: python -m pytest -q tests/test_deploy_mount_strategy.py
