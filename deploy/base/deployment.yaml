@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: inception, labels: { app: inception } }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: inception } }
+  template:
+    metadata: { labels: { app: inception } }
+    spec:
+      serviceAccountName: inception
+      securityContext: { runAsNonRoot: true, runAsUser: 10001, fsGroup: 10001 }
+      containers:
+        - name: inception
+          # Digest-pinned by the release train (INV-DEP-1). Placeholder is intentionally NOT a
+          # fake sha256 (avoids the ImagePullBackOff trap): the wave-promote pin injects the real
+          # digest. Deploy is HELD; this package is deploy-ready, not deployed.
+          image: cybernetic-genesis/inception:RELEASE_TRAIN_PINS_DIGEST
+          ports: [{ containerPort: 8731 }]
+          envFrom: [{ configMapRef: { name: inception-config } }]
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }
+          resources:
+            requests: { cpu: "50m", memory: "128Mi" }
+            limits: { cpu: "500m", memory: "256Mi" }
+          readinessProbe: { tcpSocket: { port: 8731 }, initialDelaySeconds: 3 }
+          livenessProbe: { tcpSocket: { port: 8731 }, initialDelaySeconds: 10 }
+          volumeMounts:
+            - { name: data, mountPath: /data }
+            - { name: tmp, mountPath: /tmp }
+      volumes:
+        - { name: data, persistentVolumeClaim: { claimName: inception-data } }
+        - { name: tmp, emptyDir: {} }

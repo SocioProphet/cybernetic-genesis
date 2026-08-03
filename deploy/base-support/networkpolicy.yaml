@@ -1,0 +1,9 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: { name: inception-baseline }
+spec:
+  podSelector: { matchLabels: { app: inception } }
+  policyTypes: ["Ingress"]
+  ingress:
+    - from: [{ namespaceSelector: { matchLabels: { kubernetes.io/metadata.name: inception } } }]
+      ports: [{ protocol: TCP, port: 8731 }]
