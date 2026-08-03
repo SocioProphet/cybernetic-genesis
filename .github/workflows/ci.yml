@@ -42,5 +42,7 @@ jobs:
         run: python tools/verify_semantic_serdes_alignment.py
       - name: enum drift guard (Genesis enums == semantic-serdes canonical)
         run: python tools/check_enum_alignment.py
+      - name: enum $defs generated from canonical (in sync)
+        run: python tools/gen_enums.py --check
       - name: Genesis -> tritrpc_envelope -> Q3 emission (end-to-end)
         run: pip install pytest && python -m pytest -q tools/test_emit_tritrpc.py
