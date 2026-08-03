@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://socioprophet.ai/schemas/common.schema.json",
-  "title": "Cybernetic Genesis — Shared $defs (L0 source-canon primitives)",
+  "title": "Cybernetic Genesis \u2014 Shared $defs (L0 source-canon primitives)",
   "description": "Reusable definitions that bake in the L0 covenant: dual-witness, boundary-stone content addressing, and weights-&-measures. Referenced by every other schema in the pack.",
   "$defs": {
     "ContentHash": {
@@ -18,39 +18,73 @@
       "$comment": "One attestation. type=chart => a signer/identity witness; type=method => a validator/method witness.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["role", "type", "hash"],
+      "required": [
+        "role",
+        "type",
+        "hash"
+      ],
       "properties": {
-        "name": { "type": "string", "minLength": 1 },
-        "role": { "type": "string", "minLength": 1 },
-        "type": { "type": "string", "enum": ["chart", "method"] },
-        "hash": { "$ref": "common.schema.json#/$defs/ContentHash" }
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "chart",
+            "method"
+          ]
+        },
+        "hash": {
+          "$ref": "common.schema.json#/$defs/ContentHash"
+        }
       }
     },
     "Witnesses": {
       "$comment": "Dual witness (Deut 19:15): a matter is established by two or three witnesses. Never one.",
       "type": "array",
-      "items": { "$ref": "common.schema.json#/$defs/Witness" },
+      "items": {
+        "$ref": "common.schema.json#/$defs/Witness"
+      },
       "minItems": 2
     },
     "WitnessesDualType": {
-      "$comment": "Stronger form: not just two witnesses, but two of DIFFERENT kind — at least one chart AND one method. A signer alone, or two validators alone, does not establish the matter.",
+      "$comment": "Stronger form: not just two witnesses, but two of DIFFERENT kind \u2014 at least one chart AND one method. A signer alone, or two validators alone, does not establish the matter.",
       "type": "array",
-      "items": { "$ref": "common.schema.json#/$defs/Witness" },
+      "items": {
+        "$ref": "common.schema.json#/$defs/Witness"
+      },
       "minItems": 2,
       "allOf": [
         {
           "contains": {
             "type": "object",
-            "properties": { "type": { "const": "chart" } },
-            "required": ["type"]
+            "properties": {
+              "type": {
+                "const": "chart"
+              }
+            },
+            "required": [
+              "type"
+            ]
           },
           "minContains": 1
         },
         {
           "contains": {
             "type": "object",
-            "properties": { "type": { "const": "method" } },
-            "required": ["type"]
+            "properties": {
+              "type": {
+                "const": "method"
+              }
+            },
+            "required": [
+              "type"
+            ]
           },
           "minContains": 1
         }
@@ -60,16 +94,37 @@
       "$comment": "Weights & measures (Lev 19:35-36 / Prov 11:1): a just weight declares its terms. Every metric states sample_size, snr (number or explicit 'n/a'), and units.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "value", "units", "sample_size", "snr"],
+      "required": [
+        "name",
+        "value",
+        "units",
+        "sample_size",
+        "snr"
+      ],
       "properties": {
-        "name": { "type": "string", "minLength": 1 },
-        "value": { "type": "number" },
-        "units": { "type": "string", "minLength": 1 },
-        "sample_size": { "type": "integer", "minimum": 0 },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": "number"
+        },
+        "units": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sample_size": {
+          "type": "integer",
+          "minimum": 0
+        },
         "snr": {
           "anyOf": [
-            { "type": "number" },
-            { "const": "n/a" }
+            {
+              "type": "number"
+            },
+            {
+              "const": "n/a"
+            }
           ]
         }
       }
@@ -78,18 +133,45 @@
       "$comment": "ESTATE INTEGRATION: this is the SocioProphet/semantic-serdes governance block, reused verbatim so a Genesis object carries the same admission discipline as an AgentMessage / SemanticCell. admissibility_tier + review_status enums are the semantic-serdes canonical_enums (no drift). A Genesis object without governance is a fork; with it, it consumes the estate contract.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["admissibility_tier", "review_status"],
+      "required": [
+        "admissibility_tier",
+        "review_status"
+      ],
       "properties": {
-        "admissibility_tier": { "enum": ["RAW", "VALIDATED", "GOVERNED", "CANONICAL"] },
-        "review_status": {
-          "enum": ["NOT_REQUIRED", "REQUIRED", "PENDING", "APPROVED", "REJECTED", "ESCALATED"]
+        "admissibility_tier": {
+          "enum": [
+            "RAW",
+            "VALIDATED",
+            "GOVERNED",
+            "CANONICAL"
+          ]
         },
-        "policy_basis": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/Ref" } }
+        "review_status": {
+          "enum": [
+            "NOT_REQUIRED",
+            "REQUIRED",
+            "PENDING",
+            "APPROVED",
+            "REJECTED",
+            "ESCALATED"
+          ]
+        },
+        "policy_basis": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Ref"
+          }
+        }
       }
     },
     "TruthClass": {
-      "$comment": "ESTATE INTEGRATION: semantic-serdes canonical truth_class. A Hologram is a semantic claim, so it declares HOW it is known — the same vocabulary a SemanticCell uses.",
-      "enum": ["OBSERVED", "ASSERTED", "INFERRED", "REPUTED"]
+      "$comment": "ESTATE INTEGRATION: semantic-serdes canonical truth_class. A Hologram is a semantic claim, so it declares HOW it is known \u2014 the same vocabulary a SemanticCell uses.",
+      "enum": [
+        "OBSERVED",
+        "ASSERTED",
+        "INFERRED",
+        "REPUTED"
+      ]
     }
   }
 }
