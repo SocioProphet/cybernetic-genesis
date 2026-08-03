@@ -73,3 +73,8 @@ Phases 1–6 are tracked downstream and MUST consume the contracts frozen here.
 ## License
 
 MIT © 2026 SocioProphet. See `LICENSE`.
+
+## Integrations landed
+- **Consumes semantic-serdes** (governance + truth_class; alignment gate proves a TwinEventEnvelope projects to a valid AgentMessage). No enum drift (`tools/check_enum_alignment.py` vs `vendor/semantic_serdes_canonical_enums.yaml`).
+- **Genesis → TritRPC → Q3 end-to-end** (`tools/emit_tritrpc.py`): a twin event emits AS a `tritrpc_envelope` (TritPack243), and `q3_roundtrip()` proves the canonical hash survives the qutrit leg (audit doesn't fork). Uses quantum-prophet if importable, else an identity qutrit leg.
+- **Multiscript / SBS-10T** alphabet layer given a home (`docs/multiscript-sbs10t.md` + `schemas/glyph.schema.json`, v0.1 sketch — needs the manuscript).

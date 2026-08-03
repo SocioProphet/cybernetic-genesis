@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.ai/schemas/glyph.schema.json",
+  "title": "Glyph (Multiscript / SBS-10T) — v0.1 sketch",
+  "$comment": "The alphabet layer: a written glyph as a semantic projection of a trit-tuple / ASu. v0.1 sketch — needs the SBS-10T manuscript alphabet table before it is a frozen contract.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["glyph_id", "script", "trit_tuple", "semantic_role"],
+  "properties": {
+    "glyph_id": { "type": "string", "minLength": 1 },
+    "script": { "type": "string", "minLength": 1, "$comment": "e.g. latin, hebrew, cuneiform, ..." },
+    "trit_tuple": {
+      "type": "array",
+      "items": { "type": "integer", "enum": [0, 1, 2] },
+      "minItems": 1,
+      "$comment": "The balanced-ternary content this glyph projects (wire trits 0/1/2)."
+    },
+    "asu_ref": { "$ref": "common.schema.json#/$defs/Ref", "$comment": "The Ghostspace ASu this glyph is the legible face of." },
+    "semantic_role": { "type": "string", "minLength": 1 },
+    "reconstruction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": { "invertible": { "type": "boolean" }, "note": { "type": "string" } },
+      "$comment": "Projection is lossless iff reconstruct(project(x)) == x on trit_tuple."
+    }
+  }
+}

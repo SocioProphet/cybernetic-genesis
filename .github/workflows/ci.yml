@@ -20,7 +20,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install jsonschema
-        run: pip install "jsonschema>=4.18"
+        run: pip install "jsonschema pyyaml pytest>=4.18"
 
       - name: Validate all JSON parses
         run: |
@@ -40,3 +40,7 @@ jobs:
         run: python tools/validate.py selftest
       - name: semantic-serdes integration conformance (consume, not fork)
         run: python tools/verify_semantic_serdes_alignment.py
+      - name: enum drift guard (Genesis enums == semantic-serdes canonical)
+        run: python tools/check_enum_alignment.py
+      - name: Genesis -> tritrpc_envelope -> Q3 emission (end-to-end)
+        run: pip install pytest && python -m pytest -q tools/test_emit_tritrpc.py
