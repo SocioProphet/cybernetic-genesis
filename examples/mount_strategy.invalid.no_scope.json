@@ -1,0 +1,9 @@
+{
+  "context": "workspace",
+  "mount_type": "volume",
+  "scope_ref": "",
+  "durability": "durable",
+  "readonly": false,
+  "symlink_safe": true,
+  "destination": "/data/workspace"
+}

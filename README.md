@@ -26,9 +26,12 @@ consumes. Private-first.
 | `schemas/artifact_record.schema.json` | Dual-witnessed, boundary-stone-addressed outputs. |
 | `schemas/policy_decision.schema.json` | Fail-closed verdicts (ALLOW/DENY/REQUIRE_APPROVAL). |
 | `schemas/adapter_descriptor.schema.json` | Adapter contract (frozen now; built Phase 1+). |
+| `schemas/inception_mount_strategy.schema.json` | Podman mount-type contract per execution context (volume/bind/tmpfs). |
 | `examples/*.valid.json` | Valid sample objects (must validate). |
 | `examples/*.invalid.*.json` | Fixtures that MUST be rejected (teeth). |
 | `tools/validate.py` | jsonschema validator + `selftest` (valids pass, invalids fail). |
+| `tools/verify_mount_strategy.py` | Mount-strategy verifier (symlink + scope teeth) + Podman `--mount` projection. |
+| `docs/inception-mount-strategy.md` | The mount-type mapping, the teeth, and the Podman projection. |
 | `docs/L0-genesis-covenant.md` | The source-canon doctrine the schemas enforce. |
 | `.github/workflows/ci.yml` | Installs jsonschema, runs the selftest, fail-closed. |
 
@@ -55,6 +58,8 @@ doctrine and the verse→rule table (cited as *doctrinal source, not executable 
 pip install jsonschema
 python tools/validate.py selftest          # valids validate, invalids rejected; exit 0
 python tools/validate.py hologram.schema.json:hologram.valid.json   # one-off pair
+python tools/verify_mount_strategy.py selftest   # mount-strategy teeth both ways; exit 0
+make check                                  # every fail-closed gate the CI runs
 ```
 
 ## The 7-phase plan

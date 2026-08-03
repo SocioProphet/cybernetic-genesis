@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.ai/schemas/inception_mount_strategy.schema.json",
+  "title": "InceptionMountStrategy — Podman mount-type contract per execution context",
+  "description": "Maps each agent-execution context to the right Podman mount type (named volume | bind | tmpfs), following Docker's Manage-data three-mount model applied to the sovereign Podman runtime. STRUCTURAL teeth live here (enum coherence, required scope_ref, bind requires source, context->mount-type mapping, task-persistence lock). The SEMANTIC teeth that need the real filesystem (a bind whose source resolves through a symlink) and the scope-namespace coherence (cross-scope leakage) live in tools/verify_mount_strategy.py, which validates against this schema first, then resolves the host path. Podman is the sovereign runtime — not Docker.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "context",
+    "mount_type",
+    "scope_ref",
+    "durability",
+    "readonly",
+    "symlink_safe",
+    "destination"
+  ],
+  "properties": {
+    "context": {
+      "$comment": "The agent-execution context this mount serves. Determines the only admissible mount type.",
+      "enum": [
+        "userspace",
+        "task_execution",
+        "chat",
+        "workspace",
+        "project",
+        "directory"
+      ]
+    },
+    "mount_type": {
+      "$comment": "Podman mount type. volume = sovereign-managed, durable, NOT host-coupled. bind = a scoped host path. tmpfs = memory-only, ephemeral.",
+      "enum": [
+        "volume",
+        "bind",
+        "tmpfs"
+      ]
+    },
+    "scope_ref": {
+      "$comment": "Which chat/workspace/project/dir/task/user this mount is bound to. REQUIRED and non-empty so cross-scope leakage is unrepresentable. Namespace must match the context (verifier enforces prefix, e.g. chat: -> chat).",
+      "$ref": "common.schema.json#/$defs/Ref"
+    },
+    "durability": {
+      "$comment": "Whether the data outlives the container. durable => must be a named volume. ephemeral => must be tmpfs.",
+      "enum": [
+        "durable",
+        "ephemeral"
+      ]
+    },
+    "readonly": {
+      "type": "boolean"
+    },
+    "symlink_safe": {
+      "$comment": "Claim that the mount source does not resolve through a symlink. For a bind this MUST be true, and the verifier PROVES it against the real filesystem (never trust the claim: feedback_never_write_through_symlink).",
+      "type": "boolean"
+    },
+    "source": {
+      "$comment": "Host path for a bind mount. Required only for mount_type=bind. Ignored for volume (name is derived from scope_ref) and tmpfs (no source).",
+      "type": "string",
+      "minLength": 1
+    },
+    "destination": {
+      "$comment": "Absolute mountpoint inside the container.",
+      "type": "string",
+      "pattern": "^/.+"
+    },
+    "declared_durable": {
+      "$comment": "Explicit override for task_execution ONLY: a task context is ephemeral tmpfs by default; set true to justify a durable volume/bind for a task. Absent or false => the task-persistence lock applies.",
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "$comment": "COHERENCE: tmpfs is always ephemeral.",
+      "if": {
+        "properties": {
+          "mount_type": {
+            "const": "tmpfs"
+          }
+        },
+        "required": [
+          "mount_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "durability": {
+            "const": "ephemeral"
+          }
+        }
+      }
+    },
+    {
+      "$comment": "COHERENCE: a named volume is always durable.",
+      "if": {
+        "properties": {
+          "mount_type": {
+            "const": "volume"
+          }
+        },
+        "required": [
+          "mount_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "durability": {
+            "const": "durable"
+          }
+        }
+      }
+    },
+    {
+      "$comment": "TEETH: a bind must name a source and must claim symlink_safe (the verifier then proves it on the real FS).",
+      "if": {
+        "properties": {
+          "mount_type": {
+            "const": "bind"
+          }
+        },
+        "required": [
+          "mount_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "source"
+        ],
+        "properties": {
+          "symlink_safe": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "$comment": "TEETH: the directory context is a scoped bind of a host directory / project source.",
+      "if": {
+        "properties": {
+          "context": {
+            "const": "directory"
+          }
+        },
+        "required": [
+          "context"
+        ]
+      },
+      "then": {
+        "properties": {
+          "mount_type": {
+            "const": "bind"
+          }
+        }
+      }
+    },
+    {
+      "$comment": "TEETH: durable-state contexts (userspace/chat/workspace/project) MUST be named volumes. tmpfs => data loss; bind => host-coupled durable state. Both REJECTED.",
+      "if": {
+        "properties": {
+          "context": {
+            "enum": [
+              "userspace",
+              "chat",
+              "workspace",
+              "project"
+            ]
+          }
+        },
+        "required": [
+          "context"
+        ]
+      },
+      "then": {
+        "properties": {
+          "mount_type": {
+            "const": "volume"
+          }
+        }
+      }
+    },
+    {
+      "$comment": "TEETH: task-persistence lock. A task_execution context is tmpfs+ephemeral UNLESS declared_durable is explicitly true. A task on a durable volume/bind without that declaration is REJECTED.",
+      "if": {
+        "allOf": [
+          {
+            "properties": {
+              "context": {
+                "const": "task_execution"
+              }
+            },
+            "required": [
+              "context"
+            ]
+          },
+          {
+            "not": {
+              "required": [
+                "declared_durable"
+              ],
+              "properties": {
+                "declared_durable": {
+                  "const": true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "properties": {
+          "mount_type": {
+            "const": "tmpfs"
+          },
+          "durability": {
+            "const": "ephemeral"
+          }
+        }
+      }
+    }
+  ]
+}
