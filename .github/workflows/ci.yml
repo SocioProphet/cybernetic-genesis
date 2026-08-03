@@ -6,24 +6,28 @@ name: schema-pack-ci
 #   * pull_request (ANY base branch)  -> no stacked-PR blind spot
 #   * merge_group                     -> the merge queue is validated before it lands
 #   * push: main                      -> post-merge plumb-line on the trunk
-#   * schedule                        -> daily self-healing re-assertion of the teeth on main
 #   * workflow_dispatch               -> operator can re-run the gate on demand
+#
+# Red-main DETECTION is deliberately NOT a per-repo scheduled watcher here: the estate already
+# scans every first-party repo's default-branch CI conclusion ORG-WIDE from git-ops-standards
+# (estate-ci-health, control github-ci-health-current), and that scan — hosted in an actively
+# maintained repo — keeps watching this repo even when it goes dormant (a per-repo `schedule`
+# would be disabled by GitHub after 60 days of inactivity, i.e. exactly when it would matter).
+# So the earlier per-repo schedule + drift-issue jobs were removed to avoid duplicating, and
+# contradicting the lesson of, incident 2026-08-02-silent-ci-failures. See docs/ci-resilience.md.
 on:
   push:
     branches: [main]
   pull_request:
   merge_group:
-  schedule:
-    - cron: "17 6 * * *"   # 06:17 UTC daily — the plumb-line re-asserts main is still conformant
   workflow_dispatch:
 
-# Cancel superseded PR runs (a new push obsoletes the old one); never cancel a trunk push or the
-# scheduled plumb-line — those must always run to completion so drift cannot slip through.
+# Cancel superseded PR runs (a new push obsoletes the old one); never cancel a trunk push.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
-# Least privilege by default; the self-healing jobs elevate to issues:write locally.
+# Least privilege: the teeth only read the checkout.
 permissions:
   contents: read
 
@@ -101,52 +105,3 @@ jobs:
             exit 1
           fi
           echo "All fail-closed teeth passed. Gate OPEN."
-
-  # ---------------------------------------------------------------------------- #
-  # SELF-HEALING drift loop (scheduled plumb-line only). The teeth already re-run on the daily
-  # schedule; these two jobs make the outcome self-maintaining: if main drifts out of
-  # conformance the drift is auto-surfaced as a tracking issue, and when the next plumb-line is
-  # green the issue auto-closes. Detection + notification + auto-recovery of the TRACKING STATE —
-  # never a blind auto-mutation of main (that is the daemon that dies; the fail-closed gate is
-  # the control that cannot fail).
-  # ---------------------------------------------------------------------------- #
-  drift-autofile:
-    name: plumb-line drift — auto-file (self-heal)
-    needs: [selftest]
-    if: ${{ github.event_name == 'schedule' && needs.selftest.result == 'failure' }}
-    runs-on: ubuntu-latest
-    permissions:
-      issues: write
-    steps:
-      - name: open or update the drift issue
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TITLE: "CI plumb-line RED on main — fail-closed teeth broke"
-        run: |
-          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          body="The scheduled plumb-line re-asserted the fail-closed teeth on \`main\` and they FAILED ($run_url). main is out of conformance — investigate and restore green. This issue AUTO-CLOSES when the next plumb-line passes."
-          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title \"$TITLE\"" --json number --jq '.[0].number // empty')
-          if [ -n "$existing" ]; then
-            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "$body"
-          else
-            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body "$body"
-          fi
-
-  drift-resolve:
-    name: plumb-line drift — auto-close (self-heal)
-    needs: [selftest]
-    if: ${{ github.event_name == 'schedule' && needs.selftest.result == 'success' }}
-    runs-on: ubuntu-latest
-    permissions:
-      issues: write
-    steps:
-      - name: close the drift issue once the plumb-line is green again
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TITLE: "CI plumb-line RED on main — fail-closed teeth broke"
-        run: |
-          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title \"$TITLE\"" --json number --jq '.[].number'); do
-            gh issue comment "$n" --repo "$GITHUB_REPOSITORY" --body "Plumb-line GREEN again on main ($run_url). Auto-closing — main is conformant."
-            gh issue close "$n" --repo "$GITHUB_REPOSITORY"
-          done
