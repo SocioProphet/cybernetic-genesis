@@ -18,33 +18,70 @@
     "policy_refs",
     "memory_refs",
     "provenance_refs",
-    "payload"
+    "payload",
+    "governance"
   ],
   "properties": {
-    "event_id": { "type": "string", "minLength": 1 },
-    "event_type": { "type": "string", "minLength": 1 },
-    "timestamp": { "type": "string", "format": "date-time" },
-    "actor_id": { "type": "string", "minLength": 1 },
-    "twin_id": { "type": "string", "minLength": 1 },
-    "mission_id": { "type": "string", "minLength": 1 },
-    "project_id": { "type": "string", "minLength": 1 },
-    "correlation_id": { "type": "string", "minLength": 1 },
-    "trace_id": { "type": "string", "minLength": 1 },
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "twin_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mission_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
     "policy_refs": {
       "type": "array",
-      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+      "items": {
+        "$ref": "common.schema.json#/$defs/Ref"
+      }
     },
     "memory_refs": {
       "type": "array",
-      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+      "items": {
+        "$ref": "common.schema.json#/$defs/Ref"
+      }
     },
     "provenance_refs": {
       "type": "array",
-      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+      "items": {
+        "$ref": "common.schema.json#/$defs/Ref"
+      }
     },
     "payload": {
       "type": "object",
       "additionalProperties": true
+    },
+    "governance": {
+      "$ref": "common.schema.json#/$defs/Governance"
     }
   }
 }

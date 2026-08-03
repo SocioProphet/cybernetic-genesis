@@ -6,8 +6,26 @@
     "principal": "twin:atlas-cartographer.001",
     "chart_hash": "sha256:aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44"
   },
-  "memory_refs": ["mem:atlas.semantic.001", "mem:atlas.episodic.001"],
-  "policy_refs": ["policy:atlas.baseline", "policy:geo.privacy"],
-  "provenance_refs": ["prov:seed.atlas-cartographer.v1"],
-  "capabilities": ["query_tiles", "compose_atlas"]
+  "memory_refs": [
+    "mem:atlas.semantic.001",
+    "mem:atlas.episodic.001"
+  ],
+  "policy_refs": [
+    "policy:atlas.baseline",
+    "policy:geo.privacy"
+  ],
+  "provenance_refs": [
+    "prov:seed.atlas-cartographer.v1"
+  ],
+  "capabilities": [
+    "query_tiles",
+    "compose_atlas"
+  ],
+  "governance": {
+    "admissibility_tier": "GOVERNED",
+    "review_status": "APPROVED",
+    "policy_basis": [
+      "policy:genesis/base"
+    ]
+  }
 }
