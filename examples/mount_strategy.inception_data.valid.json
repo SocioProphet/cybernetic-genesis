@@ -1,0 +1,9 @@
+{
+  "context": "project",
+  "mount_type": "volume",
+  "scope_ref": "project:inception",
+  "durability": "durable",
+  "readonly": false,
+  "symlink_safe": true,
+  "destination": "/data"
+}

@@ -1,0 +1,9 @@
+{
+  "context": "task_execution",
+  "mount_type": "tmpfs",
+  "scope_ref": "task:inception",
+  "durability": "ephemeral",
+  "readonly": false,
+  "symlink_safe": true,
+  "destination": "/tmp"
+}

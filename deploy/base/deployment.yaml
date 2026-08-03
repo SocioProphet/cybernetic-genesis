@@ -30,5 +30,10 @@ spec:
             - { name: data, mountPath: /data }
             - { name: tmp, mountPath: /tmp }
       volumes:
+        # /data — DURABLE context (project:inception) -> a named volume per InceptionMountStrategy:
+        # the append-only event log survives the container. K8s analog of a Podman named volume = PVC.
         - { name: data, persistentVolumeClaim: { claimName: inception-data } }
-        - { name: tmp, emptyDir: {} }
+        # /tmp — task_execution context -> tmpfs per the contract: memory-only, ephemeral, MUST NOT
+        # persist. medium: Memory makes this a real tmpfs (not node-disk emptyDir); sizeLimit mirrors
+        # the podman projection's tmpfs-size. Coherence proven by tools/verify_deploy_mount_strategy.py.
+        - { name: tmp, emptyDir: { medium: Memory, sizeLimit: 64Mi } }
