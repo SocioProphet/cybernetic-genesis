@@ -73,6 +73,23 @@
           ]
         }
       }
+    },
+    "Governance": {
+      "$comment": "ESTATE INTEGRATION: this is the SocioProphet/semantic-serdes governance block, reused verbatim so a Genesis object carries the same admission discipline as an AgentMessage / SemanticCell. admissibility_tier + review_status enums are the semantic-serdes canonical_enums (no drift). A Genesis object without governance is a fork; with it, it consumes the estate contract.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["admissibility_tier", "review_status"],
+      "properties": {
+        "admissibility_tier": { "enum": ["RAW", "VALIDATED", "GOVERNED", "CANONICAL"] },
+        "review_status": {
+          "enum": ["NOT_REQUIRED", "REQUIRED", "PENDING", "APPROVED", "REJECTED", "ESCALATED"]
+        },
+        "policy_basis": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/Ref" } }
+      }
+    },
+    "TruthClass": {
+      "$comment": "ESTATE INTEGRATION: semantic-serdes canonical truth_class. A Hologram is a semantic claim, so it declares HOW it is known — the same vocabulary a SemanticCell uses.",
+      "enum": ["OBSERVED", "ASSERTED", "INFERRED", "REPUTED"]
     }
   }
 }

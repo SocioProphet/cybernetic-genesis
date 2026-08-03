@@ -8,12 +8,25 @@
   "project_id": "project:atlas",
   "correlation_id": "corr:atlas-survey.run.42",
   "trace_id": "trace:9f8e7d6c5b4a",
-  "policy_refs": ["policy:atlas.baseline"],
-  "memory_refs": ["mem:atlas.episodic.001"],
-  "provenance_refs": ["prov:tile.compose.2026-08-02"],
+  "policy_refs": [
+    "policy:atlas.baseline"
+  ],
+  "memory_refs": [
+    "mem:atlas.episodic.001"
+  ],
+  "provenance_refs": [
+    "prov:tile.compose.2026-08-02"
+  ],
   "payload": {
     "tile": "12/2048/1361",
     "composed_from": 4,
     "digest": "sha256:cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66"
+  },
+  "governance": {
+    "admissibility_tier": "GOVERNED",
+    "review_status": "APPROVED",
+    "policy_basis": [
+      "policy:genesis/base"
+    ]
   }
 }

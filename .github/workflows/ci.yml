@@ -38,3 +38,5 @@ jobs:
 
       - name: Run schema selftest (fail-closed)
         run: python tools/validate.py selftest
+      - name: semantic-serdes integration conformance (consume, not fork)
+        run: python tools/verify_semantic_serdes_alignment.py

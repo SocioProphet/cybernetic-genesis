@@ -13,14 +13,28 @@
     "memory_refs",
     "policy_refs",
     "provenance_refs",
-    "capabilities"
+    "capabilities",
+    "governance"
   ],
   "properties": {
-    "twin_id": { "type": "string", "minLength": 1 },
-    "seed_id": { "type": "string", "minLength": 1 },
+    "twin_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seed_id": {
+      "type": "string",
+      "minLength": 1
+    },
     "status": {
       "type": "string",
-      "enum": ["SEEDED", "VERIFYING", "READY", "PAUSED", "REVOKED", "ARCHIVED"]
+      "enum": [
+        "SEEDED",
+        "VERIFYING",
+        "READY",
+        "PAUSED",
+        "REVOKED",
+        "ARCHIVED"
+      ]
     },
     "identity": {
       "type": "object",
@@ -28,34 +42,65 @@
     },
     "memory_refs": {
       "type": "array",
-      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+      "items": {
+        "$ref": "common.schema.json#/$defs/Ref"
+      }
     },
     "policy_refs": {
       "type": "array",
-      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+      "items": {
+        "$ref": "common.schema.json#/$defs/Ref"
+      }
     },
     "provenance_refs": {
       "type": "array",
-      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+      "items": {
+        "$ref": "common.schema.json#/$defs/Ref"
+      }
     },
     "capabilities": {
       "type": "array",
-      "items": { "type": "string", "minLength": 1 }
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "governance": {
+      "$ref": "common.schema.json#/$defs/Governance"
     }
   },
   "allOf": [
     {
       "$comment": "Fail-closed readiness: READY demands non-empty identity, policy_refs, and memory_refs. A twin cannot go live blind.",
       "if": {
-        "properties": { "status": { "const": "READY" } },
-        "required": ["status"]
+        "properties": {
+          "status": {
+            "const": "READY"
+          }
+        },
+        "required": [
+          "status"
+        ]
       },
       "then": {
-        "required": ["identity", "policy_refs", "memory_refs"],
+        "required": [
+          "identity",
+          "policy_refs",
+          "memory_refs"
+        ],
         "properties": {
-          "identity": { "type": "object", "minProperties": 1 },
-          "policy_refs": { "type": "array", "minItems": 1 },
-          "memory_refs": { "type": "array", "minItems": 1 }
+          "identity": {
+            "type": "object",
+            "minProperties": 1
+          },
+          "policy_refs": {
+            "type": "array",
+            "minItems": 1
+          },
+          "memory_refs": {
+            "type": "array",
+            "minItems": 1
+          }
         }
       }
     }
