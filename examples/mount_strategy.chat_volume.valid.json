@@ -1,0 +1,9 @@
+{
+  "context": "chat",
+  "mount_type": "volume",
+  "scope_ref": "chat:c-0192",
+  "durability": "durable",
+  "readonly": false,
+  "symlink_safe": true,
+  "destination": "/data/chat"
+}

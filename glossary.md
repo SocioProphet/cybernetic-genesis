@@ -20,6 +20,11 @@ schemas MUST use these terms and no synonyms. Each entry is one or two lines.
 - **AdapterDescriptor** — Declares an adapter (provider, organ, or surface bridge) the
   platform may bind — its capabilities, identity mode, policy hooks, audit surface,
   and rollback strategy. Contract frozen now; adapter build is Phase 1+.
+- **InceptionMountStrategy** — The Podman mount-type contract: maps each execution context
+  (userspace/task_execution/chat/workspace/project/directory) to the one admissible mount
+  type — named **volume** (durable, sovereign-managed), **bind** (scoped host path, never
+  through a symlink), or **tmpfs** (ephemeral). Carries `scope_ref` so cross-scope leakage
+  is unrepresentable. See `docs/inception-mount-strategy.md`.
 
 ## Process concepts
 

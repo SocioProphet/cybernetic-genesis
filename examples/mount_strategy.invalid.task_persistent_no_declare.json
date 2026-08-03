@@ -1,0 +1,9 @@
+{
+  "context": "task_execution",
+  "mount_type": "volume",
+  "scope_ref": "task:run-8f21c",
+  "durability": "durable",
+  "readonly": false,
+  "symlink_safe": true,
+  "destination": "/artifacts"
+}

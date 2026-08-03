@@ -1,0 +1,9 @@
+{
+  "context": "userspace",
+  "mount_type": "tmpfs",
+  "scope_ref": "user:charles.peterson",
+  "durability": "ephemeral",
+  "readonly": false,
+  "symlink_safe": true,
+  "destination": "/home/app"
+}

@@ -1,0 +1,10 @@
+{
+  "context": "directory",
+  "mount_type": "bind",
+  "scope_ref": "dir:project-source",
+  "durability": "ephemeral",
+  "readonly": true,
+  "symlink_safe": true,
+  "source": "schemas",
+  "destination": "/src/schemas"
+}

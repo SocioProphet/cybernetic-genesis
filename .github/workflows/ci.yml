@@ -38,6 +38,10 @@ jobs:
 
       - name: Run schema selftest (fail-closed)
         run: python tools/validate.py selftest
+      - name: mount-strategy contract (task->tmpfs, durable->volume, dir->bind; symlink + task-persistence teeth)
+        run: python tools/verify_mount_strategy.py selftest
+      - name: mount-strategy teeth (pytest)
+        run: python -m pytest -q tests/test_mount_strategy.py
       - name: semantic-serdes integration conformance (consume, not fork)
         run: python tools/verify_semantic_serdes_alignment.py
       - name: enum drift guard (Genesis enums == semantic-serdes canonical)

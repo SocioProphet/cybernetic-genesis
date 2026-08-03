@@ -1,0 +1,9 @@
+{
+  "context": "userspace",
+  "mount_type": "volume",
+  "scope_ref": "user:charles.peterson",
+  "durability": "durable",
+  "readonly": false,
+  "symlink_safe": true,
+  "destination": "/home/app"
+}

@@ -1,0 +1,9 @@
+{
+  "context": "task_execution",
+  "mount_type": "tmpfs",
+  "scope_ref": "task:run-8f21c",
+  "durability": "ephemeral",
+  "readonly": false,
+  "symlink_safe": true,
+  "destination": "/scratch"
+}
