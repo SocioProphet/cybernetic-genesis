@@ -1,0 +1,39 @@
+name: image
+# Build-once-promote-many: build the Inception image and push it to ghcr with a real digest, so
+# the digest can be pinned for deployment. Cost discipline (wave-deploy): does NOT rebuild on every
+# merge — only on a release tag `v*` or a manual dispatch. ghcr is the BUILD/validation registry;
+# estate DEPLOYMENT (INV-DEP-8) requires promoting the image to GAR and pinning THAT digest in
+# deploy/base/deployment.yaml — that promotion is the release-train's job (needs GAR WIF; held).
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/socioprophet/cybernetic-genesis-inception:${{ github.sha }}
+      - name: Emit the digest (the promotable artifact)
+        run: |
+          echo "### Inception image built + pushed" >> "$GITHUB_STEP_SUMMARY"
+          echo "digest: \`${{ steps.build.outputs.digest }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "ghcr.io/socioprophet/cybernetic-genesis-inception@${{ steps.build.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "NOTE: estate deploy (INV-DEP-8) promotes this to GAR and pins the GAR digest."
