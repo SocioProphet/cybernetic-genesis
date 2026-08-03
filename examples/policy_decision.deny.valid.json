@@ -1,0 +1,10 @@
+{
+  "decision_id": "dec:atlas.exfil.001",
+  "subject": "twin:atlas-cartographer.001",
+  "action": "export_raw_pii",
+  "verdict": "DENY",
+  "world_changing": true,
+  "policy_refs": ["policy:geo.privacy"],
+  "reason": "action would export raw PII outside the permitted space; fail-closed",
+  "evidence_refs": ["prov:privacy.scan.2026-08-02"]
+}

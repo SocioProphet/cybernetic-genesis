@@ -1,0 +1,40 @@
+name: schema-pack-ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  selftest:
+    name: schema selftest (valids validate, invalids rejected)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install jsonschema
+        run: pip install "jsonschema>=4.18"
+
+      - name: Validate all JSON parses
+        run: |
+          python - <<'PY'
+          import json, sys, pathlib
+          bad = 0
+          for p in list(pathlib.Path("schemas").glob("*.json")) + list(pathlib.Path("examples").glob("*.json")):
+              try:
+                  json.loads(p.read_text())
+              except Exception as e:
+                  bad += 1
+                  print(f"PARSE FAIL {p}: {e}")
+          sys.exit(1 if bad else 0)
+          PY
+
+      - name: Run schema selftest (fail-closed)
+        run: python tools/validate.py selftest

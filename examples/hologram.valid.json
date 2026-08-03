@@ -1,0 +1,30 @@
+{
+  "id": "holo:atlas.crystal.001",
+  "kind": "semantic-hologram",
+  "archetypes": ["cartographer", "librarian"],
+  "traits": { "domain": "geospatial", "risk_tier": "low" },
+  "relations": [
+    { "type": "derived_from", "target": "holo:atlas.base.000" },
+    { "type": "governs", "target": "mission:atlas-survey" }
+  ],
+  "vector_signatures": {
+    "dense": [0.12, -0.44, 0.98, 0.03],
+    "sparse": [
+      { "index": 17, "value": 0.7 },
+      { "index": 204, "value": 0.31 }
+    ]
+  },
+  "memories": {
+    "semantic": ["coastlines are boundary features", "tiles compose at zoom>=12"],
+    "provenance": ["prov:ingest.2026-08-01.tileset"]
+  },
+  "affordances": ["query_tiles", "compose_atlas", "explain_projection"],
+  "policy_envelope": { "space": "public", "purposes": ["mapping", "analysis"] },
+  "provenance_root": "sha256:1a2b3c4d5e6f70819a2b3c4d5e6f70819a2b3c4d5e6f70819a2b3c4d5e6f7081",
+  "state_projection": { "phase": "active", "confidence": 0.86 },
+  "metrics": [
+    { "name": "retrieval_precision", "value": 0.91, "units": "ratio", "sample_size": 240, "snr": 12.4 },
+    { "name": "coverage", "value": 0.78, "units": "ratio", "sample_size": 240, "snr": "n/a" }
+  ],
+  "version": "1.0.0"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.ai/schemas/adapter_descriptor.schema.json",
+  "title": "AdapterDescriptor",
+  "description": "Declares an adapter (provider, organ, or surface bridge) the platform may bind: its capabilities, identity mode, policy hooks, audit surface, and rollback strategy. Adapter work is Phase 1+; this schema freezes the contract now.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "adapter_id",
+    "kind",
+    "capabilities",
+    "identity_mode",
+    "policy_hooks",
+    "audit_fields",
+    "rollback_strategy"
+  ],
+  "properties": {
+    "adapter_id": { "type": "string", "minLength": 1 },
+    "kind": { "type": "string", "minLength": 1 },
+    "capabilities": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "identity_mode": {
+      "type": "string",
+      "enum": ["delegated", "impersonation", "service_account", "none"]
+    },
+    "policy_hooks": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+    },
+    "audit_fields": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "rollback_strategy": {
+      "type": "string",
+      "enum": ["none", "compensating", "snapshot_restore", "idempotent_replay"]
+    }
+  }
+}

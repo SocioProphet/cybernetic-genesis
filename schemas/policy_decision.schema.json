@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.ai/schemas/policy_decision.schema.json",
+  "title": "PolicyDecision",
+  "description": "A verdict from the policy plane. Fail-closed enum (ALLOW | DENY | REQUIRE_APPROVAL). A world-changing ALLOW MUST carry dual witnesses (chart + method).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "decision_id",
+    "subject",
+    "action",
+    "verdict",
+    "policy_refs",
+    "reason",
+    "evidence_refs"
+  ],
+  "properties": {
+    "decision_id": { "type": "string", "minLength": 1 },
+    "subject": { "type": "string", "minLength": 1 },
+    "action": { "type": "string", "minLength": 1 },
+    "verdict": {
+      "type": "string",
+      "enum": ["ALLOW", "DENY", "REQUIRE_APPROVAL"]
+    },
+    "world_changing": {
+      "$comment": "True when the action mutates state outside the twin's own sandbox. Defaults false when omitted.",
+      "type": "boolean"
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+    },
+    "reason": { "type": "string", "minLength": 1 },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+    },
+    "witnesses": {
+      "$ref": "common.schema.json#/$defs/WitnessesDualType"
+    }
+  },
+  "allOf": [
+    {
+      "$comment": "A world-changing ALLOW is an artifact-grade act: it must be established by two witnesses of different kind.",
+      "if": {
+        "properties": {
+          "verdict": { "const": "ALLOW" },
+          "world_changing": { "const": true }
+        },
+        "required": ["verdict", "world_changing"]
+      },
+      "then": {
+        "required": ["witnesses"]
+      }
+    }
+  ]
+}

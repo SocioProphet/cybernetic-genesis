@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.ai/schemas/genesis_seed.schema.json",
+  "title": "GenesisSeed",
+  "description": "The declarative seed from which a Twin is inceived: the ontology slice, goal, allowed organs, retrieval/memory/policy/provider/federation profiles, and the approval gate for host mutation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "seed_id",
+    "archetype",
+    "ontology_slice",
+    "goal_schema",
+    "organs_allowed",
+    "retrieval_profile",
+    "memory_profile",
+    "policy_profile",
+    "provider_profile",
+    "federation_profile",
+    "approval_profile"
+  ],
+  "properties": {
+    "seed_id": { "type": "string", "minLength": 1 },
+    "archetype": { "type": "string", "minLength": 1 },
+    "ontology_slice": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "goal_schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "organs_allowed": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "retrieval_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["graph", "hybrid", "multimodal", "self_reflective", "recursive"],
+      "properties": {
+        "graph": { "type": "boolean" },
+        "hybrid": { "type": "boolean" },
+        "multimodal": { "type": "boolean" },
+        "self_reflective": { "type": "boolean" },
+        "recursive": { "type": "boolean" }
+      }
+    },
+    "memory_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["episodic", "semantic", "procedural", "provenance"],
+      "properties": {
+        "episodic": { "type": "boolean" },
+        "semantic": { "type": "boolean" },
+        "procedural": { "type": "boolean" },
+        "provenance": { "type": "boolean" }
+      }
+    },
+    "policy_profile": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+    },
+    "provider_profile": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "federation_profile": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "approval_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["host_mutation"],
+      "properties": {
+        "host_mutation": {
+          "$comment": "Fail-closed gate: mutating the host requires explicit approval mode.",
+          "type": "string",
+          "enum": ["forbidden", "require_approval", "auto"]
+        }
+      }
+    }
+  }
+}

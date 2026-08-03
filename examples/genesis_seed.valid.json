@@ -1,0 +1,27 @@
+{
+  "seed_id": "seed:atlas-cartographer.v1",
+  "archetype": "cartographer",
+  "ontology_slice": ["geo:Place", "geo:Boundary", "geo:Tile"],
+  "goal_schema": {
+    "objective": "maintain a verified atlas of a bounded region",
+    "success": "tiles fresh within 24h and boundary-consistent"
+  },
+  "organs_allowed": ["retriever", "planner", "tile_composer"],
+  "retrieval_profile": {
+    "graph": true,
+    "hybrid": true,
+    "multimodal": true,
+    "self_reflective": true,
+    "recursive": false
+  },
+  "memory_profile": {
+    "episodic": true,
+    "semantic": true,
+    "procedural": true,
+    "provenance": true
+  },
+  "policy_profile": ["policy:atlas.baseline", "policy:geo.privacy"],
+  "provider_profile": ["provider:local-embed", "provider:tile-store"],
+  "federation_profile": { "peers": ["atlas-north", "atlas-south"], "mode": "read_replica" },
+  "approval_profile": { "host_mutation": "require_approval" }
+}

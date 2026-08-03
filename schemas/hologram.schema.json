@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.ai/schemas/hologram.schema.json",
+  "title": "Hologram",
+  "description": "The semantic-hologram base object: a multi-projection representation of an entity (dense/sparse vectors, memories, relations, affordances) bound to a policy envelope and a boundary-stone provenance root.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "kind",
+    "archetypes",
+    "traits",
+    "relations",
+    "vector_signatures",
+    "memories",
+    "affordances",
+    "policy_envelope",
+    "provenance_root",
+    "state_projection",
+    "version"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "kind": { "type": "string", "minLength": 1 },
+    "archetypes": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "traits": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "target"],
+        "properties": {
+          "type": { "type": "string", "minLength": 1 },
+          "target": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "vector_signatures": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dense", "sparse"],
+      "properties": {
+        "dense": { "type": "array", "items": { "type": "number" } },
+        "sparse": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["index", "value"],
+            "properties": {
+              "index": { "type": "integer", "minimum": 0 },
+              "value": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "memories": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["semantic", "provenance"],
+      "properties": {
+        "semantic": { "type": "array", "items": { "type": "string" } },
+        "provenance": {
+          "type": "array",
+          "items": { "$ref": "common.schema.json#/$defs/Ref" }
+        }
+      }
+    },
+    "affordances": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "policy_envelope": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "provenance_root": { "$ref": "common.schema.json#/$defs/ContentHash" },
+    "state_projection": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "metrics": {
+      "$comment": "Optional; when present every entry obeys weights-&-measures.",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/Measurement" }
+    },
+    "version": { "type": "string", "minLength": 1 }
+  }
+}

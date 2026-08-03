@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.ai/schemas/common.schema.json",
+  "title": "Cybernetic Genesis — Shared $defs (L0 source-canon primitives)",
+  "description": "Reusable definitions that bake in the L0 covenant: dual-witness, boundary-stone content addressing, and weights-&-measures. Referenced by every other schema in the pack.",
+  "$defs": {
+    "ContentHash": {
+      "$comment": "Boundary stone (Deut 19:14 / Prov 22:28): immutable content address. Do not move the ancient landmark.",
+      "type": "string",
+      "pattern": "^(sha256|sha3-256):[0-9a-f]{64}$"
+    },
+    "Ref": {
+      "$comment": "An opaque reference id to another governed object (policy, memory, provenance, evidence).",
+      "type": "string",
+      "minLength": 1
+    },
+    "Witness": {
+      "$comment": "One attestation. type=chart => a signer/identity witness; type=method => a validator/method witness.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "type", "hash"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "enum": ["chart", "method"] },
+        "hash": { "$ref": "common.schema.json#/$defs/ContentHash" }
+      }
+    },
+    "Witnesses": {
+      "$comment": "Dual witness (Deut 19:15): a matter is established by two or three witnesses. Never one.",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/Witness" },
+      "minItems": 2
+    },
+    "WitnessesDualType": {
+      "$comment": "Stronger form: not just two witnesses, but two of DIFFERENT kind — at least one chart AND one method. A signer alone, or two validators alone, does not establish the matter.",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/Witness" },
+      "minItems": 2,
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": { "type": { "const": "chart" } },
+            "required": ["type"]
+          },
+          "minContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": { "type": { "const": "method" } },
+            "required": ["type"]
+          },
+          "minContains": 1
+        }
+      ]
+    },
+    "Measurement": {
+      "$comment": "Weights & measures (Lev 19:35-36 / Prov 11:1): a just weight declares its terms. Every metric states sample_size, snr (number or explicit 'n/a'), and units.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value", "units", "sample_size", "snr"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "value": { "type": "number" },
+        "units": { "type": "string", "minLength": 1 },
+        "sample_size": { "type": "integer", "minimum": 0 },
+        "snr": {
+          "anyOf": [
+            { "type": "number" },
+            { "const": "n/a" }
+          ]
+        }
+      }
+    }
+  }
+}

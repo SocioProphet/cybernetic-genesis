@@ -1,0 +1,9 @@
+{
+  "adapter_id": "adapter:tile-store.v1",
+  "kind": "provider",
+  "capabilities": ["read_tiles", "write_tiles", "list_tilesets"],
+  "identity_mode": "service_account",
+  "policy_hooks": ["policy:atlas.baseline", "policy:geo.privacy"],
+  "audit_fields": ["actor_id", "tile", "operation", "digest"],
+  "rollback_strategy": "snapshot_restore"
+}

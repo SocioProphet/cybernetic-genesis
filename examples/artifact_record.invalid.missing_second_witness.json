@@ -1,0 +1,17 @@
+{
+  "artifact_id": "artifact:atlas.tileset.bad-single-witness",
+  "digest": "sha256:dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11",
+  "kind": "tileset",
+  "produced_by_twin": "twin:atlas-cartographer.001",
+  "signatures": ["sig:cosign:MEUCIQ...atlas"],
+  "witnesses": [
+    {
+      "name": "atlas-signing-key",
+      "role": "release-signer",
+      "type": "chart",
+      "hash": "sha256:ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22"
+    }
+  ],
+  "provenance_root": "sha256:1122334455667788112233445566778811223344556677881122334455667788",
+  "lineage": ["prov:tile.compose.2026-08-02"]
+}

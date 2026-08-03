@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.ai/schemas/twin_event_envelope.schema.json",
+  "title": "TwinEventEnvelope",
+  "description": "The canonical envelope for every twin-emitted event: identity + correlation/trace context plus policy, memory, and provenance references carried alongside the payload.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "event_type",
+    "timestamp",
+    "actor_id",
+    "twin_id",
+    "mission_id",
+    "project_id",
+    "correlation_id",
+    "trace_id",
+    "policy_refs",
+    "memory_refs",
+    "provenance_refs",
+    "payload"
+  ],
+  "properties": {
+    "event_id": { "type": "string", "minLength": 1 },
+    "event_type": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "actor_id": { "type": "string", "minLength": 1 },
+    "twin_id": { "type": "string", "minLength": 1 },
+    "mission_id": { "type": "string", "minLength": 1 },
+    "project_id": { "type": "string", "minLength": 1 },
+    "correlation_id": { "type": "string", "minLength": 1 },
+    "trace_id": { "type": "string", "minLength": 1 },
+    "policy_refs": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+    },
+    "memory_refs": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+    },
+    "provenance_refs": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

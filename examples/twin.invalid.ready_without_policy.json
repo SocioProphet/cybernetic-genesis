@@ -1,0 +1,13 @@
+{
+  "twin_id": "twin:atlas-cartographer.blind",
+  "seed_id": "seed:atlas-cartographer.v1",
+  "status": "READY",
+  "identity": {
+    "principal": "twin:atlas-cartographer.blind",
+    "chart_hash": "sha256:aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44"
+  },
+  "memory_refs": ["mem:atlas.semantic.001"],
+  "policy_refs": [],
+  "provenance_refs": ["prov:seed.atlas-cartographer.v1"],
+  "capabilities": ["query_tiles"]
+}

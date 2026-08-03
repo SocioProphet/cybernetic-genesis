@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.ai/schemas/artifact_record.schema.json",
+  "title": "ArtifactRecord",
+  "description": "A world-changing output produced by a Twin. Boundary-stone addressed (digest + provenance_root) and DUAL-WITNESSED: at least one chart (signer) witness AND one method (validator) witness — never fewer than two.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_id",
+    "digest",
+    "kind",
+    "produced_by_twin",
+    "signatures",
+    "witnesses",
+    "provenance_root",
+    "lineage"
+  ],
+  "properties": {
+    "artifact_id": { "type": "string", "minLength": 1 },
+    "digest": { "$ref": "common.schema.json#/$defs/ContentHash" },
+    "kind": { "type": "string", "minLength": 1 },
+    "produced_by_twin": { "type": "string", "minLength": 1 },
+    "signatures": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "witnesses": {
+      "$comment": "Deut 19:15 — established by two, of different kind (chart + method).",
+      "$ref": "common.schema.json#/$defs/WitnessesDualType"
+    },
+    "provenance_root": { "$ref": "common.schema.json#/$defs/ContentHash" },
+    "lineage": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/Ref" }
+    },
+    "metrics": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/Measurement" }
+    }
+  }
+}
