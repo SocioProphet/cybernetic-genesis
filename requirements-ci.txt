@@ -1,0 +1,12 @@
+# Pinned CI dependencies for schema-pack-ci — reproducibility + supply-chain hygiene.
+# Exact `==` pins (not `>=`) so a CI run is deterministic and a compromised/broken upstream
+# release cannot silently enter the teeth. Direct dependencies only; regenerate deliberately
+# (e.g. via Dependabot) rather than floating. A future step is a full hash-locked closure
+# (`pip-compile --generate-hashes`) — tracked in the CI-hardening work order.
+jsonschema==4.26.0
+referencing==0.37.0
+PyYAML==6.0.3
+pytest==9.1.1
+fastapi==0.141.1
+httpx==0.28.1
+uvicorn==0.52.1
