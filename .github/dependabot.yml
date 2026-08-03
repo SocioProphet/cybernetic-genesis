@@ -1,0 +1,17 @@
+# Deliberate, reviewed dependency bumps — the counterpart to SHA-pinning actions and `==`-pinning
+# CI deps. Pins do not rot silently: Dependabot opens a PR (which must pass the fail-closed ci-gate)
+# to advance them, so upgrades are a reviewed event, never a moving-tag surprise.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: ci
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: ci
