@@ -1,0 +1,8 @@
+# VENDORED from SocioProphet/semantic-serdes/canonical_enums.yaml — the single source of truth
+# for the estate governance/truth vocabulary. Genesis $defs and the alignment pins are checked
+# against THIS file by tools/check_enum_alignment.py, so the two packs cannot drift.
+# Refresh: copy the relevant enums from semantic-serdes on change; the guard fails closed on mismatch.
+admissibility_tier: [RAW, VALIDATED, GOVERNED, CANONICAL]
+review_status: [NOT_REQUIRED, REQUIRED, PENDING, APPROVED, REJECTED, ESCALATED]
+truth_class: [OBSERVED, ASSERTED, INFERRED, REPUTED]
+decision_outcome: [ACCEPT, REJECT, ESCALATE, DEFER, CONTEST]
