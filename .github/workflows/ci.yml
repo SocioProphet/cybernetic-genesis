@@ -1,10 +1,31 @@
 name: schema-pack-ci
 
+# RESILIENT + FAIL-CLOSED triggers. The teeth must run on EVERY path to main, not just
+# PRs whose base is main — the old `pull_request: branches: [main]` left a blind spot where a
+# stacked PR (base != main) merged into an intermediate branch with ZERO repo CI. Now:
+#   * pull_request (ANY base branch)  -> no stacked-PR blind spot
+#   * merge_group                     -> the merge queue is validated before it lands
+#   * push: main                      -> post-merge plumb-line on the trunk
+#   * schedule                        -> daily self-healing re-assertion of the teeth on main
+#   * workflow_dispatch               -> operator can re-run the gate on demand
 on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+  merge_group:
+  schedule:
+    - cron: "17 6 * * *"   # 06:17 UTC daily — the plumb-line re-asserts main is still conformant
+  workflow_dispatch:
+
+# Cancel superseded PR runs (a new push obsoletes the old one); never cancel a trunk push or the
+# scheduled plumb-line — those must always run to completion so drift cannot slip through.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+# Least privilege by default; the self-healing jobs elevate to issues:write locally.
+permissions:
+  contents: read
 
 jobs:
   selftest:
@@ -58,3 +79,74 @@ jobs:
         run: python tools/verify_deploy_mount_strategy.py
       - name: deploy mount-strategy teeth (pytest)
         run: python -m pytest -q tests/test_deploy_mount_strategy.py
+
+  # ---------------------------------------------------------------------------- #
+  # FAIL-CLOSED aggregate gate. One stable required status check that represents ALL the
+  # teeth. `if: always()` + an EXPLICIT success assertion means a skipped/cancelled/failed
+  # `selftest` fails the gate — you cannot merge on a check that merely "didn't run red".
+  # Branch protection requires THIS context, so adding a future teeth job can never silently
+  # widen the gate: wire it into `needs` and it is enforced.
+  # ---------------------------------------------------------------------------- #
+  ci-gate:
+    name: CI gate (fail-closed aggregate)
+    needs: [selftest]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: assert every required teeth job succeeded
+        run: |
+          echo "selftest = ${{ needs.selftest.result }}"
+          if [ "${{ needs.selftest.result }}" != "success" ]; then
+            echo "::error::FAIL-CLOSED — required teeth did not succeed (selftest=${{ needs.selftest.result }})."
+            exit 1
+          fi
+          echo "All fail-closed teeth passed. Gate OPEN."
+
+  # ---------------------------------------------------------------------------- #
+  # SELF-HEALING drift loop (scheduled plumb-line only). The teeth already re-run on the daily
+  # schedule; these two jobs make the outcome self-maintaining: if main drifts out of
+  # conformance the drift is auto-surfaced as a tracking issue, and when the next plumb-line is
+  # green the issue auto-closes. Detection + notification + auto-recovery of the TRACKING STATE —
+  # never a blind auto-mutation of main (that is the daemon that dies; the fail-closed gate is
+  # the control that cannot fail).
+  # ---------------------------------------------------------------------------- #
+  drift-autofile:
+    name: plumb-line drift — auto-file (self-heal)
+    needs: [selftest]
+    if: ${{ github.event_name == 'schedule' && needs.selftest.result == 'failure' }}
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: open or update the drift issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: "CI plumb-line RED on main — fail-closed teeth broke"
+        run: |
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          body="The scheduled plumb-line re-asserted the fail-closed teeth on \`main\` and they FAILED ($run_url). main is out of conformance — investigate and restore green. This issue AUTO-CLOSES when the next plumb-line passes."
+          existing=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title \"$TITLE\"" --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "$body"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body "$body"
+          fi
+
+  drift-resolve:
+    name: plumb-line drift — auto-close (self-heal)
+    needs: [selftest]
+    if: ${{ github.event_name == 'schedule' && needs.selftest.result == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: close the drift issue once the plumb-line is green again
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: "CI plumb-line RED on main — fail-closed teeth broke"
+        run: |
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title \"$TITLE\"" --json number --jq '.[].number'); do
+            gh issue comment "$n" --repo "$GITHUB_REPOSITORY" --body "Plumb-line GREEN again on main ($run_url). Auto-closing — main is conformant."
+            gh issue close "$n" --repo "$GITHUB_REPOSITORY"
+          done
