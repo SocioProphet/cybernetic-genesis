@@ -1,9 +1,25 @@
 name: image
-# Build-once-promote-many: build the Inception image and push it to ghcr with a real digest, so
-# the digest can be pinned for deployment. Cost discipline (wave-deploy): does NOT rebuild on every
-# merge — only on a release tag `v*` or a manual dispatch. ghcr is the BUILD/validation registry;
-# estate DEPLOYMENT (INV-DEP-8) requires promoting the image to GAR and pinning THAT digest in
-# deploy/base/deployment.yaml — that promotion is the release-train's job (needs GAR WIF; held).
+# Build-once-promote-many: build the Inception image on a release tag `v*` (or manual dispatch) and
+# push it to BOTH registries with a real, content-addressed digest so that digest can be pinned for
+# deployment:
+#   * ghcr.io  — the PUBLIC BUILD/VALIDATION mirror (existing behaviour, kept).
+#   * GAR      — us-central1-docker.pkg.dev/socioprophet-platform/socioprophet/inception, the estate
+#                DEPLOYMENT registry. The live GKE nodes have Workload Identity auth to GAR and NONE
+#                to ghcr, so a ghcr-only digest 401s on a real `kubectl apply` — the apply-caught
+#                registry mismatch the estate already paid for (see search-orchestrator-image.yml in
+#                prophet-platform). The deployable digest MUST land in GAR; ghcr stays the public mirror.
+#
+# The manifest is pinned by @sha256: DIGEST (deploy/overlays/prod), never a moving tag — `:latest` +
+# IfNotPresent never rolls. Cost discipline (wave-deploy): does NOT rebuild on every merge, only on a
+# release tag `v*` or manual dispatch.
+#
+# amd64 ONLY: the GKE nodes are linux/amd64. An arm64 image (this repo's dev machines are arm64)
+# crash-loops on them with `exec format error`, so the build platform is pinned to linux/amd64.
+#
+# WIF, NO PATs: GAR auth is minted in-CI from the OIDC token via google-github-actions/auth — no
+# long-lived service-account key, no committed credential. Provider + service account are read from
+# the same secret NAMES the estate's workflows use (GCP_WORKLOAD_IDENTITY_PROVIDER /
+# GCP_SERVICE_ACCOUNT). See deploy/DECISIONS.md for the IAM prerequisite this repo does NOT yet meet.
 on:
   push:
     tags: ["v*"]
@@ -11,7 +27,14 @@ on:
 
 permissions:
   contents: read
-  packages: write
+  packages: write   # ghcr push (public validation mirror)
+  id-token: write   # WIF: google-github-actions/auth mints the GAR access token from the OIDC token
+
+env:
+  # Canonical GAR path — mirrors the estate convention
+  # (us-central1-docker.pkg.dev/socioprophet-platform/socioprophet/<service>).
+  GAR_REGISTRY: us-central1-docker.pkg.dev
+  GAR_IMAGE: us-central1-docker.pkg.dev/socioprophet-platform/socioprophet/inception
 
 jobs:
   build-push:
@@ -19,21 +42,52 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: docker/setup-buildx-action@v3
+
+      # ghcr login — the public build/validation mirror (existing behaviour).
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      # GAR auth via Workload Identity Federation — the estate's canonical pattern
+      # (prophet-platform search-orchestrator-image.yml / helm-release.yml). token_format:
+      # access_token yields the short-lived bearer docker/login-action logs in with as
+      # `oauth2accesstoken`. Provider + service account come from repo/org secrets, never committed.
+      - id: gar-auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          token_format: access_token
+
+      - name: Log in to GAR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.GAR_REGISTRY }}
+          username: oauth2accesstoken
+          password: ${{ steps.gar-auth.outputs.access_token }}
+
       - id: build
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
+          # GKE nodes are amd64; an arm64 image crash-loops with `exec format error`.
+          platforms: linux/amd64
+          # Immutable sha- tags are the estate convention; the deploy still pins the @sha256: digest
+          # emitted below (digest > moving tag). The same digest lands under all three tags / both
+          # registries (content-addressed).
           tags: |
             ghcr.io/socioprophet/cybernetic-genesis-inception:${{ github.sha }}
+            ${{ env.GAR_IMAGE }}:${{ github.sha }}
+            ${{ env.GAR_IMAGE }}:sha-${{ github.sha }}
+
       - name: Emit the digest (the promotable artifact)
         run: |
-          echo "### Inception image built + pushed" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Inception image built + pushed (linux/amd64)" >> "$GITHUB_STEP_SUMMARY"
           echo "digest: \`${{ steps.build.outputs.digest }}\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "ghcr.io/socioprophet/cybernetic-genesis-inception@${{ steps.build.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "NOTE: estate deploy (INV-DEP-8) promotes this to GAR and pins the GAR digest."
+          echo "GAR (deploy):  \`${{ env.GAR_IMAGE }}@${{ steps.build.outputs.digest }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "ghcr (mirror): \`ghcr.io/socioprophet/cybernetic-genesis-inception@${{ steps.build.outputs.digest }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Pin the GAR ref in deploy/overlays/prod/kustomization.yaml (INV-DEP-1)." >> "$GITHUB_STEP_SUMMARY"

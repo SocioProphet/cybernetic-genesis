@@ -1,0 +1,33 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+# Prod overlay — the DIGEST PIN on the self-contained base. This is the single place the deployable
+# image ref is fixed (INV-DEP-1). ArgoCD's Inception Application (prophet-platform
+# deploy/argocd/inception-services.yaml) points at THIS path.
+#
+# The pinned digest is the one that was actually built, promoted to GAR, and validated Ready+serving
+# on the live GKE cluster in the inception-validation namespace (tag 81fd3cc-amd64), then torn down.
+# We pin the VALIDATED digest, not "whatever the next build produces" — a future release train
+# rebuilds via .github/workflows/image.yml and re-pins here.
+namespace: inception
+resources:
+  - ../../base
+
+# Digest pin, never a moving tag. The base Deployment carries the placeholder image name
+# `cybernetic-genesis/inception`; kustomize rewrites it to the GAR path @ the validated digest.
+images:
+  - name: cybernetic-genesis/inception
+    newName: us-central1-docker.pkg.dev/socioprophet-platform/socioprophet/inception
+    digest: sha256:423b4ae6edbd198b999720ce02ca9561834d457c37962018b3f3007efdd234e8
+
+# Conservative: replicas 1 (already the base default; reasserted here so the prod posture is explicit
+# and cannot silently drift). NO ingress, NO Service exposure beyond the ClusterIP the base defines,
+# NO traffic cutover — that is a held, owner-only decision.
+replicas:
+  - name: inception
+    count: 1
+
+# NETPOL SELECTOR: the base NetworkPolicy already scopes ingress to
+# namespaceSelector kubernetes.io/metadata.name: inception, and this overlay's namespace IS
+# `inception`, so no selector retarget is needed here (the validation overlay needed one only because
+# it moved the namespace to inception-validation). Left as a no-op on purpose — documented, not
+# forgotten.
