@@ -51,6 +51,8 @@ doctrine and the verse→rule table (cited as *doctrinal source, not executable 
 4. **Fail-closed verdicts** — no implicit allow; a Twin is not `READY` without
    identity + policy + memory refs.
 5. **Plumb-line** — `validate.py selftest` is the CI baseline; drift is caught at the gate.
+7. **M.OS.ES** — an authoring device that falls short of direct authorship must carry a
+   **+1 attestation** (three witnesses, not two). Falling short demands a companion, not a veto.
 6. **The threshold** — the membrane opens both ways only on a full crossing of the 22 sealed
    thresholds **and** an explicit purpose-bound opt-in. 21 is short; the Ring stack serves
    opted-in users only.

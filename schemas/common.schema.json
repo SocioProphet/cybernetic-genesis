@@ -253,6 +253,90 @@
           ]
         }
       }
+    },
+    "EstimatedShortfall": {
+      "$comment": "M.OS.ES \u2014 Model-OS Estimated Shortfall. A measured handicap on the authoring device: how far its assurance falls below what direct authorship demands. A constrained device (mobile, ephemeral) does not get to author on its own word. The covenant already allows for this \u2014 'two or three witnesses' \u2014 so a device carrying a shortfall must make it up with a +1 attestation: a THIRD witness, independent of the chart+method pair. Shortfall 0 authors directly; shortfall > 0 authors only attested; a shortfall that cannot be made up is refused. This is the same shape as the 22-threshold: falling short is not a veto on the work, it is a demand that someone else cross with you.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "device_class",
+        "estimated_shortfall",
+        "authoring"
+      ],
+      "properties": {
+        "device_class": {
+          "$comment": "sealed_host = attested boot + sealed key custody; workstation = operator-controlled; mobile = constrained custody; ephemeral = no durable custody.",
+          "enum": [
+            "sealed_host",
+            "workstation",
+            "mobile",
+            "ephemeral"
+          ]
+        },
+        "estimated_shortfall": {
+          "$comment": "0.0 = meets the bar for direct authorship. > 0 = short by that fraction, and the +1 is required.",
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "authoring": {
+          "enum": [
+            "direct",
+            "attested",
+            "refused"
+          ]
+        },
+        "plus_one": {
+          "$comment": "The +1: the third, independent witness that makes up the shortfall. Not a re-signature by the same party \u2014 it must be a different witness kind than the one the device itself supplies.",
+          "$ref": "common.schema.json#/$defs/Witness"
+        },
+        "measured_at": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$comment": "A device that falls short may NOT author directly. The handicap is the point.",
+          "if": {
+            "properties": {
+              "estimated_shortfall": {
+                "exclusiveMinimum": 0.0
+              }
+            },
+            "required": [
+              "estimated_shortfall"
+            ]
+          },
+          "then": {
+            "properties": {
+              "authoring": {
+                "enum": [
+                  "attested",
+                  "refused"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "$comment": "Authoring while short is permitted ONLY with the +1 actually present.",
+          "if": {
+            "properties": {
+              "authoring": {
+                "const": "attested"
+              }
+            },
+            "required": [
+              "authoring"
+            ]
+          },
+          "then": {
+            "required": [
+              "plus_one"
+            ]
+          }
+        }
+      ]
     }
   }
 }

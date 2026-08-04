@@ -37,6 +37,8 @@ VALID_CASES = [
     ("policy_decision.schema.json", "policy_decision.valid.json"),
     ("policy_decision.schema.json", "policy_decision.deny.valid.json"),
     ("adapter_descriptor.schema.json", "adapter_descriptor.valid.json"),
+    # M.OS.ES: a short device may author WITH the +1 (three witnesses, not two).
+    ("artifact_record.schema.json", "artifact_record.from_short_device.valid.json"),
 ]
 
 INVALID_CASES = [
@@ -48,6 +50,10 @@ INVALID_CASES = [
     ("twin.schema.json", "twin.invalid.bidirectional_without_consent.json"),
     ("genesis_seed.schema.json", "genesis_seed.invalid.active_active_single_model.json"),
     ("genesis_seed.schema.json", "genesis_seed.invalid.no_consent_profile.json"),
+    # M.OS.ES: falling short is a demand that someone else cross with you, not a free pass.
+    ("twin.schema.json", "twin.invalid.mobile_authors_direct_while_short.json"),
+    ("twin.schema.json", "twin.invalid.attested_without_plus_one.json"),
+    ("artifact_record.schema.json", "artifact_record.invalid.short_device_only_two_witnesses.json"),
 ]
 
 

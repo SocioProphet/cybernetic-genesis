@@ -1,5 +1,5 @@
 {
-  "twin_id": "twin:atlas-cartographer.001",
+  "twin_id": "twin:mobile/direct-while-short",
   "seed_id": "seed:atlas-cartographer.v1",
   "status": "READY",
   "identity": {
@@ -45,13 +45,6 @@
   "authoring_device": {
     "device_class": "mobile",
     "estimated_shortfall": 0.35,
-    "authoring": "attested",
-    "plus_one": {
-      "name": "custody-notary",
-      "role": "plus-one-attestor",
-      "type": "method",
-      "hash": "sha256:ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34"
-    },
-    "measured_at": "2026-08-04T00:00:00Z"
+    "authoring": "direct"
   }
 }

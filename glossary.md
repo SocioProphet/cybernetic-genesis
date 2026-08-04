@@ -58,6 +58,18 @@ schemas MUST use these terms and no synonyms. Each entry is one or two lines.
   training and updates. *Active-active* is a liveness claim: exactly two live members, not a
   primary with a spare (`genesis_seed.model_profile`).
 
+- **M.OS.ES (Model-OS Estimated Shortfall)** — A measured handicap on the *authoring device*:
+  how far its assurance falls below what direct authorship demands. A constrained device
+  (`mobile`, `ephemeral`) does not author on its own word. The covenant already allows for
+  this — *"two **or three** witnesses"* — so a device carrying a shortfall must make it up
+  with a **+1 attestation**: a third witness, independent of the chart+method pair. Shortfall
+  `0` authors `direct`; shortfall `> 0` authors only `attested`; a shortfall that cannot be
+  made up is `refused`. Same shape as the 22-threshold — **falling short is not a veto on the
+  work, it is a demand that someone else cross with you.** Moses saw the land; Joshua crossed.
+- **+1 attestation** — The third witness that discharges an M.OS.ES shortfall. Must be a
+  different witness kind than the one the short device itself supplies; a re-signature by the
+  same party is not a +1.
+
 ## L0 source-canon discipline (see `docs/L0-genesis-covenant.md`)
 
 - **Dual witness** — A world-changing record is established only by two or more

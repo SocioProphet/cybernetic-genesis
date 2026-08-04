@@ -71,6 +71,9 @@
     },
     "membrane": {
       "$ref": "common.schema.json#/$defs/Membrane"
+    },
+    "authoring_device": {
+      "$ref": "common.schema.json#/$defs/EstimatedShortfall"
     }
   },
   "allOf": [
