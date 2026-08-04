@@ -11,19 +11,28 @@
       "name": "atlas-signing-key",
       "role": "release-signer",
       "type": "chart",
-      "hash": "sha256:ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22"
+      "hash": "sha256:ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22",
+      "authority_chain": [
+        "ca:release-root"
+      ]
     },
     {
       "name": "tile-consistency-validator",
       "role": "method-check",
       "type": "method",
-      "hash": "sha256:ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33"
+      "hash": "sha256:ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33",
+      "authority_chain": [
+        "ca:validation-root"
+      ]
     },
     {
       "name": "custody-notary",
       "role": "plus-one-attestor",
       "type": "method",
-      "hash": "sha256:ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34"
+      "hash": "sha256:ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34",
+      "authority_chain": [
+        "ca:validation-root"
+      ]
     }
   ],
   "provenance_root": "sha256:1122334455667788112233445566778811223344556677881122334455667788",

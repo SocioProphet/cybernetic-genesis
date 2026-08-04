@@ -112,6 +112,11 @@ schemas MUST use these terms and no synonyms. Each entry is one or two lines.
   Without this, a subject mints a derived identity and has it attest on their own behalf, and the
   +1 is the subject wearing another name. Unstated authority is refused: unknown provenance is not
   independence.
+- **Witness independence** — Kind-distinctness is **necessary but not sufficient**. Two witnesses
+  of different kind are still **one voice** if either draws authority from the subject it witnesses
+  (the record witnesses itself) or from the other witness (one witness wearing two names). Each
+  witness states an `authority_chain`; `origin` is unconstrained. A distant shared root (one org CA)
+  is fine — the defect is **proximate**. Unstated authority is refused.
 - **AD4M** — A *third-party* project (Coasys: Agents/Languages/Perspectives). **Not** ADMN. Keep the
   names firewalled; they are unrelated.
 

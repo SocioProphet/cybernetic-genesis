@@ -134,6 +134,37 @@ def check_braid() -> list[str]:
     return failures
 
 
+def check_witnesses() -> list[str]:
+    """Two witnesses of different kind can still be one voice: refuse a witness authorised by the
+    subject it witnesses, or by the other witness."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from witness_independence import WitnessError, check_artifact_record
+
+    failures = []
+    for path in sorted(EXAMPLE_DIR.glob("artifact_record*.json")):
+        obj = json.loads(path.read_text())
+        if "witnesses" not in obj:
+            continue
+        # Only the arithmetic-false fixtures MUST be caught here — they are schema-valid by
+        # construction and invisible to it. A `.invalid.` fixture is the SCHEMA's to reject (a bad
+        # boundary stone, a short device needing three witnesses); its witnesses may legitimately
+        # be independent, so whether this check also fires is informational.
+        must_be_refused = "schema_valid_arithmetic_false" in path.name
+        schema_owns_it = ".invalid." in path.name
+        try:
+            check_artifact_record(obj)
+            if must_be_refused:
+                failures.append(f"{path.name} SHOULD have been refused but passed")
+            else:
+                print(f"  [ok] {path.name} witnesses are independent")
+        except WitnessError as e:
+            if must_be_refused or schema_owns_it:
+                print(f"  [ok] {path.name} refused ({e})")
+            else:
+                failures.append(f"{path.name} refused: {e}")
+    return failures
+
+
 def check_initiations() -> list[str]:
     """A rename must actually be the operation it claims, and must not be self-granted where it
     buys passage. JSON Schema cannot compare two field lengths or two field values."""
@@ -234,6 +265,12 @@ def cmd_selftest() -> int:
     for msg in braid_failures:
         print(f"  [X] {msg}")
     failures += len(braid_failures)
+
+    print("\n== WITNESS INDEPENDENCE (kind-distinctness is not enough) ==")
+    wit_failures = check_witnesses()
+    for msg in wit_failures:
+        print(f"  [X] {msg}")
+    failures += len(wit_failures)
 
     print("\n== INITIATION (the rename must hold up) ==")
     rite_failures = check_initiations()

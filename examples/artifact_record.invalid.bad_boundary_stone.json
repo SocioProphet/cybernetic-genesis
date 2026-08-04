@@ -3,19 +3,29 @@
   "digest": "md5:not-a-real-boundary-stone",
   "kind": "tileset",
   "produced_by_twin": "twin:atlas-cartographer.001",
-  "signatures": ["sig:cosign:MEUCIQ...atlas"],
+  "signatures": [
+    "sig:cosign:MEUCIQ...atlas"
+  ],
   "witnesses": [
     {
       "role": "release-signer",
       "type": "chart",
-      "hash": "sha256:ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22"
+      "hash": "sha256:ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22",
+      "authority_chain": [
+        "ca:release-root"
+      ]
     },
     {
       "role": "policy-validator",
       "type": "method",
-      "hash": "sha256:ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33"
+      "hash": "sha256:ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33",
+      "authority_chain": [
+        "ca:validation-root"
+      ]
     }
   ],
   "provenance_root": "sha256:1122334455667788112233445566778811223344556677881122334455667788",
-  "lineage": ["prov:tile.compose.2026-08-02"]
+  "lineage": [
+    "prov:tile.compose.2026-08-02"
+  ]
 }

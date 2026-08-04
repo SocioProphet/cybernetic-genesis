@@ -41,6 +41,18 @@
         },
         "hash": {
           "$ref": "common.schema.json#/$defs/ContentHash"
+        },
+        "authority_chain": {
+          "$comment": "Where this witness's authority comes from. Sophia's rule: a witness's ORIGIN may descend from the subject it witnesses, but its AUTHORITY may not \u2014 and no witness may draw authority from another witness, or two witnesses are one voice. A distant shared root (one org CA) is fine; the defect is proximate. Independence is checked in tools/witness_independence.py \u2014 JSON Schema cannot test whether one field's value appears inside another field's array.",
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Ref"
+          },
+          "minItems": 1
+        },
+        "origin": {
+          "$comment": "Where the witness was brought forth from. UNCONSTRAINED \u2014 may be the subject.",
+          "$ref": "common.schema.json#/$defs/Ref"
         }
       }
     },
@@ -53,7 +65,7 @@
       "minItems": 2
     },
     "WitnessesDualType": {
-      "$comment": "Stronger form: not just two witnesses, but two of DIFFERENT kind \u2014 at least one chart AND one method. A signer alone, or two validators alone, does not establish the matter.",
+      "$comment": "Stronger form: not just two witnesses, but two of DIFFERENT kind \u2014 at least one chart AND one method. A signer alone, or two validators alone, does not establish the matter. NOTE: kind-distinctness is necessary but NOT sufficient \u2014 two witnesses of different kind can still be one voice if one authorises the other. See tools/witness_independence.py.",
       "type": "array",
       "items": {
         "$ref": "common.schema.json#/$defs/Witness"

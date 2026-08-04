@@ -1,5 +1,5 @@
 {
-  "artifact_id": "artifact:atlas.tileset.2026-08-02-from-mobile-two-witnesses",
+  "artifact_id": "artifact:atlas.tileset.2026-08-02-one-voice",
   "digest": "sha256:dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11",
   "kind": "tileset",
   "produced_by_twin": "twin:atlas-cartographer.001",
@@ -22,7 +22,7 @@
       "type": "method",
       "hash": "sha256:ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33",
       "authority_chain": [
-        "ca:validation-root"
+        "atlas-signing-key"
       ]
     }
   ],
@@ -39,17 +39,5 @@
       "sample_size": 4096,
       "snr": "n/a"
     }
-  ],
-  "authoring_device": {
-    "device_class": "mobile",
-    "estimated_shortfall": 0.35,
-    "authoring": "attested",
-    "plus_one": {
-      "name": "custody-notary",
-      "role": "plus-one-attestor",
-      "type": "method",
-      "hash": "sha256:ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34ab12cd34"
-    },
-    "measured_at": "2026-08-04T00:00:00Z"
-  }
+  ]
 }
