@@ -131,6 +131,71 @@ carrying a `boundary` source and a mechanism is a registry error.
 **A gap, recorded as a gap:** "four crows" could not be verified. The attested four is the **four
 rolls and four colours**, not crows. If a source turns up it can be added properly.
 
+## The Walking Purchase: the fraud was in the instrument
+
+In **1737** **Thomas Penn** — William's son, proprietor nineteen years after his father's death —
+produced a claimed *lost* deed of **1686** ceding land as far as a man could **walk in a day and a
+half**. The Lenape understood a walk.
+
+Penn hired the three fastest men in the colony — **Edward Marshall, James Yeates, Solomon
+Jennings** — offered a prize to whoever covered the most ground, and had **the path cleared in
+advance**. About **1,200 square miles** were taken. **Nutimus** and other Lenape leaders protested
+precisely this: that the path had been artificially cleared, and that the pace was not the customary
+traverse the agreement assumed.
+
+> **The terms were kept and the measure was rigged.**
+
+A contract adjudicated by a measurement is only as honest as its instrument — and here the
+instrument was **supplied, paid and prepared by one party to the agreement**. There was no
+independent party to the measure. That is the witness rule violated in a land treaty: the measurer's
+**origin and authority both came from the interested side.**
+
+It is a contract settled by **feet**, and it is why this estate recomputes rather than trusts:
+`tools/octonion_boundary.py` recomputes a declared norm from its axes and refuses a mismatch,
+because *a self-reported measurement is an instrument, and instruments lie.*
+
+## Penn the lawgiver, and the son who used his name
+
+Jefferson, in **1825**, called William Penn *"the greatest lawgiver the world has produced, being
+the first, in either ancient or modern times who has laid the foundation of government in the pure
+and unadulterated principles of peace, reason, and right."* Penn named **Bucks County** in 1682 for
+**Buckinghamshire**, his family's home in England.
+
+And the Walking Purchase was executed by his **son Thomas**, in 1737, **nineteen years after
+William's death**, on a deed attributed to the father's era. The father's name carried the credit;
+the son's runners took the land.
+
+> **A venerated name is not a warrant, and inherited authority is the weakest kind.**
+
+Both things are true and neither cancels the other. Authority attaches to the act and the actor,
+never to the surname — which is why an authority chain must be **traced**, not assumed.
+
+*Two gaps:* a *"greatest lawgiver **since Moses**"* formulation was not found — Jefferson's attested
+wording is *"the greatest lawgiver the world has produced."* And a *"king's land"* derivation for
+Buckingham was not verified; the attested derivation is the Penn family's Buckinghamshire.
+
+## Pisgah in Pennsylvania: the place named for seeing and not entering
+
+**Pisgah** is the summit from which Moses viewed the promised land **and did not enter it**
+(Deut 34:1–3).
+
+Central Pennsylvania has a **Mount Pisgah Altar** — a stone altar on **Shade Mountain, Snyder
+County**, at about 2,000 feet, looking out over the valley. It was built by **Robert Cryan** of
+Beaver Springs, with **Wilmer Shank** doing the stonework, **May–October 1979**, dedicated June
+1980, and it is used for Easter sunrise service. **It is modern, not ancient, and the people who
+built it are known by name.**
+
+> **A place is named for the vantage, not the crossing.**
+
+That viewpoints keep getting called Pisgah — repeatedly, by people who never met — says the
+shortfall at the threshold is the part worth **marking**, not the part to hide. Name the boundary
+you stopped at; it serves whoever comes next better than a claim of arrival.
+
+*Two gaps:* whether this altar was built **unhewn / without iron tools** is **not attested** — the
+sources describe concrete and mountain stone. The unhewn-altar law itself is real and citable
+(**Ex 20:25** — *"if thou lift up thy tool upon it, thou hast polluted it"* — **Deut 27:5–6**,
+**Josh 8:31**), but no *ancient* unhewn altar in central PA was verified.
+
 ## 5. The one rule underneath
 
 Every entry above is the same rule seen from a different side:

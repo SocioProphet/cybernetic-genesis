@@ -429,6 +429,142 @@
         "sophia-authority",
         "mosis-shortfall"
       ]
+    },
+    {
+      "id": "walking-purchase-instrument",
+      "title": "The Walking Purchase: the fraud was in the instrument",
+      "narrative": "In 1737 Thomas Penn \u2014 William's son, proprietor nineteen years after his father's death \u2014 produced a claimed 'lost' deed of 1686 ceding land as far as a man could walk in a day and a half. The Lenape understood a walk. Penn hired the three fastest men in the colony, Edward Marshall, James Yeates and Solomon Jennings, offered a prize to whoever covered the most ground, and had the path CLEARED IN ADVANCE. About 1,200 square miles were taken. Nutimus and other Lenape leaders protested precisely this: that the path had been artificially cleared and the pace was not the customary traverse the agreement assumed.",
+      "design_principle": "THE TERMS WERE KEPT AND THE MEASURE WAS RIGGED. A contract adjudicated by a measurement is only as honest as the instrument, and here the instrument was supplied, paid and prepared by one party to the agreement. That is the witness rule violated in a land treaty: the measurer's origin AND authority both came from the interested side, with no independent party to the measure. It is why a self-reported measurement is refused, why a signer must be independent of the subject, and why the estate recomputes rather than trusts a declared value.",
+      "sources": [
+        {
+          "kind": "attested",
+          "citation": "Walking Purchase, 25 August 1737; Thomas Penn (1702-1775); runners Marshall, Yeates, Jennings; pre-cleared path; ~1,200 sq mi",
+          "url": "https://www.britannica.com/event/Walking-Purchase"
+        },
+        {
+          "kind": "attested",
+          "citation": "Nutimus and other Lenape leaders protested the cleared path and the non-customary pace",
+          "url": "https://philadelphiaencyclopedia.org/essays/walking-purchase/"
+        },
+        {
+          "kind": "attested",
+          "citation": "The 1686 deed relied upon was itself of contested authenticity"
+        },
+        {
+          "kind": "interpretation",
+          "citation": "Reading it as an INSTRUMENT failure rather than a terms failure is this estate's framing"
+        }
+      ],
+      "mechanism": {
+        "repo": "cybernetic-genesis",
+        "path": "tools/octonion_boundary.py",
+        "invariant": "a declared norm is RECOMPUTED from the axes and a mismatch refused \u2014 a self-reported measurement is an instrument, and instruments lie"
+      },
+      "anchors": [
+        {
+          "repo": "cybernetic-genesis",
+          "doc": "docs/wisdom-sources.md",
+          "section": "The Walking Purchase: the fraud was in the instrument"
+        }
+      ],
+      "related": [
+        "penn-lawgiver-reception",
+        "feet-guarantors",
+        "sophia-authority",
+        "quorum-independence"
+      ]
+    },
+    {
+      "id": "penn-lawgiver-reception",
+      "title": "Penn the lawgiver, and the son who used his name",
+      "narrative": "Jefferson in 1825 called William Penn 'the greatest lawgiver the world has produced, being the first, in either ancient or modern times who has laid the foundation of government in the pure and unadulterated principles of peace, reason, and right.' Penn named Bucks County in 1682 for Buckinghamshire, his family's home in England. But the Walking Purchase was executed in 1737 by his SON Thomas, nineteen years after William's death, on a deed attributed to the father's era \u2014 the father's name carrying the credit, the son's runners taking the land.",
+      "design_principle": "A venerated name is not a warrant, and inherited authority is the weakest kind. The reception of William Penn as lawgiver is real and the fraud of 1737 is real, and holding both without letting either cancel the other is the discipline. Authority attaches to the act and the actor, never to the surname \u2014 which is exactly why an authority chain must be traced rather than assumed.",
+      "sources": [
+        {
+          "kind": "attested",
+          "citation": "Thomas Jefferson, 1825, on William Penn as 'the greatest lawgiver the world has produced'"
+        },
+        {
+          "kind": "attested",
+          "citation": "Bucks County named 1682 for Buckinghamshire, the Penn family home",
+          "url": "https://en.wikipedia.org/wiki/Bucks_County,_Pennsylvania"
+        },
+        {
+          "kind": "attested",
+          "citation": "William Penn died 1718; the Walking Purchase was 1737, executed by Thomas Penn"
+        },
+        {
+          "kind": "gap",
+          "citation": "A 'greatest lawgiver SINCE MOSES' formulation was not found; Jefferson's attested wording is 'the greatest lawgiver the world has produced'"
+        },
+        {
+          "kind": "gap",
+          "citation": "A 'king's land' derivation for Buckingham/Bucks was not verified; the attested derivation is the Penn family's Buckinghamshire"
+        }
+      ],
+      "mechanism": {
+        "repo": "cybernetic-genesis",
+        "path": "tools/witness_independence.py",
+        "invariant": "an authority chain must be stated and traced; unstated provenance is not independence"
+      },
+      "anchors": [
+        {
+          "repo": "cybernetic-genesis",
+          "doc": "docs/wisdom-sources.md",
+          "section": "Penn the lawgiver, and the son who used his name"
+        }
+      ],
+      "related": [
+        "walking-purchase-instrument",
+        "tamanend-reception",
+        "sophia-authority"
+      ]
+    },
+    {
+      "id": "pisgah-seeing-not-entering",
+      "title": "Pisgah in Pennsylvania: the place named for seeing and not entering",
+      "narrative": "Pisgah is the summit from which Moses viewed the promised land and did not enter it (Deut 34:1-3). Central Pennsylvania has a Mount Pisgah Altar \u2014 a stone altar on Shade Mountain in Snyder County, at about 2,000 feet, looking out over the valley. It was built by Robert Cryan of Beaver Springs with Wilmer Shank doing the stonework, from May to October 1979, dedicated in June 1980, and it is used for Easter sunrise service. It is a modern altar, not an ancient one, and the people who built it are known by name.",
+      "design_principle": "A place is named for the vantage, not the crossing. That a viewpoint gets called Pisgah \u2014 repeatedly, by people who never met \u2014 says the shortfall at the threshold is the part worth marking, not the part to be hidden. Name the boundary you stopped at; it is more useful to whoever comes next than a claim of arrival.",
+      "sources": [
+        {
+          "kind": "attested",
+          "citation": "Deut 34:1-3 (Moses views the land from Pisgah)"
+        },
+        {
+          "kind": "attested",
+          "citation": "Mount Pisgah Altar, Shade Mountain, Snyder County PA; built 1979 by Robert Cryan and Wilmer Shank, dedicated June 1980",
+          "url": "https://www.interestingpennsylvania.com/2017/06/mt-pisgah-altar-atop-a-mountain.html"
+        },
+        {
+          "kind": "attested",
+          "citation": "The unhewn-altar law is real and citable: Ex 20:25 ('if thou lift up thy tool upon it, thou hast polluted it'), Deut 27:5-6, Josh 8:31"
+        },
+        {
+          "kind": "gap",
+          "citation": "Whether the Snyder County altar was built unhewn / without iron tools is NOT attested in what could be checked; the sources describe concrete and mountain stone"
+        },
+        {
+          "kind": "gap",
+          "citation": "No ANCIENT unhewn stone altar in central PA was verified; the Mount Pisgah altar is a documented 1979 construction"
+        }
+      ],
+      "mechanism": {
+        "repo": "cybernetic-genesis",
+        "path": "schemas/twin.schema.json",
+        "invariant": "the threshold rule names what is missing (21 < 22) rather than silently downgrading the actor"
+      },
+      "anchors": [
+        {
+          "repo": "cybernetic-genesis",
+          "doc": "docs/wisdom-sources.md",
+          "section": "Pisgah in Pennsylvania: the place named for seeing and not entering"
+        }
+      ],
+      "related": [
+        "moses-threshold",
+        "walking-purchase-instrument",
+        "mosis-shortfall"
+      ]
     }
   ]
 }
