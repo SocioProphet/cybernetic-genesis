@@ -816,3 +816,63 @@ PERMISSION TO ACT IS NOT PERMISSION TO SEND. An act can be entirely legitimate a
 
 `guard-goose-gate`, `feet-guarantors`, `silent-workflow-death`
 
+## Hel, Hall, Heller, Hillel, Helle, Helier — one sound, several unrelated lines
+
+`id: hel-cluster-false-cognates`
+
+### Narrative
+
+A cluster of names sits around the same syllable and they do not share an origin. HEL is the Norse ruler of the dead and her realm, and English 'hell' descends from Proto-Germanic *haljo, from a PIE root meaning TO COVER, TO CONCEAL — the same family that gives 'hall' (a covered place), and 'conceal', 'hull', 'helm', 'occult'. HILLEL is Hebrew, from the Semitic root h-l-l, PRAISE — the root of 'hallelujah' — and belongs to a different language family entirely. HELLE is a Greek personal name, the girl who fell from the golden ram into the strait that took her name, the Hellespont, and whom Graves (1948) invoked to read Helleborus as 'food of Helle'. HELIER is a personal name of Latin/Germanic origin, borne by a 6th-century hermit. And HELLER, the coin, is from Hall — Schwabisch Hall, a SALT town, which may well be a salt-root and not the covering-root at all.
+
+### Design principle
+
+RESEMBLANCE IS NOT PROVENANCE, and a name-cluster that sounds unified is exactly where each line must be traced separately. Hel and Hillel are near-opposites in sense — concealment against praise, covering against shining — and no amount of phonetic similarity bridges Germanic to Semitic. This is the register's own thesis applied to itself: authority laundering works by resemblance, a thing SOUNDING like it descends from something is how it acquires a lineage it was never granted, and the defence is the same one used on Tamanend and on Penn — trace the chain, do not infer it from the surface.
+
+### Sources
+
+- **attested** — Hel and Helheim in Norse cosmology; English 'hell' from Proto-Germanic *haljo
+- **attested** — Hillel the Elder (c.110 BCE-10 CE); Hebrew h-l-l, 'praise', the root of hallelujah
+- **attested** — Helle and the Hellespont; Graves (1948) proposed 'food of Helle' for Helleborus — <https://www.theoi.com/Pontios/Helle.html>
+- **attested** — The Heller coin is named for Hall (Schwabisch Hall)
+- **gap** — The precise derivations need a philologist's confirmation before they are asserted as fact: whether 'hell' and 'hall' share PIE *kel- 'to cover', and whether the town-name Hall is that root or a SALT root, are exactly the joins where a plausible story would slot in unearned. The STRUCTURAL claim — that these are several unrelated lines, not one — is what this entry stands behind.
+- **interpretation** — Reading the cluster as an instance of laundering-by-resemblance is this register's framing
+
+### Mechanism
+
+`cybernetic-genesis` → `tools/witness_independence.py`
+
+> an authority chain must be stated and traced; a resemblance is not a chain, and unstated provenance is not independence
+
+### Related
+
+`heller-ahasuerus-nameline`, `tamanend-reception`, `penn-lawgiver-reception`, `sophia-authority`
+
+## St Helier on the tidal rock — a threshold with a schedule
+
+`id: st-helier-tidal-hermitage`
+
+### Narrative
+
+Helier was born to pagan parents at Tongeren, came to Jersey, and lived as a hermit on a TIDAL ISLET — Hermitage Rock, beside the islet that now carries Elizabeth Castle. He was killed by raiding pirates, beheaded with an axe, around 555, and is patron of Jersey and of the capital that bears his name. His feast is 16 July, and the record carries his name several ways: Helier, Elier, Herlier, Helyi.
+
+### Design principle
+
+A TIDAL CAUSEWAY IS A MEMBRANE WITH A SCHEDULE. The rock is joined to the land at low water and cut off at high — the same ground is passable or not depending on when you stand on it, and the crossing is governed by a clock nobody negotiates with. That is the estate's membrane exactly: flow across a boundary is not a property of the boundary alone but of the boundary AND the moment, which is why `thresholds_crossed` and `consent` are checked together rather than either standing for the other. And note the name again unsettled in the record — Helier, Elier, Herlier, Helyi — four spellings for one hermit.
+
+### Sources
+
+- **attested** — Helier, 6th-c. hermit of Jersey, born Tongeren, martyred c.555 by pirates; patron of Jersey and of St Helier; feast 16 July — <https://en.wikipedia.org/wiki/Helier>
+- **attested** — He lived on a tidal islet, now Hermitage Rock, beside the islet occupied by Elizabeth Castle
+- **attested** — Name variants in the record: Helier, Elier, Herlier, Helyi
+- **interpretation** — Reading the tidal causeway as a scheduled membrane is this register's framing, not a claim about the hagiography
+
+### Mechanism
+
+`cybernetic-genesis` → `schemas/twin.schema.json`
+
+> bidirectional flow requires thresholds_crossed AND consent together — a boundary's passability is a property of the boundary and the moment, not of either alone
+
+### Related
+
+`hel-cluster-false-cognates`, `membrane-twin-bridge`, `moses-threshold`, `heller-ahasuerus-nameline`
+

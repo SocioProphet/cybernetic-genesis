@@ -1106,6 +1106,100 @@
         "feet-guarantors",
         "silent-workflow-death"
       ]
+    },
+    {
+      "id": "hel-cluster-false-cognates",
+      "title": "Hel, Hall, Heller, Hillel, Helle, Helier \u2014 one sound, several unrelated lines",
+      "narrative": "A cluster of names sits around the same syllable and they do not share an origin. HEL is the Norse ruler of the dead and her realm, and English 'hell' descends from Proto-Germanic *haljo, from a PIE root meaning TO COVER, TO CONCEAL \u2014 the same family that gives 'hall' (a covered place), and 'conceal', 'hull', 'helm', 'occult'. HILLEL is Hebrew, from the Semitic root h-l-l, PRAISE \u2014 the root of 'hallelujah' \u2014 and belongs to a different language family entirely. HELLE is a Greek personal name, the girl who fell from the golden ram into the strait that took her name, the Hellespont, and whom Graves (1948) invoked to read Helleborus as 'food of Helle'. HELIER is a personal name of Latin/Germanic origin, borne by a 6th-century hermit. And HELLER, the coin, is from Hall \u2014 Schwabisch Hall, a SALT town, which may well be a salt-root and not the covering-root at all.",
+      "design_principle": "RESEMBLANCE IS NOT PROVENANCE, and a name-cluster that sounds unified is exactly where each line must be traced separately. Hel and Hillel are near-opposites in sense \u2014 concealment against praise, covering against shining \u2014 and no amount of phonetic similarity bridges Germanic to Semitic. This is the register's own thesis applied to itself: authority laundering works by resemblance, a thing SOUNDING like it descends from something is how it acquires a lineage it was never granted, and the defence is the same one used on Tamanend and on Penn \u2014 trace the chain, do not infer it from the surface.",
+      "sources": [
+        {
+          "kind": "attested",
+          "citation": "Hel and Helheim in Norse cosmology; English 'hell' from Proto-Germanic *haljo"
+        },
+        {
+          "kind": "attested",
+          "citation": "Hillel the Elder (c.110 BCE-10 CE); Hebrew h-l-l, 'praise', the root of hallelujah"
+        },
+        {
+          "kind": "attested",
+          "citation": "Helle and the Hellespont; Graves (1948) proposed 'food of Helle' for Helleborus",
+          "url": "https://www.theoi.com/Pontios/Helle.html"
+        },
+        {
+          "kind": "attested",
+          "citation": "The Heller coin is named for Hall (Schwabisch Hall)"
+        },
+        {
+          "kind": "gap",
+          "citation": "The precise derivations need a philologist's confirmation before they are asserted as fact: whether 'hell' and 'hall' share PIE *kel- 'to cover', and whether the town-name Hall is that root or a SALT root, are exactly the joins where a plausible story would slot in unearned. The STRUCTURAL claim \u2014 that these are several unrelated lines, not one \u2014 is what this entry stands behind."
+        },
+        {
+          "kind": "interpretation",
+          "citation": "Reading the cluster as an instance of laundering-by-resemblance is this register's framing"
+        }
+      ],
+      "mechanism": {
+        "repo": "cybernetic-genesis",
+        "path": "tools/witness_independence.py",
+        "invariant": "an authority chain must be stated and traced; a resemblance is not a chain, and unstated provenance is not independence"
+      },
+      "anchors": [
+        {
+          "repo": "cybernetic-genesis",
+          "doc": "docs/wisdom-sources-narrated.md",
+          "section": "5. Ahasuerus \u2014 motion without arrival"
+        }
+      ],
+      "related": [
+        "heller-ahasuerus-nameline",
+        "tamanend-reception",
+        "penn-lawgiver-reception",
+        "sophia-authority"
+      ]
+    },
+    {
+      "id": "st-helier-tidal-hermitage",
+      "title": "St Helier on the tidal rock \u2014 a threshold with a schedule",
+      "narrative": "Helier was born to pagan parents at Tongeren, came to Jersey, and lived as a hermit on a TIDAL ISLET \u2014 Hermitage Rock, beside the islet that now carries Elizabeth Castle. He was killed by raiding pirates, beheaded with an axe, around 555, and is patron of Jersey and of the capital that bears his name. His feast is 16 July, and the record carries his name several ways: Helier, Elier, Herlier, Helyi.",
+      "design_principle": "A TIDAL CAUSEWAY IS A MEMBRANE WITH A SCHEDULE. The rock is joined to the land at low water and cut off at high \u2014 the same ground is passable or not depending on when you stand on it, and the crossing is governed by a clock nobody negotiates with. That is the estate's membrane exactly: flow across a boundary is not a property of the boundary alone but of the boundary AND the moment, which is why `thresholds_crossed` and `consent` are checked together rather than either standing for the other. And note the name again unsettled in the record \u2014 Helier, Elier, Herlier, Helyi \u2014 four spellings for one hermit.",
+      "sources": [
+        {
+          "kind": "attested",
+          "citation": "Helier, 6th-c. hermit of Jersey, born Tongeren, martyred c.555 by pirates; patron of Jersey and of St Helier; feast 16 July",
+          "url": "https://en.wikipedia.org/wiki/Helier"
+        },
+        {
+          "kind": "attested",
+          "citation": "He lived on a tidal islet, now Hermitage Rock, beside the islet occupied by Elizabeth Castle"
+        },
+        {
+          "kind": "attested",
+          "citation": "Name variants in the record: Helier, Elier, Herlier, Helyi"
+        },
+        {
+          "kind": "interpretation",
+          "citation": "Reading the tidal causeway as a scheduled membrane is this register's framing, not a claim about the hagiography"
+        }
+      ],
+      "mechanism": {
+        "repo": "cybernetic-genesis",
+        "path": "schemas/twin.schema.json",
+        "invariant": "bidirectional flow requires thresholds_crossed AND consent together \u2014 a boundary's passability is a property of the boundary and the moment, not of either alone"
+      },
+      "anchors": [
+        {
+          "repo": "cybernetic-genesis",
+          "doc": "docs/wisdom-sources.md",
+          "section": "1. The threshold: 22, and 21"
+        }
+      ],
+      "related": [
+        "hel-cluster-false-cognates",
+        "membrane-twin-bridge",
+        "moses-threshold",
+        "heller-ahasuerus-nameline"
+      ]
     }
   ]
 }
