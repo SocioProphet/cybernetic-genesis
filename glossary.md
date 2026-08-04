@@ -92,6 +92,17 @@ schemas MUST use these terms and no synonyms. Each entry is one or two lines.
   (M.OS.ES) and Guard Goose. **A carry chain must be capped** — uncapped, it overshoots the goal
   and lands exactly on the restart square.
 
+- **Initiation (the rename)** — A name change as a governed event: a letter inserted, swapped, or
+  dropped. Abram→Abraham (heh in), Sarai→Sarah (yod for heh), Hoshea→**Ye**hoshua (yod added **by
+  Moses**, Num 13:16), YHVH→YH**Sh**VH (shin set in — the braid's own five phases). **ADMN = Adam-N**
+  is this operation applied to the naming space itself. It is the oldest form of the +1 attestation:
+  the one who fell short adds a letter so another can cross.
+- **You cannot rename yourself across a threshold** — An initiation carrying `enables_threshold`
+  requires an attestor distinct from the subject. Hoshea did not add his own yod. Self-attested
+  passage is refused for the same reason a re-signature by the same party is not a +1 (M.OS.ES).
+- **AD4M** — A *third-party* project (Coasys: Agents/Languages/Perspectives). **Not** ADMN. Keep the
+  names firewalled; they are unrelated.
+
 ## L0 source-canon discipline (see `docs/L0-genesis-covenant.md`)
 
 - **Dual witness** — A world-changing record is established only by two or more

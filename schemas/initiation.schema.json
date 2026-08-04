@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.ai/schemas/initiation.schema.json",
+  "title": "Initiation",
+  "description": "A name change as a governed event. Renaming on initiation is a letter operation \u2014 Abram->Abraham (heh inserted), Sarai->Sarah (yod swapped for heh), Hoshea->Yehoshua (yod added BY MOSES, Num 13:16), YHVH->YHShVH (shin set in). It is the oldest form of the +1 attestation. Operation/name consistency and the self-attestation rule are enforced by tools/initiation.py \u2014 JSON Schema cannot compare two field lengths.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "subject",
+    "prior_name",
+    "new_name",
+    "operation",
+    "letter"
+  ],
+  "properties": {
+    "subject": {
+      "$ref": "common.schema.json#/$defs/Ref"
+    },
+    "prior_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "new_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operation": {
+      "$comment": "insert grows the name, drop shrinks it, swap trades one letter for another at equal length.",
+      "enum": [
+        "insert",
+        "swap",
+        "drop",
+        "replace"
+      ]
+    },
+    "letter": {
+      "$comment": "The letter set in, swapped, or dropped. The braid letters are yod/heh/shin/vav.",
+      "type": "string",
+      "minLength": 1
+    },
+    "script": {
+      "type": "string",
+      "minLength": 1
+    },
+    "enables_threshold": {
+      "$comment": "The crossing this rename buys passage to. WHEN PRESENT, an attestor distinct from the subject is REQUIRED: you cannot rename yourself across a threshold. Hoshea did not add his own yod.",
+      "$ref": "common.schema.json#/$defs/Ref"
+    },
+    "attestor": {
+      "$comment": "Who performed the rename \u2014 the +1. Moses, for Joshua.",
+      "$ref": "common.schema.json#/$defs/Ref"
+    },
+    "governance": {
+      "$ref": "common.schema.json#/$defs/Governance"
+    }
+  },
+  "allOf": [
+    {
+      "$comment": "A rename that buys passage needs a witness to it.",
+      "if": {
+        "required": [
+          "enables_threshold"
+        ]
+      },
+      "then": {
+        "required": [
+          "attestor"
+        ]
+      }
+    }
+  ]
+}

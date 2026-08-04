@@ -38,6 +38,7 @@ VALID_CASES = [
     ("policy_decision.schema.json", "policy_decision.deny.valid.json"),
     ("adapter_descriptor.schema.json", "adapter_descriptor.valid.json"),
     ("genesis_braid.schema.json", "genesis_braid.valid.json"),
+    ("initiation.schema.json", "initiation.valid.json"),
     # M.OS.ES: a short device may author WITH the +1 (three witnesses, not two).
     ("artifact_record.schema.json", "artifact_record.from_short_device.valid.json"),
 ]
@@ -56,6 +57,7 @@ INVALID_CASES = [
     # Each of these is an error found in a real source render of the braid.
     ("genesis_braid.schema.json", "genesis_braid.invalid.three_spaces.json"),
     ("genesis_braid.schema.json", "genesis_braid.invalid.ten_steps.json"),
+    ("initiation.schema.json", "initiation.invalid.self_renamed_across_threshold.json"),
     # M.OS.ES: falling short is a demand that someone else cross with you, not a free pass.
     ("twin.schema.json", "twin.invalid.mobile_authors_direct_while_short.json"),
     ("twin.schema.json", "twin.invalid.attested_without_plus_one.json"),
@@ -128,6 +130,29 @@ def check_braid() -> list[str]:
                 print(f"  [ok] {path.name} refused by the spine check ({e})")
             else:
                 failures.append(f"{path.name} spine refused: {e}")
+    return failures
+
+
+def check_initiations() -> list[str]:
+    """A rename must actually be the operation it claims, and must not be self-granted where it
+    buys passage. JSON Schema cannot compare two field lengths or two field values."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from initiation import InitiationError, check as check_rite
+
+    failures = []
+    for path in sorted(EXAMPLE_DIR.glob("initiation*.json")):
+        must_be_refused = "schema_valid_arithmetic_false" in path.name or ".invalid." in path.name
+        try:
+            check_rite(json.loads(path.read_text()))
+            if must_be_refused:
+                failures.append(f"{path.name} SHOULD have been refused but passed")
+            else:
+                print(f"  [ok] {path.name} rename verified")
+        except InitiationError as e:
+            if must_be_refused:
+                print(f"  [ok] {path.name} refused ({e})")
+            else:
+                failures.append(f"{path.name} refused: {e}")
     return failures
 
 
@@ -208,6 +233,12 @@ def cmd_selftest() -> int:
     for msg in braid_failures:
         print(f"  [X] {msg}")
     failures += len(braid_failures)
+
+    print("\n== INITIATION (the rename must hold up) ==")
+    rite_failures = check_initiations()
+    for msg in rite_failures:
+        print(f"  [X] {msg}")
+    failures += len(rite_failures)
 
     print("\n== OCTONION BOUNDARY (arithmetic the schema cannot do) ==")
     boundary_failures = check_boundaries()
