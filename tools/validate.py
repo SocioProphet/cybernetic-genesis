@@ -45,6 +45,8 @@ INVALID_CASES = [
     ("artifact_record.schema.json", "artifact_record.invalid.missing_second_witness.json"),
     ("artifact_record.schema.json", "artifact_record.invalid.bad_boundary_stone.json"),
     ("twin.schema.json", "twin.invalid.ready_without_policy.json"),
+    ("twin.schema.json", "twin.invalid.ready_while_boundary_halts.json"),
+    ("twin.schema.json", "twin.invalid.boundary_breach_without_halt.json"),
     # The threshold: 21 is short — the land was seen, not entered.
     ("twin.schema.json", "twin.invalid.bidirectional_at_21.json"),
     ("twin.schema.json", "twin.invalid.bidirectional_without_consent.json"),
@@ -55,6 +57,43 @@ INVALID_CASES = [
     ("twin.schema.json", "twin.invalid.attested_without_plus_one.json"),
     ("artifact_record.schema.json", "artifact_record.invalid.short_device_only_two_witnesses.json"),
 ]
+
+
+# Objects whose `boundary` is schema-valid but arithmetically false. The schema CANNOT catch
+# these — it has no norm — so they are checked by tools/octonion_boundary.py instead.
+ARITHMETIC_FALSE_CASES = [
+    "twin.lied_norm.schema_valid_arithmetic_false.json",
+]
+
+
+def check_boundaries() -> list[str]:
+    """Recompute every declared octonion norm. A boundary that lies about itself is refused
+    here even though it satisfies the schema — JSON Schema cannot do arithmetic."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from octonion_boundary import BoundaryError, check_object
+
+    failures = []
+    for path in sorted(EXAMPLE_DIR.glob("*.json")):
+        obj = json.loads(path.read_text())
+        if not isinstance(obj, dict) or "boundary" not in obj:
+            continue
+        must_be_refused = path.name in ARITHMETIC_FALSE_CASES
+        # A `.invalid.` fixture is the SCHEMA's to reject; whether the arithmetic also catches it
+        # is informational. Only ARITHMETIC_FALSE_CASES must be caught here, because only they are
+        # invisible to the schema.
+        schema_owns_it = ".invalid." in path.name
+        try:
+            check_object(obj)
+            if must_be_refused:
+                failures.append(f"{path.name} SHOULD have been refused by the norm check but passed")
+            else:
+                print(f"  [ok] {path.name} boundary norm verified")
+        except BoundaryError as e:
+            if must_be_refused or schema_owns_it:
+                print(f"  [ok] {path.name} refused by the norm check ({e})")
+            else:
+                failures.append(f"{path.name} boundary refused: {e}")
+    return failures
 
 
 def build_registry() -> Registry:
@@ -129,11 +168,17 @@ def cmd_selftest() -> int:
         else:
             print(f"  [ok] {example_name} rejected ({errors[0]})")
 
+    print("\n== OCTONION BOUNDARY (arithmetic the schema cannot do) ==")
+    boundary_failures = check_boundaries()
+    for msg in boundary_failures:
+        print(f"  [X] {msg}")
+    failures += len(boundary_failures)
+
     print()
     if failures:
         print(f"SELFTEST FAILED: {failures} case(s) wrong. Fail-closed: exiting non-zero.")
         return 1
-    print("SELFTEST PASSED: all valids validate, all invalids rejected.")
+    print("SELFTEST PASSED: all valids validate, all invalids rejected, every declared norm recomputed.")
     return 0
 
 

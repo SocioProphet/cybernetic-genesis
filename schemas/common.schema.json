@@ -337,6 +337,128 @@
           }
         }
       ]
+    },
+    "OctonionBoundary": {
+      "$comment": "The octonion shell. Eight non-negotiable axes: `legality` is the REAL unit (1) and the remaining seven are the imaginary units e1..e7 \u2014 legality is the scalar every other axis is directional against. Each axis carries a pressure in [0,1] where 0 is clean. ||b|| >= 1 HALTS.\n\nGEOMETRY (corrected 2026-08-04): the halting surface ||b|| = 1 is the unit sphere in O = R^8, i.e. S^7 \u2014 which is the FIBER of the octonionic Hopf fibration S^7 -> S^15 -> S^8, not its base. Governance is therefore attached over EVERY point of the base; it is not a region you can be outside of. The tower terminates here: Hurwitz gives only R,C,H,O and Adams (1960) proves Hopf invariant one exists only in dimensions 1,2,4,8, so there is no rung above the octonions. These eight axes are the top.\n\nNON-ASSOCIATIVITY: octonion multiplication is not associative, so S^7 is not a group and this is not a principal bundle. Boundary constraints therefore do NOT compose associatively \u2014 the order of evaluation can change the result \u2014 which is why `evaluation_order` is required and must be a complete permutation of the eight axes. Inside the shell, Ring-1's U(k) IS associative and unitary; the outer shell is not.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "axes",
+        "norm",
+        "state",
+        "evaluation_order"
+      ],
+      "properties": {
+        "axes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "legality",
+            "containment",
+            "provenance",
+            "privacy",
+            "performance",
+            "reproducibility",
+            "licensing",
+            "governance"
+          ],
+          "properties": {
+            "legality": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "containment": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "provenance": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "privacy": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "performance": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "reproducibility": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "licensing": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "governance": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            }
+          }
+        },
+        "norm": {
+          "$comment": "The declared Euclidean norm ||b||. JSON Schema cannot compute it, so tools/octonion_boundary.py RECOMPUTES it and refuses a declaration that does not match the axes. A self-reported norm is an instrument, and instruments lie.",
+          "type": "number",
+          "minimum": 0.0
+        },
+        "state": {
+          "$comment": "||b|| >= 1 MUST be `halt`. There is no discretion at the shell.",
+          "enum": [
+            "proceed",
+            "halt"
+          ]
+        },
+        "evaluation_order": {
+          "$comment": "The order the axes were evaluated in. Required because composition at the shell is non-associative; without it the verdict is not replayable.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "legality",
+              "containment",
+              "provenance",
+              "privacy",
+              "performance",
+              "reproducibility",
+              "licensing",
+              "governance"
+            ]
+          },
+          "minItems": 8,
+          "maxItems": 8,
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "$comment": "The shell has no discretion: a declared norm at or past 1 must halt.",
+          "if": {
+            "properties": {
+              "norm": {
+                "minimum": 1.0
+              }
+            },
+            "required": [
+              "norm"
+            ]
+          },
+          "then": {
+            "properties": {
+              "state": {
+                "const": "halt"
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

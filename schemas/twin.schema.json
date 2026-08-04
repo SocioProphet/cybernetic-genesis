@@ -74,6 +74,9 @@
     },
     "authoring_device": {
       "$ref": "common.schema.json#/$defs/EstimatedShortfall"
+    },
+    "boundary": {
+      "$ref": "common.schema.json#/$defs/OctonionBoundary"
     }
   },
   "allOf": [
@@ -152,6 +155,35 @@
               "thresholds_crossed",
               "consent"
             ]
+          }
+        }
+      }
+    },
+    {
+      "$comment": "A twin that has hit the octonion shell cannot be READY. The boundary outranks readiness.",
+      "if": {
+        "properties": {
+          "boundary": {
+            "properties": {
+              "state": {
+                "const": "halt"
+              }
+            },
+            "required": [
+              "state"
+            ]
+          }
+        },
+        "required": [
+          "boundary"
+        ]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "not": {
+              "const": "READY"
+            }
           }
         }
       }

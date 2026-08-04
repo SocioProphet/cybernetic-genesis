@@ -70,6 +70,17 @@ schemas MUST use these terms and no synonyms. Each entry is one or two lines.
   different witness kind than the one the short device itself supplies; a re-signature by the
   same party is not a +1.
 
+- **Octonion shell** — The outer governance boundary: eight non-negotiable axes (`legality` as
+  the real unit, then containment, provenance, privacy, performance, reproducibility, licensing,
+  governance as e1..e7). `‖b‖ ≥ 1` **halts**, and the shell has no discretion. The halting surface
+  is the unit sphere in `𝕆 ≅ ℝ⁸` — that is `S⁷`, the **fiber** of the octonionic Hopf fibration
+  `S⁷ → S¹⁵ → S⁸`. Governance is therefore attached over *every* point of the base, not a region
+  you can stand outside of. See `docs/cognitive-fibrations.md`.
+- **Evaluation order** — The recorded sequence in which the eight boundary axes were evaluated.
+  Required and must be a complete permutation: octonions are non-associative, so `S⁷` is not a
+  group and boundary constraints do **not** compose associatively — order can change the verdict,
+  and an unrecorded order is not replayable.
+
 ## L0 source-canon discipline (see `docs/L0-genesis-covenant.md`)
 
 - **Dual witness** — A world-changing record is established only by two or more
