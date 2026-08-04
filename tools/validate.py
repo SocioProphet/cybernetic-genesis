@@ -37,13 +37,155 @@ VALID_CASES = [
     ("policy_decision.schema.json", "policy_decision.valid.json"),
     ("policy_decision.schema.json", "policy_decision.deny.valid.json"),
     ("adapter_descriptor.schema.json", "adapter_descriptor.valid.json"),
+    ("genesis_braid.schema.json", "genesis_braid.valid.json"),
+    ("initiation.schema.json", "initiation.valid.json"),
+    ("initiation.schema.json", "initiation.sophia_raised.valid.json"),
+    # M.OS.ES: a short device may author WITH the +1 (three witnesses, not two).
+    ("artifact_record.schema.json", "artifact_record.from_short_device.valid.json"),
 ]
 
 INVALID_CASES = [
     ("artifact_record.schema.json", "artifact_record.invalid.missing_second_witness.json"),
     ("artifact_record.schema.json", "artifact_record.invalid.bad_boundary_stone.json"),
     ("twin.schema.json", "twin.invalid.ready_without_policy.json"),
+    ("twin.schema.json", "twin.invalid.ready_while_boundary_halts.json"),
+    ("twin.schema.json", "twin.invalid.boundary_breach_without_halt.json"),
+    # The threshold: 21 is short — the land was seen, not entered.
+    ("twin.schema.json", "twin.invalid.bidirectional_at_21.json"),
+    ("twin.schema.json", "twin.invalid.bidirectional_without_consent.json"),
+    ("genesis_seed.schema.json", "genesis_seed.invalid.active_active_single_model.json"),
+    ("genesis_seed.schema.json", "genesis_seed.invalid.no_consent_profile.json"),
+    # Each of these is an error found in a real source render of the braid.
+    ("genesis_braid.schema.json", "genesis_braid.invalid.three_spaces.json"),
+    ("genesis_braid.schema.json", "genesis_braid.invalid.ten_steps.json"),
+    ("initiation.schema.json", "initiation.invalid.self_renamed_across_threshold.json"),
+    # M.OS.ES: falling short is a demand that someone else cross with you, not a free pass.
+    ("twin.schema.json", "twin.invalid.mobile_authors_direct_while_short.json"),
+    ("twin.schema.json", "twin.invalid.attested_without_plus_one.json"),
+    ("artifact_record.schema.json", "artifact_record.invalid.short_device_only_two_witnesses.json"),
 ]
+
+
+# Objects whose `boundary` is schema-valid but arithmetically false. The schema CANNOT catch
+# these — it has no norm — so they are checked by tools/octonion_boundary.py instead.
+ARITHMETIC_FALSE_CASES = [
+    "twin.lied_norm.schema_valid_arithmetic_false.json",
+]
+
+
+def check_boundaries() -> list[str]:
+    """Recompute every declared octonion norm. A boundary that lies about itself is refused
+    here even though it satisfies the schema — JSON Schema cannot do arithmetic."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from octonion_boundary import BoundaryError, check_object
+
+    failures = []
+    for path in sorted(EXAMPLE_DIR.glob("*.json")):
+        obj = json.loads(path.read_text())
+        if not isinstance(obj, dict) or "boundary" not in obj:
+            continue
+        must_be_refused = path.name in ARITHMETIC_FALSE_CASES
+        # A `.invalid.` fixture is the SCHEMA's to reject; whether the arithmetic also catches it
+        # is informational. Only ARITHMETIC_FALSE_CASES must be caught here, because only they are
+        # invisible to the schema.
+        schema_owns_it = ".invalid." in path.name
+        try:
+            check_object(obj)
+            if must_be_refused:
+                failures.append(f"{path.name} SHOULD have been refused by the norm check but passed")
+            else:
+                print(f"  [ok] {path.name} boundary norm verified")
+        except BoundaryError as e:
+            if must_be_refused or schema_owns_it:
+                print(f"  [ok] {path.name} refused by the norm check ({e})")
+            else:
+                failures.append(f"{path.name} boundary refused: {e}")
+    return failures
+
+
+# Braid fixtures whose defect is arithmetic, not vocabulary: JSON Schema pins the enums and the
+# array bounds, but cannot see a backwards range or a repeated phase in the right-sized list.
+BRAID_ARITHMETIC_FALSE = [
+    "genesis_braid.invalid.vav_missing.json",
+    "genesis_braid.invalid.layer_runs_backwards.json",
+]
+
+
+def check_braid() -> list[str]:
+    """Count the spine: four spaces, five phases with vav, twelve contiguous steps, 7x49=343."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from genesis_braid import BraidError, check as check_spine
+
+    failures = []
+    for path in sorted(EXAMPLE_DIR.glob("genesis_braid*.json")):
+        must_be_refused = path.name in BRAID_ARITHMETIC_FALSE or ".invalid." in path.name
+        try:
+            unconfirmed = check_spine(json.loads(path.read_text()))
+            if must_be_refused:
+                failures.append(f"{path.name} SHOULD have been refused by the spine check but passed")
+            else:
+                note = f" ({len(unconfirmed)} label(s) unconfirmed: {unconfirmed})" if unconfirmed else ""
+                print(f"  [ok] {path.name} spine verified{note}")
+        except BraidError as e:
+            if must_be_refused:
+                print(f"  [ok] {path.name} refused by the spine check ({e})")
+            else:
+                failures.append(f"{path.name} spine refused: {e}")
+    return failures
+
+
+def check_witnesses() -> list[str]:
+    """Two witnesses of different kind can still be one voice: refuse a witness authorised by the
+    subject it witnesses, or by the other witness."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from witness_independence import WitnessError, check_artifact_record
+
+    failures = []
+    for path in sorted(EXAMPLE_DIR.glob("artifact_record*.json")):
+        obj = json.loads(path.read_text())
+        if "witnesses" not in obj:
+            continue
+        # Only the arithmetic-false fixtures MUST be caught here — they are schema-valid by
+        # construction and invisible to it. A `.invalid.` fixture is the SCHEMA's to reject (a bad
+        # boundary stone, a short device needing three witnesses); its witnesses may legitimately
+        # be independent, so whether this check also fires is informational.
+        must_be_refused = "schema_valid_arithmetic_false" in path.name
+        schema_owns_it = ".invalid." in path.name
+        try:
+            check_artifact_record(obj)
+            if must_be_refused:
+                failures.append(f"{path.name} SHOULD have been refused but passed")
+            else:
+                print(f"  [ok] {path.name} witnesses are independent")
+        except WitnessError as e:
+            if must_be_refused or schema_owns_it:
+                print(f"  [ok] {path.name} refused ({e})")
+            else:
+                failures.append(f"{path.name} refused: {e}")
+    return failures
+
+
+def check_initiations() -> list[str]:
+    """A rename must actually be the operation it claims, and must not be self-granted where it
+    buys passage. JSON Schema cannot compare two field lengths or two field values."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from initiation import InitiationError, check as check_rite
+
+    failures = []
+    for path in sorted(EXAMPLE_DIR.glob("initiation*.json")):
+        must_be_refused = "schema_valid_arithmetic_false" in path.name or ".invalid." in path.name
+        try:
+            check_rite(json.loads(path.read_text()))
+            if must_be_refused:
+                failures.append(f"{path.name} SHOULD have been refused but passed")
+            else:
+                print(f"  [ok] {path.name} rename verified")
+        except InitiationError as e:
+            if must_be_refused:
+                print(f"  [ok] {path.name} refused ({e})")
+            else:
+                failures.append(f"{path.name} refused: {e}")
+    return failures
 
 
 def build_registry() -> Registry:
@@ -118,11 +260,48 @@ def cmd_selftest() -> int:
         else:
             print(f"  [ok] {example_name} rejected ({errors[0]})")
 
+    print("\n== GENESIS BRAID (counting the schema cannot do) ==")
+    braid_failures = check_braid()
+    for msg in braid_failures:
+        print(f"  [X] {msg}")
+    failures += len(braid_failures)
+
+    print("\n== LEGEND REGISTRY (narrative -> mechanism, and the boundary rule) ==")
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from legend_registry import ROOT as _LR_ROOT, check as _lr_check, load as _lr_load, local_anchor_problems as _lr_anchors
+    _reg = _lr_load()
+    _lr = _lr_check(_reg) + _lr_anchors(_reg, "cybernetic-genesis", _LR_ROOT)
+    for msg in _lr:
+        print(f"  [X] {msg}")
+    failures += len(_lr)
+    if not _lr:
+        _gaps = sum(1 for e in _reg["entries"] for s in e["sources"] if s["kind"] == "gap")
+        _bounded = sum(1 for e in _reg["entries"] if any(s["kind"] == "boundary" for s in e["sources"]))
+        print(f"  [ok] {len(_reg['entries'])} entries, {_gaps} recorded gap(s), {_bounded} bounded (no mechanism)")
+
+    print("\n== WITNESS INDEPENDENCE (kind-distinctness is not enough) ==")
+    wit_failures = check_witnesses()
+    for msg in wit_failures:
+        print(f"  [X] {msg}")
+    failures += len(wit_failures)
+
+    print("\n== INITIATION (the rename must hold up) ==")
+    rite_failures = check_initiations()
+    for msg in rite_failures:
+        print(f"  [X] {msg}")
+    failures += len(rite_failures)
+
+    print("\n== OCTONION BOUNDARY (arithmetic the schema cannot do) ==")
+    boundary_failures = check_boundaries()
+    for msg in boundary_failures:
+        print(f"  [X] {msg}")
+    failures += len(boundary_failures)
+
     print()
     if failures:
         print(f"SELFTEST FAILED: {failures} case(s) wrong. Fail-closed: exiting non-zero.")
         return 1
-    print("SELFTEST PASSED: all valids validate, all invalids rejected.")
+    print("SELFTEST PASSED: all valids validate, all invalids rejected, every declared norm recomputed.")
     return 0
 
 

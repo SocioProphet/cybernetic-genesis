@@ -1,0 +1,13 @@
+{
+  "subject": "identity:hoshea",
+  "prior_name": "hoshea",
+  "new_name": "yehoshua",
+  "operation": "insert",
+  "letter": "yod",
+  "script": "hebrew",
+  "enables_threshold": "crossing:jordan",
+  "governance": {
+    "admissibility_tier": "GOVERNED",
+    "review_status": "APPROVED"
+  }
+}

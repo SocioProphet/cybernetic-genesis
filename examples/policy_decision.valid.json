@@ -4,19 +4,31 @@
   "action": "publish_tileset",
   "verdict": "ALLOW",
   "world_changing": true,
-  "policy_refs": ["policy:atlas.baseline", "policy:release.dual-witness"],
+  "policy_refs": [
+    "policy:atlas.baseline",
+    "policy:release.dual-witness"
+  ],
   "reason": "tileset passed consistency validation and carries dual witnesses",
-  "evidence_refs": ["prov:tile.compose.2026-08-02", "artifact:atlas.tileset.2026-08-02"],
+  "evidence_refs": [
+    "prov:tile.compose.2026-08-02",
+    "artifact:atlas.tileset.2026-08-02"
+  ],
   "witnesses": [
     {
       "role": "release-signer",
       "type": "chart",
-      "hash": "sha256:ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22"
+      "hash": "sha256:ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22",
+      "authority_chain": [
+        "ca:release-root"
+      ]
     },
     {
       "role": "policy-validator",
       "type": "method",
-      "hash": "sha256:ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33"
+      "hash": "sha256:ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33",
+      "authority_chain": [
+        "ca:validation-root"
+      ]
     }
   ]
 }

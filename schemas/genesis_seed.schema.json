@@ -17,7 +17,8 @@
     "provider_profile",
     "federation_profile",
     "approval_profile",
-    "governance"
+    "governance",
+    "consent_profile"
   ],
   "properties": {
     "seed_id": {
@@ -135,6 +136,67 @@
     },
     "governance": {
       "$ref": "common.schema.json#/$defs/Governance"
+    },
+    "consent_profile": {
+      "$comment": "Fail-closed: a seed MUST declare its consent posture. The Ring/three-space serving + update stack applies to opted-in users only; a seed that does not say is not permitted to assume.",
+      "$ref": "common.schema.json#/$defs/ConsentGrant"
+    },
+    "model_profile": {
+      "$comment": "Model ops, not just devops. Training + updates run as an ACTIVE-ACTIVE pair of LoRA-tuned foundation models: PATET / PETER (rock). Active-active means exactly two live members \u2014 not a primary with a spare.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adaptation",
+        "mode",
+        "pair"
+      ],
+      "properties": {
+        "adaptation": {
+          "enum": [
+            "lora",
+            "full_finetune",
+            "frozen"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "active_active",
+            "single"
+          ]
+        },
+        "pair": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "maxItems": 2
+        }
+      },
+      "allOf": [
+        {
+          "$comment": "active_active is a claim about liveness: it demands exactly two members.",
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "active_active"
+              }
+            },
+            "required": [
+              "mode"
+            ]
+          },
+          "then": {
+            "properties": {
+              "pair": {
+                "minItems": 2,
+                "maxItems": 2
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

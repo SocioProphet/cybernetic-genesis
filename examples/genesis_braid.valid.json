@@ -1,0 +1,144 @@
+{
+  "spaces": [
+    "atzilut",
+    "beriah",
+    "yetzirah",
+    "assiah"
+  ],
+  "phases": [
+    "yod",
+    "heh",
+    "shin",
+    "vav",
+    "heh"
+  ],
+  "steps": [
+    {
+      "id": "T0",
+      "space": "atzilut",
+      "phase": "yod",
+      "label": "seed: container / namespace"
+    },
+    {
+      "id": "T1",
+      "space": "atzilut",
+      "phase": "yod",
+      "label": "genesis gate"
+    },
+    {
+      "id": "T2",
+      "space": "atzilut",
+      "phase": "heh",
+      "label": "identity closure"
+    },
+    {
+      "id": "T3",
+      "space": "beriah",
+      "phase": "heh",
+      "label": "pre-flight orientation"
+    },
+    {
+      "id": "T4",
+      "space": "beriah",
+      "phase": "heh",
+      "label": "AUM-arch approve"
+    },
+    {
+      "id": "T5",
+      "space": "beriah",
+      "phase": "shin",
+      "label": "kernel / defense"
+    },
+    {
+      "id": "T6",
+      "space": "yetzirah",
+      "phase": "shin",
+      "label": "import sealed base"
+    },
+    {
+      "id": "T7",
+      "space": "yetzirah",
+      "phase": "shin",
+      "label": "governance files (roles, purposes)"
+    },
+    {
+      "id": "T8",
+      "space": "yetzirah",
+      "phase": "shin",
+      "label": "publish deltas"
+    },
+    {
+      "id": "T9",
+      "space": "assiah",
+      "phase": "vav",
+      "label": "UNCONFIRMED \u2014 absent from every source render",
+      "unconfirmed": true
+    },
+    {
+      "id": "T10",
+      "space": "assiah",
+      "phase": "vav",
+      "label": "UNCONFIRMED \u2014 absent from every source render",
+      "unconfirmed": true
+    },
+    {
+      "id": "T11",
+      "space": "assiah",
+      "phase": "heh",
+      "label": "transparency log update / witness attest-sign"
+    }
+  ],
+  "trit_surface": {
+    "total": 343,
+    "layers": [
+      {
+        "index": 1,
+        "start": 0,
+        "end": 48,
+        "role": "agent id (sigil)"
+      },
+      {
+        "index": 2,
+        "start": 49,
+        "end": 97,
+        "role": "trust XOR tag"
+      },
+      {
+        "index": 3,
+        "start": 98,
+        "end": 146,
+        "role": "hopf rotation vector"
+      },
+      {
+        "index": 4,
+        "start": 147,
+        "end": 195,
+        "role": "genesis projection"
+      },
+      {
+        "index": 5,
+        "start": 196,
+        "end": 244,
+        "role": "harmonic integer lattice"
+      },
+      {
+        "index": 6,
+        "start": 245,
+        "end": 293,
+        "role": "timestamp"
+      },
+      {
+        "index": 7,
+        "start": 294,
+        "end": 342,
+        "role": "signature digest + DAG"
+      }
+    ]
+  },
+  "harmonic_ladder": {
+    "seed": 111,
+    "scaled": 343,
+    "culmination": 777,
+    "epoch": 888
+  }
+}

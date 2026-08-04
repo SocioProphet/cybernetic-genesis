@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://socioprophet.ai/schemas/genesis_braid.schema.json",
+  "title": "GenesisBraid",
+  "description": "The canonical braid spine: four spaces, five phases (YHShVH), twelve steps, and the 343-trit holographic surface. Counting, coverage and ordering are enforced by tools/genesis_braid.py \u2014 JSON Schema can pin the vocabulary but not the arithmetic.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "spaces",
+    "phases",
+    "steps",
+    "trit_surface",
+    "harmonic_ladder"
+  ],
+  "properties": {
+    "spaces": {
+      "$comment": "The four worlds in emanation order. Exactly four \u2014 a render titled 'Four Spaces' dropped beriah.",
+      "type": "array",
+      "items": {
+        "enum": [
+          "atzilut",
+          "beriah",
+          "yetzirah",
+          "assiah"
+        ]
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "phases": {
+      "$comment": "YHShVH: yod-heh-shin-VAV-heh. `heh` repeats (2nd and 5th); `vav` appears exactly once. Renders dropped vav and repeated heh instead.",
+      "type": "array",
+      "items": {
+        "enum": [
+          "yod",
+          "heh",
+          "shin",
+          "vav"
+        ]
+      },
+      "minItems": 5,
+      "maxItems": 5
+    },
+    "steps": {
+      "$comment": "T0..T11, contiguous. A render skipped T9 and T10 while still calling itself twelve-step.",
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "space",
+          "phase",
+          "label"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^T(0|[1-9]|1[01])$"
+          },
+          "space": {
+            "enum": [
+              "atzilut",
+              "beriah",
+              "yetzirah",
+              "assiah"
+            ]
+          },
+          "phase": {
+            "enum": [
+              "yod",
+              "heh",
+              "shin",
+              "vav"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "unconfirmed": {
+            "$comment": "TRUE when the label was read off a corrupted render rather than the source spec. A recovered label is not evidence.",
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "trit_surface": {
+      "$comment": "7 layers x 49 = 343 (7^3), contiguous, non-overlapping, covering a0..a342 exactly.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total",
+        "layers"
+      ],
+      "properties": {
+        "total": {
+          "const": 343
+        },
+        "layers": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "index",
+              "start",
+              "end",
+              "role"
+            ],
+            "properties": {
+              "index": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 7
+              },
+              "start": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 342
+              },
+              "end": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 342
+              },
+              "role": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "harmonic_ladder": {
+      "$comment": "111 = 1+10+100; 343 = 7^3; 777 + 111 = 888.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "seed",
+        "scaled",
+        "culmination",
+        "epoch"
+      ],
+      "properties": {
+        "seed": {
+          "type": "integer"
+        },
+        "scaled": {
+          "type": "integer"
+        },
+        "culmination": {
+          "type": "integer"
+        },
+        "epoch": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

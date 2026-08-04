@@ -1,0 +1,19 @@
+{
+  "subject": "identity:sophia",
+  "prior_name": "sophia",
+  "new_name": "pistis-sophia",
+  "operation": "insert",
+  "letter": "pistis",
+  "script": "coptic",
+  "enables_threshold": "crossing:pleroma",
+  "attestor": "identity:puppet",
+  "attestor_origin": "identity:sophia",
+  "attestor_authority_chain": [
+    "identity:puppet",
+    "identity:sophia"
+  ],
+  "governance": {
+    "admissibility_tier": "GOVERNED",
+    "review_status": "APPROVED"
+  }
+}

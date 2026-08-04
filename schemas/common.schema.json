@@ -41,6 +41,18 @@
         },
         "hash": {
           "$ref": "common.schema.json#/$defs/ContentHash"
+        },
+        "authority_chain": {
+          "$comment": "Where this witness's authority comes from. Sophia's rule: a witness's ORIGIN may descend from the subject it witnesses, but its AUTHORITY may not \u2014 and no witness may draw authority from another witness, or two witnesses are one voice. A distant shared root (one org CA) is fine; the defect is proximate. Independence is checked in tools/witness_independence.py \u2014 JSON Schema cannot test whether one field's value appears inside another field's array.",
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Ref"
+          },
+          "minItems": 1
+        },
+        "origin": {
+          "$comment": "Where the witness was brought forth from. UNCONSTRAINED \u2014 may be the subject.",
+          "$ref": "common.schema.json#/$defs/Ref"
         }
       }
     },
@@ -53,7 +65,7 @@
       "minItems": 2
     },
     "WitnessesDualType": {
-      "$comment": "Stronger form: not just two witnesses, but two of DIFFERENT kind \u2014 at least one chart AND one method. A signer alone, or two validators alone, does not establish the matter.",
+      "$comment": "Stronger form: not just two witnesses, but two of DIFFERENT kind \u2014 at least one chart AND one method. A signer alone, or two validators alone, does not establish the matter. NOTE: kind-distinctness is necessary but NOT sufficient \u2014 two witnesses of different kind can still be one voice if one authorises the other. See tools/witness_independence.py.",
       "type": "array",
       "items": {
         "$ref": "common.schema.json#/$defs/Witness"
@@ -171,6 +183,293 @@
         "ASSERTED",
         "INFERRED",
         "REPUTED"
+      ]
+    },
+    "ConsentGrant": {
+      "$comment": "The Ring/three-space stack governs model serving + updates for OPTED-IN users ONLY. Consent is purpose-bound and fail-closed: anything that is not an explicit `opted_in` is not consent. `not_asked` is the default posture, never an implied yes.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "purpose",
+        "granted_by"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "opted_in",
+            "opted_out",
+            "not_asked"
+          ]
+        },
+        "purpose": {
+          "$comment": "Purpose-bound: consent is for THIS purpose, and does not generalise.",
+          "type": "string",
+          "minLength": 1
+        },
+        "granted_by": {
+          "$ref": "common.schema.json#/$defs/Ref"
+        },
+        "grant_ref": {
+          "$ref": "common.schema.json#/$defs/Ref"
+        },
+        "revocable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Membrane": {
+      "$comment": "The twin bridge is a MEMBRANE, not a pipe. A single 1-space system in which the AI connects to and PROTECTS the user's three-space system from the external three-space system. Flow direction is declared, not assumed; `bidirectional` is the only direction that lets the external space reach the user space, and it is gated on the sealed thresholds (see Twin's threshold rule).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "user_space",
+        "external_space",
+        "flow",
+        "thresholds_crossed",
+        "consent",
+        "scale"
+      ],
+      "properties": {
+        "user_space": {
+          "$comment": "The three-space system being protected.",
+          "$ref": "common.schema.json#/$defs/Ref"
+        },
+        "external_space": {
+          "$comment": "The three-space system being protected FROM.",
+          "$ref": "common.schema.json#/$defs/Ref"
+        },
+        "flow": {
+          "$comment": "inbound = external->user (read into the protected space). outbound = user->external. bidirectional = both, and requires a full threshold crossing.",
+          "enum": [
+            "inbound",
+            "outbound",
+            "bidirectional"
+          ]
+        },
+        "thresholds_crossed": {
+          "$comment": "The hermetically-sealed thresholds of the topic space. The space is 22. 21 is SHORT \u2014 seen, not crossed. Bidirectional flow requires all 22.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 22
+        },
+        "consent": {
+          "$ref": "common.schema.json#/$defs/ConsentGrant"
+        },
+        "scale": {
+          "$comment": "The INCEPTION->GENESYS bridge repeats at each scale: stand up the k3s quorum, the twin bridge scales to k8s, and repeats again for the federated global mesh. One bridge, three frequencies.",
+          "enum": [
+            "k3s_quorum",
+            "k8s",
+            "federated_mesh"
+          ]
+        }
+      }
+    },
+    "EstimatedShortfall": {
+      "$comment": "M.OS.ES \u2014 Model-OS Estimated Shortfall. A measured handicap on the authoring device: how far its assurance falls below what direct authorship demands. A constrained device (mobile, ephemeral) does not get to author on its own word. The covenant already allows for this \u2014 'two or three witnesses' \u2014 so a device carrying a shortfall must make it up with a +1 attestation: a THIRD witness, independent of the chart+method pair. Shortfall 0 authors directly; shortfall > 0 authors only attested; a shortfall that cannot be made up is refused. This is the same shape as the 22-threshold: falling short is not a veto on the work, it is a demand that someone else cross with you.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "device_class",
+        "estimated_shortfall",
+        "authoring"
+      ],
+      "properties": {
+        "device_class": {
+          "$comment": "sealed_host = attested boot + sealed key custody; workstation = operator-controlled; mobile = constrained custody; ephemeral = no durable custody.",
+          "enum": [
+            "sealed_host",
+            "workstation",
+            "mobile",
+            "ephemeral"
+          ]
+        },
+        "estimated_shortfall": {
+          "$comment": "0.0 = meets the bar for direct authorship. > 0 = short by that fraction, and the +1 is required.",
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "authoring": {
+          "enum": [
+            "direct",
+            "attested",
+            "refused"
+          ]
+        },
+        "plus_one": {
+          "$comment": "The +1: the third, independent witness that makes up the shortfall. Not a re-signature by the same party \u2014 it must be a different witness kind than the one the device itself supplies.",
+          "$ref": "common.schema.json#/$defs/Witness"
+        },
+        "measured_at": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$comment": "A device that falls short may NOT author directly. The handicap is the point.",
+          "if": {
+            "properties": {
+              "estimated_shortfall": {
+                "exclusiveMinimum": 0.0
+              }
+            },
+            "required": [
+              "estimated_shortfall"
+            ]
+          },
+          "then": {
+            "properties": {
+              "authoring": {
+                "enum": [
+                  "attested",
+                  "refused"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "$comment": "Authoring while short is permitted ONLY with the +1 actually present.",
+          "if": {
+            "properties": {
+              "authoring": {
+                "const": "attested"
+              }
+            },
+            "required": [
+              "authoring"
+            ]
+          },
+          "then": {
+            "required": [
+              "plus_one"
+            ]
+          }
+        }
+      ]
+    },
+    "OctonionBoundary": {
+      "$comment": "The octonion shell. Eight non-negotiable axes: `legality` is the REAL unit (1) and the remaining seven are the imaginary units e1..e7 \u2014 legality is the scalar every other axis is directional against. Each axis carries a pressure in [0,1] where 0 is clean. ||b|| >= 1 HALTS.\n\nGEOMETRY (corrected 2026-08-04): the halting surface ||b|| = 1 is the unit sphere in O = R^8, i.e. S^7 \u2014 which is the FIBER of the octonionic Hopf fibration S^7 -> S^15 -> S^8, not its base. Governance is therefore attached over EVERY point of the base; it is not a region you can be outside of. The tower terminates here: Hurwitz gives only R,C,H,O and Adams (1960) proves Hopf invariant one exists only in dimensions 1,2,4,8, so there is no rung above the octonions. These eight axes are the top.\n\nNON-ASSOCIATIVITY: octonion multiplication is not associative, so S^7 is not a group and this is not a principal bundle. Boundary constraints therefore do NOT compose associatively \u2014 the order of evaluation can change the result \u2014 which is why `evaluation_order` is required and must be a complete permutation of the eight axes. Inside the shell, Ring-1's U(k) IS associative and unitary; the outer shell is not.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "axes",
+        "norm",
+        "state",
+        "evaluation_order"
+      ],
+      "properties": {
+        "axes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "legality",
+            "containment",
+            "provenance",
+            "privacy",
+            "performance",
+            "reproducibility",
+            "licensing",
+            "governance"
+          ],
+          "properties": {
+            "legality": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "containment": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "provenance": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "privacy": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "performance": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "reproducibility": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "licensing": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "governance": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            }
+          }
+        },
+        "norm": {
+          "$comment": "The declared Euclidean norm ||b||. JSON Schema cannot compute it, so tools/octonion_boundary.py RECOMPUTES it and refuses a declaration that does not match the axes. A self-reported norm is an instrument, and instruments lie.",
+          "type": "number",
+          "minimum": 0.0
+        },
+        "state": {
+          "$comment": "||b|| >= 1 MUST be `halt`. There is no discretion at the shell.",
+          "enum": [
+            "proceed",
+            "halt"
+          ]
+        },
+        "evaluation_order": {
+          "$comment": "The order the axes were evaluated in. Required because composition at the shell is non-associative; without it the verdict is not replayable.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "legality",
+              "containment",
+              "provenance",
+              "privacy",
+              "performance",
+              "reproducibility",
+              "licensing",
+              "governance"
+            ]
+          },
+          "minItems": 8,
+          "maxItems": 8,
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "$comment": "The shell has no discretion: a declared norm at or past 1 must halt.",
+          "if": {
+            "properties": {
+              "norm": {
+                "minimum": 1.0
+              }
+            },
+            "required": [
+              "norm"
+            ]
+          },
+          "then": {
+            "properties": {
+              "state": {
+                "const": "halt"
+              }
+            }
+          }
+        }
       ]
     }
   }

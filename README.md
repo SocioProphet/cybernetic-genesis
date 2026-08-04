@@ -21,7 +21,7 @@ consumes. Private-first.
 | `schemas/common.schema.json` | Shared `$defs`: `ContentHash`, `Witness(es)`, `WitnessesDualType`, `Measurement`, `Ref`. |
 | `schemas/hologram.schema.json` | The semantic-hologram base object. |
 | `schemas/genesis_seed.schema.json` | The seed a Twin is inceived from. |
-| `schemas/twin.schema.json` | The runtime twin + fail-closed READY gate. |
+| `schemas/twin.schema.json` | The runtime twin + fail-closed READY gate + the membrane threshold gate. |
 | `schemas/twin_event_envelope.schema.json` | Canonical envelope for twin events. |
 | `schemas/artifact_record.schema.json` | Dual-witnessed, boundary-stone-addressed outputs. |
 | `schemas/policy_decision.schema.json` | Fail-closed verdicts (ALLOW/DENY/REQUIRE_APPROVAL). |
@@ -33,6 +33,12 @@ consumes. Private-first.
 | `tools/verify_mount_strategy.py` | Mount-strategy verifier (symlink + scope teeth) + Podman `--mount` projection. |
 | `docs/inception-mount-strategy.md` | The mount-type mapping, the teeth, and the Podman projection. |
 | `docs/L0-genesis-covenant.md` | The source-canon doctrine the schemas enforce. |
+| `registry/legends.v1.json` | The narrative → mechanism registry. Typed sources; `gap` and `boundary` carry enforced obligations. |
+| `docs/legend-corpus.md` | GENERATED retrieval corpus — one stable section per legend, narrative and principle separated for RAG/NLQA. |
+| `docs/wisdom-sources-narrated.md` | The stories told in full, with the alignment argued rather than asserted, and plates. |
+| `docs/wisdom-sources.md` | The legends behind the mechanisms — threshold, rename, Sophia, the goose — with attested history and interpretation marked apart. |
+| `docs/cognitive-fibrations.md` | The corrected Hopf tower the octonion boundary rests on. |
+| `docs/genesis-braid.md` | The braid spine + correction record for the source renders. |
 | `.github/workflows/ci.yml` | Installs jsonschema, runs the selftest, fail-closed. |
 
 All schemas are **JSON Schema draft 2020-12**, `additionalProperties: false`, with the
@@ -51,6 +57,11 @@ doctrine and the verse→rule table (cited as *doctrinal source, not executable 
 4. **Fail-closed verdicts** — no implicit allow; a Twin is not `READY` without
    identity + policy + memory refs.
 5. **Plumb-line** — `validate.py selftest` is the CI baseline; drift is caught at the gate.
+7. **M.OS.ES** — an authoring device that falls short of direct authorship must carry a
+   **+1 attestation** (three witnesses, not two). Falling short demands a companion, not a veto.
+6. **The threshold** — the membrane opens both ways only on a full crossing of the 22 sealed
+   thresholds **and** an explicit purpose-bound opt-in. 21 is short; the Ring stack serves
+   opted-in users only.
 
 ## Run the checks locally
 

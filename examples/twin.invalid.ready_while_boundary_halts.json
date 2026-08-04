@@ -1,5 +1,5 @@
 {
-  "twin_id": "twin:atlas-cartographer.001",
+  "twin_id": "twin:deploy/7c1-breached-but-ready",
   "seed_id": "seed:atlas-cartographer.v1",
   "status": "READY",
   "identity": {
@@ -57,16 +57,16 @@
   "boundary": {
     "axes": {
       "legality": 0.0,
-      "containment": 0.0,
+      "containment": 0.9,
       "provenance": 0.0,
-      "privacy": 0.1,
-      "performance": 0.2,
+      "privacy": 0.0,
+      "performance": 0.0,
       "reproducibility": 0.0,
       "licensing": 0.0,
-      "governance": 0.0
+      "governance": 0.9
     },
-    "norm": 0.223606797749979,
-    "state": "proceed",
+    "norm": 1.2727922061357855,
+    "state": "halt",
     "evaluation_order": [
       "legality",
       "containment",
