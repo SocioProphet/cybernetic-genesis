@@ -504,3 +504,59 @@ REFERENCED, NOT OPERATIONALISED, AND MARKED AS CONTESTED. This is an esoteric do
 
 `foreknowledge-shortcut`, `black-hills-return`, `horse-substituted-instrument`
 
+## Martha measures, Mary raises — detection is not escalation
+
+`id: martha-and-mary`
+
+### Narrative
+
+John 11. Lazarus is sick and his sisters send word, and the detail everyone skips is that he STAYED TWO MORE DAYS. By the time he comes it is four days. Martha goes out to meet him on the road, reasons with him, has the theological exchange, and at the tomb makes the measurement: 'Lord, by this time he stinketh: for he hath been dead four days' — observed, dated, quantified. Mary stays in the house until she is called; when she comes she falls at his feet and weeps. 'When Jesus saw her weeping... he groaned in the spirit.' Jesus wept. THEN: 'Where have ye laid him?'
+
+### Design principle
+
+MARTHA IS DETECTION; MARY IS ESCALATION. The report was accurate, complete, and followed by a two-day delay — information alone raised nothing. A finding must land on someone to move anything, so an alarm has to be an addressed, durable artifact that ESCALATES with the age of the silence, because the natural failure of monitoring is that an old alarm becomes furniture. And it must close itself when the thing lives again: an issue that outlives its cause is noise, and noise is what taught everyone to stop reading.
+
+### Sources
+
+- **attested** — John 11:1-44; the two-day delay at 11:6; Martha's measurement at 11:39; 'Jesus wept' at 11:35
+- **interpretation** — Reading Martha as the detector and Mary as the escalation is this estate's framing
+
+### Mechanism
+
+`prophet-platform` → `tools/ci_liveness_escalate.py`
+
+> severity rises with the age of the silence (P3->P2 at 30d, P1 at 60d, P0 at 90d; never-green outranks any age) and the issue closes itself when every workflow is green
+
+### Related
+
+`hellebore-dead-or-dormant`, `feet-guarantors`, `moses-threshold`
+
+## Hellebore — how you tell dead from dormant
+
+`id: hellebore-dead-or-dormant`
+
+### Narrative
+
+Melampus the seer-physician cures the daughters of Proetus of Argos of the madness Dionysus sent them, bringing them back with a brew of hellebore; his name is melas + pous, 'BLACK-FOOT', and Melampodium is the plant's old name for him. Two things make it the right emblem: it is poison and cure in ONE SUBSTANCE separated only by dose, so the measure decides which it is; and the Christmas rose, Helleborus niger, FLOWERS IN THE DEAD OF WINTER, in snow, when the whole garden looks finished. A winter garden and a dead garden look identical. The bloom is how you tell the ground is alive.
+
+### Design principle
+
+DEAD AND DORMANT ARE INDISTINGUISHABLE FROM OUTSIDE, and telling them apart is the whole difficulty. A repo emitting no signal may be dormant — manual, between phases, nobody pushing — or dead. Calling dormant things dead is how a checker gets muted; calling dead things dormant is how five weeks pass. So the verdicts must carry the distinction explicitly, and the benign verdict must be earned by evidence (a manual-only trigger) rather than assumed.
+
+### Sources
+
+- **attested** — Melampus cures the Proetides with hellebore; Melampodium = 'black-footed' — <https://www.theoi.com/Flora1.html>
+- **attested** — Helleborus niger, the Christmas rose, flowers in December-January
+- **gap** — The etymology of Helleborus is genuinely contested — heleîn 'injure' + borá 'food', álkē 'fawn' + borós 'food for fawns', or Graves (1948) 'food of Helle'. Scholars do not agree and this register does not pretend they do.
+- **interpretation** — Reading the winter bloom as the dead/dormant discriminator is this estate's framing
+
+### Mechanism
+
+`prophet-platform` → `tools/ci_liveness_sweep.py`
+
+> UNUSED (dormant by design) never alarms; DEAD never once succeeded; SILENT is running and never winning — and UNUSED must be earned by a manual-only trigger, not assumed
+
+### Related
+
+`martha-and-mary`, `bearfoot-uniformity`, `feet-guarantors`
+

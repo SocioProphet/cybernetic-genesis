@@ -35,6 +35,7 @@ consumes. Private-first.
 | `docs/L0-genesis-covenant.md` | The source-canon doctrine the schemas enforce. |
 | `registry/legends.v1.json` | The narrative → mechanism registry. Typed sources; `gap` and `boundary` carry enforced obligations. |
 | `docs/legend-corpus.md` | GENERATED retrieval corpus — one stable section per legend, narrative and principle separated for RAG/NLQA. |
+| `docs/wisdom-sources-narrated.md` | The stories told in full, with the alignment argued rather than asserted, and plates. |
 | `docs/wisdom-sources.md` | The legends behind the mechanisms — threshold, rename, Sophia, the goose — with attested history and interpretation marked apart. |
 | `docs/cognitive-fibrations.md` | The corrected Hopf tower the octonion boundary rests on. |
 | `docs/genesis-braid.md` | The braid spine + correction record for the source renders. |
