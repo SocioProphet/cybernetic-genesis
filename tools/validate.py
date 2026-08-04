@@ -266,6 +266,19 @@ def cmd_selftest() -> int:
         print(f"  [X] {msg}")
     failures += len(braid_failures)
 
+    print("\n== LEGEND REGISTRY (narrative -> mechanism, and the boundary rule) ==")
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from legend_registry import ROOT as _LR_ROOT, check as _lr_check, load as _lr_load, local_anchor_problems as _lr_anchors
+    _reg = _lr_load()
+    _lr = _lr_check(_reg) + _lr_anchors(_reg, "cybernetic-genesis", _LR_ROOT)
+    for msg in _lr:
+        print(f"  [X] {msg}")
+    failures += len(_lr)
+    if not _lr:
+        _gaps = sum(1 for e in _reg["entries"] for s in e["sources"] if s["kind"] == "gap")
+        _bounded = sum(1 for e in _reg["entries"] if any(s["kind"] == "boundary" for s in e["sources"]))
+        print(f"  [ok] {len(_reg['entries'])} entries, {_gaps} recorded gap(s), {_bounded} bounded (no mechanism)")
+
     print("\n== WITNESS INDEPENDENCE (kind-distinctness is not enough) ==")
     wit_failures = check_witnesses()
     for msg in wit_failures:

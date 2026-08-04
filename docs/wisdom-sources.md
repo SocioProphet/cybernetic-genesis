@@ -90,6 +90,47 @@ the 5-chain overshoots to the death square (5 does not). So **a carry chain may 
 step divides the distance to the goal.** A cap truncates the aligned chain and fails to rescue the
 misaligned one; **alignment is the control, a cap is the degraded mode.**
 
+## Tamanend: the king made by those who displaced him
+
+**Tamanend** (c. 1625–1701), Chief of Chiefs of the **Turtle clan** of the Lenni-Lenape, whose name
+means *"the Affable"*, treated with William Penn in the Delaware Valley.
+
+After his death, the colonists **who had displaced his people** raised him up as **"Saint Tammany"**
+and **"King Tammany"** — they wanted a native patron saint for a new American identity, and took
+one. His feast was fixed on **May 1**, displacing European May Day; Washington, Adams and Patrick
+Henry attended the festivities. The societies formed in his name became **Tammany Hall**.
+
+**No prophecy of his return is attested.** The "return of the king" is not a Lenape tradition — it
+is a **reception**: a name lifted from the people it belonged to and given an authority they never
+granted. Saying that plainly is the entire value of the entry, and it is the same failure the
+witness rules refuse:
+
+> **Adoption is not consent, and veneration is not attribution.** Authority must be traced to its
+> source, never inherited by acclamation.
+
+## The Black Hills: a return that is promised, and a boundary that is asked for
+
+**White Buffalo Calf Woman** (*Ptesáŋwiŋ*) came to the Lakota in the sacred **Black Hills**
+(*Ȟe Sápa*) — two scouts saw her approaching — brought the sacred pipe, and **promised to return**.
+Before departing she **rolled upon the ground four times, changing colour each time**, and
+disappeared. The birth of a white buffalo calf is held as her sign.
+
+It belongs in this register because it is a **return-prophecy** standing beside the others here, and
+because the shape rhymes: what is promised is not a resumption of what was, but a restoration
+conditional on how people have kept faith.
+
+**And it stops there, on purpose.** This is living sacred tradition whose custodians have **publicly
+objected to its appropriation**. So the entry is **referenced and not operationalised** — it is
+bound to **no mechanism in this estate**, and `tools/legend_registry.py` *enforces* that: an entry
+carrying a `boundary` source and a mechanism is a registry error.
+
+> **Documenting a boundary is itself a design act.** The registry can hold an entry whose correct
+> implementation is to implement nothing — and can refuse the drift where such an entry quietly
+> grows an implementation later.
+
+**A gap, recorded as a gap:** "four crows" could not be verified. The attested four is the **four
+rolls and four colours**, not crows. If a source turns up it can be added properly.
+
 ## 5. The one rule underneath
 
 Every entry above is the same rule seen from a different side:
