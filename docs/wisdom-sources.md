@@ -196,6 +196,72 @@ sources describe concrete and mountain stone. The unhewn-altar law itself is rea
 (**Ex 20:25** — *"if thou lift up thy tool upon it, thou hast polluted it"* — **Deut 27:5–6**,
 **Josh 8:31**), but no *ancient* unhewn altar in central PA was verified.
 
+## The horse is the cheat: substituting the instrument voids the measure
+
+The Walking Purchase was settled by **a walk**, and the fraud was that **they ran**. A faster
+conveyance was put in place of the bodily measure the agreement named.
+
+The horse is that substitution's archetype. Across Indo-European tradition it is the thing that
+crosses ground — and worlds — faster than a person can: **Sleipnir** carrying Odin between realms,
+and the horse sacrifices of the Vedic **ashvamedha**, the Roman **October Equus** and Norse **blót**
+marking it as the animal set at the boundary between what a person may reach and what they may not.
+
+> **When a measure is defined by a human capacity, substituting a superior instrument voids it.**
+
+The terms can be kept perfectly while the measure is destroyed, because the agreement priced **the
+capacity, not the distance**. That is the general form of 1737 — and of benchmark gaming, and of
+every proxy that gets optimised instead of traversed. It is why a measure must name its
+**instrument**, not only its quantity, and why an instrument supplied by one party is not a measure
+at all.
+
+*Reading the horse as the archetype of the substituted instrument is this estate's framing, not a
+claim about any of those traditions. And a horse-as-clairvoyance symbol could not be found in
+Steiner's corpus — see below.*
+
+## Prophecy against the walked path
+
+A walk-measured contract prices **the traversal**: how far a person can actually go, in a day and a
+half, over ground as it lies.
+
+Foreknowledge of the destination collapses that. If you already know where the line falls, you do
+not need to walk to it — **you clear the path to it in advance**, which is exactly what was done in
+1737. Seeing the end and walking to it are different acts, and only one of them is what the
+agreement bought.
+
+> **Foreknowledge is the limit case of instrument substitution.**
+
+Where a *process* is the thing being measured, any capacity that skips the process voids the
+measurement — however honestly the endpoint is reported. Which is why a proof must carry its steps
+and not only its conclusion, why replay matters more than the answer, and why an evaluation that
+leaked its test set measured nothing.
+
+## Steiner on the mission of Abraham — recorded, typed, and bound to nothing
+
+Rudolf Steiner, in **GA 117** (*Deeper Secrets of Human History in the Light of the Gospel of St.
+Matthew*, 1909) and related cycles, holds that vestiges of an older **atavistic clairvoyance**
+survived into pre-Christian times among peoples generally, **with the ancient Hebrew people as the
+exception** — there its reappearance was not tolerated, and the capacity was set aside in favour of
+the development of **rational thinking**. His further claim is that seership must henceforth be
+reached *through* that thinking rather than around it: what was once had atavistically must now be
+attained by other methods.
+
+**It is recorded here and it stops there.** This is an esoteric doctrine about a named people's
+spiritual mission and lineage, and **Steiner's writings concerning peoples, races and lineages are a
+matter of substantial and continuing scholarly criticism.** It is typed **`tradition`** — never
+attested history — and carries a **`boundary`**, so `tools/legend_registry.py` enforces that it
+binds to **no mechanism**.
+
+Recording it accurately is better than alluding to it vaguely; adopting it is a different act, and
+this register does not.
+
+> **The separable, defensible insight it gestures at already has a home**: a capacity that skips the
+> process voids a measurement *of* the process. That is `foreknowledge-shortcut` above, and it
+> carries the mechanism. **This entry carries the citation and the caveat, and nothing else.**
+
+*Two gaps: the "mission fulfilled, reconciliation not yet" reading is a synthesis raised in
+conversation and is not sourced to a specific passage here. And no horse-as-clairvoyance symbol was
+found in Steiner's corpus.*
+
 ## 5. The one rule underneath
 
 Every entry above is the same rule seen from a different side:

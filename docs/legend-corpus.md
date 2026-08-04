@@ -420,3 +420,87 @@ A place is named for the vantage, not the crossing. That a viewpoint gets called
 
 `moses-threshold`, `walking-purchase-instrument`, `mosis-shortfall`
 
+## The horse is the cheat: substituting the instrument voids the measure
+
+`id: horse-substituted-instrument`
+
+### Narrative
+
+The Walking Purchase was settled by a walk, and the fraud was that they ran — trained runners on a cleared path, a faster conveyance put in place of the bodily measure the agreement named. The horse is that substitution's archetype: across Indo-European tradition it is the conveyance that crosses ground, and worlds, faster than a person can — Sleipnir carrying Odin between realms, and the horse sacrifices of the Vedic ashvamedha, the Roman October Equus, and Norse blot marking it as the animal set at the boundary between what a person may reach and what they may not.
+
+### Design principle
+
+WHEN A MEASURE IS DEFINED BY A HUMAN CAPACITY, SUBSTITUTING A SUPERIOR INSTRUMENT VOIDS IT. The terms can be kept perfectly while the measure is destroyed, because the agreement priced the capacity, not the distance. This is the general form of the Walking Purchase, of benchmark gaming, and of every proxy that gets optimised instead of traversed — and it is why a measure must name the instrument, not only the quantity, and why an instrument supplied by one party is not a measure at all.
+
+### Sources
+
+- **attested** — Walking Purchase 1737: hired runners on a pre-cleared path replaced the customary walk
+- **attested** — Horse sacrifice is well attested across Indo-European traditions: Vedic ashvamedha, Roman October Equus, Norse blot
+- **attested** — Sleipnir, Odin's eight-legged horse, carries its rider between worlds
+- **interpretation** — Reading the horse as the ARCHETYPE OF THE SUBSTITUTED INSTRUMENT is this estate's framing, not a claim about any of those traditions
+- **gap** — A horse-as-clairvoyance symbol could NOT be verified in Steiner's corpus; the search of his lectures did not return it
+
+### Mechanism
+
+`cybernetic-genesis` → `tools/octonion_boundary.py`
+
+> the norm is recomputed from the axes rather than read from the declaration — the measure names its instrument and does not accept a substitute
+
+### Related
+
+`walking-purchase-instrument`, `feet-guarantors`, `foreknowledge-shortcut`
+
+## Prophecy against the walked path
+
+`id: foreknowledge-shortcut`
+
+### Narrative
+
+A walk-measured contract prices the traversal: how far a person can actually go, in a day and a half, over ground as it lies. Foreknowledge of the destination collapses that. If you already know where the line falls you do not need to walk to it — you clear the path to it in advance, which is precisely what was done in 1737. Seeing the end and walking to it are different acts, and only one of them is what the agreement bought.
+
+### Design principle
+
+FOREKNOWLEDGE IS THE LIMIT CASE OF INSTRUMENT SUBSTITUTION. Where a process is the thing being measured, any capacity that skips the process voids the measurement — however honestly the endpoint is reported. This is why a proof must carry its steps and not only its conclusion, why replay matters more than the answer, and why an evaluation that leaked its test set measured nothing.
+
+### Sources
+
+- **attested** — The 1737 path was cleared in advance — the endpoint was known before the walk
+- **interpretation** — Framing foreknowledge as the limit case of instrument substitution is this estate's
+
+### Mechanism
+
+`cybernetic-genesis` → `tools/genesis_braid.py`
+
+> carry_terminus() reports the path actually walked and where it actually ends, not the intended destination
+
+### Related
+
+`horse-substituted-instrument`, `walking-purchase-instrument`, `wanderer-no-arrival`
+
+## Steiner on the mission of Abraham — recorded, typed, and bound to nothing
+
+`id: steiner-abraham-mission`
+
+### Narrative
+
+Rudolf Steiner, in GA 117 (Deeper Secrets of Human History in the Light of the Gospel of St. Matthew, 1909) and related cycles, holds that vestiges of an older atavistic clairvoyance survived into pre-Christian times among peoples generally, WITH THE ANCIENT HEBREW PEOPLE AS THE EXCEPTION: there its reappearance was not tolerated, and the capacity was set aside in favour of the development of rational thinking. Steiner's further claim is that seership must henceforth be reached THROUGH that thinking rather than around it — knowledge once had atavistically must now be attained by other methods.
+
+### Design principle
+
+REFERENCED, NOT OPERATIONALISED, AND MARKED AS CONTESTED. This is an esoteric doctrine about a named people's spiritual mission and lineage, and Steiner's writings on peoples and races are a matter of substantial and continuing scholarly criticism. It is recorded here because it was raised and because recording it accurately is better than a vague allusion — typed as TRADITION, never as attested history, and bound to no mechanism. The separable and defensible insight it points at already lives in `foreknowledge-shortcut`: a capacity that skips the process voids a measurement of the process. That entry carries the mechanism; this one carries the citation and the caveat.
+
+### Sources
+
+- **tradition** — Rudolf Steiner, GA 117, 'Deeper Secrets of Human History in the Light of the Gospel of St. Matthew' (1909): atavistic clairvoyance not tolerated among the ancient Hebrew people; seership to be reached through rational thinking — <https://rsarchive.org/Lectures/DeepSecrets/19091109p01.html>
+- **boundary** — Steiner's doctrines concerning peoples, races and lineages are substantially contested in scholarship; this entry is reference-only and binds to no code
+- **gap** — The 'mission fulfilled, reconciliation not yet' reading is a synthesis raised in conversation and is NOT sourced to a specific Steiner passage here
+- **gap** — A horse-as-clairvoyance symbol was NOT found in Steiner's corpus
+
+### Mechanism
+
+**None, deliberately.** This entry is referenced and not operationalised.
+
+### Related
+
+`foreknowledge-shortcut`, `black-hills-return`, `horse-substituted-instrument`
+
