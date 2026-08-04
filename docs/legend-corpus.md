@@ -560,3 +560,34 @@ DEAD AND DORMANT ARE INDISTINGUISHABLE FROM OUTSIDE, and telling them apart is t
 
 `martha-and-mary`, `bearfoot-uniformity`, `feet-guarantors`
 
+## Heller and Ahasuerus — the name in the record disagrees with itself
+
+`id: heller-ahasuerus-nameline`
+
+### Narrative
+
+The Wandering Jew runs through the name this estate is written under. Seligmann Heller (1831-1890), the Austrian poet, published 'Ahasverus' — an epic on the Wandering Jew in three cantos, Leipzig 1866 — into which Andersen's own Ahasuerus feeds; the Germans took the legend up hard, and Schubart, Lenau, Chamisso, Schlegel and Mosen all worked it. AND THE RECORD DOES NOT AGREE ON HIS NAME: the 1911 Britannica calls him SIGISMUND Heller, Wikipedia and the Jewish Encyclopedia have SELIGMANN. Earlier, Jacob Heller, a Frankfurt merchant, commissioned from Durer the Heller Altarpiece — the 'Assumption of the Virgin' with the Apostles about her empty tomb, 1509, its centre panel lost to fire in 1729 and surviving only as Harrich's copy. And a Heller was a coin: a small denomination named for Hall, worth almost nothing on its own.
+
+### Design principle
+
+THE RECORD DISAGREES WITH ITSELF ABOUT A NAME, IN AN ENTRY ABOUT A MAN CONDEMNED TO WANDER UNDER A NAME HE WAS GIVEN. That is the whole discipline in one artifact: an identifier is not self-evidencing, provenance must be traced rather than assumed, and two sources naming the same person differently is a conflict to record rather than a detail to smooth. Note also what survives: the altarpiece's centre is GONE and we hold a copy, which is exactly why an anchor must resolve to a location and a copy must say that it is one.
+
+### Sources
+
+- **attested** — Seligmann Heller (1831-1890), Austrian poet; 'Ahasverus', epic on the Wandering Jew, Leipzig 1866 — <https://en.wikipedia.org/wiki/Seligmann_Heller>
+- **attested** — 1911 Encyclopaedia Britannica, 'Jew, The Wandering': Heller developed the poem into three cantos; Andersen's Ahasuerus related — <https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Jew,_The_Wandering>
+- **attested** — Jacob Heller of Frankfurt commissioned Durer's Heller Altarpiece, 'Assumption of the Virgin', 1509; centre panel destroyed by fire 1729, known through Jobst Harrich's copy
+- **attested** — The Heller was a small German coin named for Hall (Schwabisch Hall)
+- **gap** — SIGISMUND (1911 Britannica) vs SELIGMANN (Wikipedia, Jewish Encyclopedia) is an UNRESOLVED conflict in the record and is recorded as one rather than silently picked
+- **interpretation** — Reading the name-line as this estate's own instance of the wanderer is Michael Heller's connection, not a scholarly claim
+
+### Mechanism
+
+`cybernetic-genesis` → `tools/witness_independence.py`
+
+> an identifier is not self-evidencing; authority provenance must be stated and traced rather than inherited from a name
+
+### Related
+
+`wanderer-no-arrival`, `initiation-rename`, `tamanend-reception`, `sophia-authority`
+

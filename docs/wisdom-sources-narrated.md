@@ -169,6 +169,28 @@ with Elijah (Matt 11:14, 17:12–13). One tarries; one returns. Different men, d
 **→ `carry_terminus()`** reports where a chain actually *ends*, not that it moved. Progress is not
 arrival.
 
+### The name-line, and a record that disagrees with itself
+
+The legend runs through the name this estate is written under. **Seligmann Heller** (1831–1890), the
+Austrian poet, published ***Ahasverus*** — an epic on the Wandering Jew in **three cantos**, Leipzig
+**1866**. Germans took the legend up hard: Schubart, Lenau, Chamisso, Schlegel and Mosen all worked
+it, and Andersen's own *Ahasuerus* feeds into the same stream.
+
+**And the record does not agree on his name.** The 1911 *Britannica* calls him **Sigismund** Heller;
+Wikipedia and the *Jewish Encyclopedia* have **Seligmann**. Two sources, one man, two names —
+**in an entry about a man condemned to wander under a name he was given.**
+
+Earlier still, **Jacob Heller**, a Frankfurt merchant, commissioned from **Dürer** the *Heller
+Altarpiece* — the **Assumption of the Virgin**, the Apostles gathered about her **empty tomb**, 1509.
+Its centre panel **burned in 1729**. What survives is Jobst Harrich's **copy**. And a *Heller* was a
+coin: a small denomination named for Hall, worth almost nothing by itself.
+
+> An identifier is not self-evidencing. Two sources naming the same person differently is a
+> **conflict to record**, not a detail to smooth — and a surviving copy must say that it is one.
+
+*(The name-line as this estate's own instance of the wanderer is Michael Heller's connection, not a
+scholarly claim, and is marked so.)*
+
 ---
 
 ## 6. The feet — Sukkah 53a, and a guarantor who cannot vouch for you

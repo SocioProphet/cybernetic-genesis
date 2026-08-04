@@ -756,6 +756,58 @@
         "bearfoot-uniformity",
         "feet-guarantors"
       ]
+    },
+    {
+      "id": "heller-ahasuerus-nameline",
+      "title": "Heller and Ahasuerus \u2014 the name in the record disagrees with itself",
+      "narrative": "The Wandering Jew runs through the name this estate is written under. Seligmann Heller (1831-1890), the Austrian poet, published 'Ahasverus' \u2014 an epic on the Wandering Jew in three cantos, Leipzig 1866 \u2014 into which Andersen's own Ahasuerus feeds; the Germans took the legend up hard, and Schubart, Lenau, Chamisso, Schlegel and Mosen all worked it. AND THE RECORD DOES NOT AGREE ON HIS NAME: the 1911 Britannica calls him SIGISMUND Heller, Wikipedia and the Jewish Encyclopedia have SELIGMANN. Earlier, Jacob Heller, a Frankfurt merchant, commissioned from Durer the Heller Altarpiece \u2014 the 'Assumption of the Virgin' with the Apostles about her empty tomb, 1509, its centre panel lost to fire in 1729 and surviving only as Harrich's copy. And a Heller was a coin: a small denomination named for Hall, worth almost nothing on its own.",
+      "design_principle": "THE RECORD DISAGREES WITH ITSELF ABOUT A NAME, IN AN ENTRY ABOUT A MAN CONDEMNED TO WANDER UNDER A NAME HE WAS GIVEN. That is the whole discipline in one artifact: an identifier is not self-evidencing, provenance must be traced rather than assumed, and two sources naming the same person differently is a conflict to record rather than a detail to smooth. Note also what survives: the altarpiece's centre is GONE and we hold a copy, which is exactly why an anchor must resolve to a location and a copy must say that it is one.",
+      "sources": [
+        {
+          "kind": "attested",
+          "citation": "Seligmann Heller (1831-1890), Austrian poet; 'Ahasverus', epic on the Wandering Jew, Leipzig 1866",
+          "url": "https://en.wikipedia.org/wiki/Seligmann_Heller"
+        },
+        {
+          "kind": "attested",
+          "citation": "1911 Encyclopaedia Britannica, 'Jew, The Wandering': Heller developed the poem into three cantos; Andersen's Ahasuerus related",
+          "url": "https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Jew,_The_Wandering"
+        },
+        {
+          "kind": "attested",
+          "citation": "Jacob Heller of Frankfurt commissioned Durer's Heller Altarpiece, 'Assumption of the Virgin', 1509; centre panel destroyed by fire 1729, known through Jobst Harrich's copy"
+        },
+        {
+          "kind": "attested",
+          "citation": "The Heller was a small German coin named for Hall (Schwabisch Hall)"
+        },
+        {
+          "kind": "gap",
+          "citation": "SIGISMUND (1911 Britannica) vs SELIGMANN (Wikipedia, Jewish Encyclopedia) is an UNRESOLVED conflict in the record and is recorded as one rather than silently picked"
+        },
+        {
+          "kind": "interpretation",
+          "citation": "Reading the name-line as this estate's own instance of the wanderer is Michael Heller's connection, not a scholarly claim"
+        }
+      ],
+      "mechanism": {
+        "repo": "cybernetic-genesis",
+        "path": "tools/witness_independence.py",
+        "invariant": "an identifier is not self-evidencing; authority provenance must be stated and traced rather than inherited from a name"
+      },
+      "anchors": [
+        {
+          "repo": "cybernetic-genesis",
+          "doc": "docs/wisdom-sources-narrated.md",
+          "section": "5. Ahasuerus \u2014 motion without arrival"
+        }
+      ],
+      "related": [
+        "wanderer-no-arrival",
+        "initiation-rename",
+        "tamanend-reception",
+        "sophia-authority"
+      ]
     }
   ]
 }
