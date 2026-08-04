@@ -113,6 +113,56 @@ or unbounded acts. They are not a warrant for anything, not a claim about anyone
 not a licence to bypass a human gate. Several of the readings here are this estate's own synthesis
 and are labelled as such; a reader is free to take the mechanism and leave the reading.
 
+
+## The feet: a guarantor that cannot vouch for you
+
+> **"The feet of a person are responsible for him; to the place where he is in demand, there they
+> lead him."** — Babylonian Talmud, *Sukkah* 53a
+
+Solomon sees the Angel of Death grieving, and learns he has been sent for two of his scribes,
+Elihoreph and Ahijah. Solomon sends them away to **Luz** — the city where death has no dominion.
+*"When they arrived at the district of Luz, they died."* The next day the Angel is happy: they were
+wanted **in that very place**. The flight was the itinerary.
+
+The Aramaic is **`arevin`** — not merely "responsible" but **guarantors, sureties**: the ones who
+stand for you and make good on the obligation. And that is the same office as the **+1**. Which
+makes the maxim say something precise, and something the whole pack turns on:
+
+> **A man's feet are his guarantors — and that is exactly why they cannot be his +1.**
+
+A guarantor must be **independent of the subject**. Your feet are not. They are yours; their
+authority is entirely derived from you. So by Sophia's rule they are the textbook self-attestation
+case: origin *and* authority both descending from the one they would vouch for. They can carry you.
+They cannot **witness** for you.
+
+That is why the guarantee is real but bounded:
+
+- **Feet guarantee delivery.** Sukkah's scribes could not outwalk their appointment; the routing
+  meant to save them performed it. You will arrive somewhere, and your own effort decides that.
+- **Feet do not guarantee crossing.** Delivery to the threshold is not entry. Moses walks to Nebo
+  and sees; he does not enter. 21 and 22 are walked; **23 can only be carried.**
+
+### And Ahasuerus is the same law with the sign flipped
+
+The Wandering Jew is condemned to walk **until the Second Coming** — feet that carry and never
+deliver. Where Sukkah shows a guarantee you cannot escape, the legend shows the **guarantee
+suspended**: the one man whose feet are no longer his guarantors.
+
+Read together they say one thing from both sides:
+
+> **Walking is not the agency.** In Sukkah it delivers you regardless of your intent; in the legend
+> it delivers you never. Either way, arrival is not something walking achieves.
+
+Which is precisely the goose board, where there are **no decisions at all** — you roll and you move,
+and only a goose carries you past what your own throw could reach. It is also why the estate's
+controls are shaped the way they are: a short device's own effort is bounded by its shortfall
+(M.OS.ES), a subject cannot rename itself across a threshold, and a witness may descend from the
+subject in **origin** but never in **authority**.
+
+*Attribution note: this maxim was raised from the SocioProphet account, and is identified here as
+Sukkah 53a. If the intended quote is a different one, swap the epigraph — the argument stands on the
+`arevin`/guarantor reading either way.*
+
 ---
 
 *Doctrinal source, not executable scripture. Nothing here runs — enforcement lives in `schemas/` and
