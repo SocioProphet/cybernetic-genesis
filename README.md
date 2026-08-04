@@ -33,6 +33,9 @@ consumes. Private-first.
 | `tools/verify_mount_strategy.py` | Mount-strategy verifier (symlink + scope teeth) + Podman `--mount` projection. |
 | `docs/inception-mount-strategy.md` | The mount-type mapping, the teeth, and the Podman projection. |
 | `docs/L0-genesis-covenant.md` | The source-canon doctrine the schemas enforce. |
+| `docs/wisdom-sources.md` | The legends behind the mechanisms — threshold, rename, Sophia, the goose — with attested history and interpretation marked apart. |
+| `docs/cognitive-fibrations.md` | The corrected Hopf tower the octonion boundary rests on. |
+| `docs/genesis-braid.md` | The braid spine + correction record for the source renders. |
 | `.github/workflows/ci.yml` | Installs jsonschema, runs the selftest, fail-closed. |
 
 All schemas are **JSON Schema draft 2020-12**, `additionalProperties: false`, with the
