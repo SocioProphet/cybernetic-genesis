@@ -438,7 +438,7 @@ WHEN A MEASURE IS DEFINED BY A HUMAN CAPACITY, SUBSTITUTING A SUPERIOR INSTRUMEN
 - **attested** — Horse sacrifice is well attested across Indo-European traditions: Vedic ashvamedha, Roman October Equus, Norse blot
 - **attested** — Sleipnir, Odin's eight-legged horse, carries its rider between worlds
 - **interpretation** — Reading the horse as the ARCHETYPE OF THE SUBSTITUTED INSTRUMENT is this estate's framing, not a claim about any of those traditions
-- **gap** — A horse-as-clairvoyance symbol could NOT be verified in Steiner's corpus; the search of his lectures did not return it
+- **tradition** — The horse as the animal figuring human clairvoyance — and horse sacrifice as the marking of its loss — is discussed explicitly by Steiner per the author, who is writing the book this register serves. CITATION PENDING: the specific GA/lecture reference is still to be pinned. My own searches did not surface it, which is a fact about my searching and not about the corpus; the earlier note claiming it was 'not in Steiner' was an overreach and is withdrawn.
 
 ### Mechanism
 
@@ -493,8 +493,8 @@ REFERENCED, NOT OPERATIONALISED, AND MARKED AS CONTESTED. This is an esoteric do
 
 - **tradition** — Rudolf Steiner, GA 117, 'Deeper Secrets of Human History in the Light of the Gospel of St. Matthew' (1909): atavistic clairvoyance not tolerated among the ancient Hebrew people; seership to be reached through rational thinking — <https://rsarchive.org/Lectures/DeepSecrets/19091109p01.html>
 - **boundary** — Steiner's doctrines concerning peoples, races and lineages are substantially contested in scholarship; this entry is reference-only and binds to no code
-- **gap** — The 'mission fulfilled, reconciliation not yet' reading is a synthesis raised in conversation and is NOT sourced to a specific Steiner passage here
-- **gap** — A horse-as-clairvoyance symbol was NOT found in Steiner's corpus
+- **gap** — The 'mission fulfilled, reconciliation not yet' reading is the author's. CITATION PENDING: a specific passage to anchor it has not yet been pinned here.
+- **tradition** — The horse as the animal figuring human clairvoyance — and horse sacrifice as the marking of its loss — is discussed explicitly by Steiner per the author, who is writing the book this register serves. CITATION PENDING: the specific GA/lecture reference is still to be pinned. My own searches did not surface it, which is a fact about my searching and not about the corpus; the earlier note claiming it was 'not in Steiner' was an overreach and is withdrawn.
 
 ### Mechanism
 

@@ -215,8 +215,9 @@ every proxy that gets optimised instead of traversed. It is why a measure must n
 at all.
 
 *Reading the horse as the archetype of the substituted instrument is this estate's framing, not a
-claim about any of those traditions. And a horse-as-clairvoyance symbol could not be found in
-Steiner's corpus — see below.*
+claim about any of those traditions. Steiner treats the horse explicitly as the animal figuring
+human clairvoyance — and horse sacrifice as the marking of its loss — per the author; the specific
+GA/lecture citation is **pending** and marked as such rather than guessed at.*
 
 ## Prophecy against the walked path
 
@@ -258,9 +259,11 @@ this register does not.
 > process voids a measurement *of* the process. That is `foreknowledge-shortcut` above, and it
 > carries the mechanism. **This entry carries the citation and the caveat, and nothing else.**
 
-*Two gaps: the "mission fulfilled, reconciliation not yet" reading is a synthesis raised in
-conversation and is not sourced to a specific passage here. And no horse-as-clairvoyance symbol was
-found in Steiner's corpus.*
+*Citations pending, not gaps: the "mission fulfilled, reconciliation not yet" reading and the
+horse-as-clairvoyance treatment are the author's, and the specific passages are still to be pinned
+here. An earlier note in this file claimed the horse symbol was "not found in Steiner" — that
+asserted a property of a ~6,000-lecture corpus on the strength of one failed search, and is
+withdrawn.*
 
 ## 5. The one rule underneath
 
