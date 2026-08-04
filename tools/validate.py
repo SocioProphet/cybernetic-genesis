@@ -39,6 +39,7 @@ VALID_CASES = [
     ("adapter_descriptor.schema.json", "adapter_descriptor.valid.json"),
     ("genesis_braid.schema.json", "genesis_braid.valid.json"),
     ("initiation.schema.json", "initiation.valid.json"),
+    ("initiation.schema.json", "initiation.sophia_raised.valid.json"),
     # M.OS.ES: a short device may author WITH the +1 (three witnesses, not two).
     ("artifact_record.schema.json", "artifact_record.from_short_device.valid.json"),
 ]

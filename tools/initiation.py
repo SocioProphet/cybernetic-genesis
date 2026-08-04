@@ -17,6 +17,12 @@ another's name so that other crosses. So:
   Abram. Self-attested initiation into a crossing is refused -- it is the same defect as a device
   with a shortfall signing its own +1 (see M.OS.ES: a re-signature by the same party is not a +1).
 
+  **And distinctness of identity is not independence.** Sophia falls by emanating ALONE and so
+  cannot ascend by herself; her raiser is her son and yet stands as her father -- brought forth
+  from below, but SENT from above. Origin may descend from the subject; AUTHORITY may not.
+  Otherwise a subject mints a derived identity and has it attest on their behalf, and the +1 is
+  the subject wearing another name. Hence `attestor_authority_chain`.
+
 JSON Schema pins the vocabulary; it cannot compare two field lengths, so the operation/name
 consistency is checked here.
 
@@ -80,8 +86,45 @@ def check_not_self_attested(rite: dict) -> None:
         )
 
 
+def check_authority_does_not_derive_from_the_subject(rite: dict) -> None:
+    """Sophia's rule: the raiser may be BROUGHT FORTH from the one raised, but must not draw
+    AUTHORITY from them.
+
+    Sophia does not fall through ignorance — she falls by emanating ALONE, without her syzygy, and
+    so she cannot ascend by herself; she is raised. Her raiser is her son and yet stands as her
+    father: brought forth from below, but SENT from above. Origin descends from her; authority does
+    not.
+
+    That distinction is the security property. Refusing only `attestor == subject` leaves a sybil
+    hole: a subject mints a derived identity and has it attest on their behalf. Distinctness of
+    identity is not independence. So the attestor's AUTHORITY CHAIN must not contain the subject —
+    while `attestor_origin` freely may, because being brought forth from the subject is not the
+    defect.
+
+    Fail-closed: where a crossing is at stake and the authority chain is unstated, the initiation is
+    refused. Unknown provenance of authority is not evidence of independence.
+    """
+    if not rite.get("enables_threshold"):
+        return
+    subject = rite.get("subject")
+    chain = rite.get("attestor_authority_chain")
+    if not chain:
+        raise InitiationError(
+            "this initiation enables a crossing but states no `attestor_authority_chain` — where the "
+            "attestor's authority comes from is exactly what must be shown, and unknown provenance is "
+            "not independence"
+        )
+    if subject in chain:
+        raise InitiationError(
+            f"the attestor's authority derives from the subject ({subject!r} appears in its authority "
+            "chain) — a raiser may be brought forth from the one it raises, but may not draw its "
+            "authority from them; otherwise the +1 is the subject wearing another name"
+        )
+
+
 def check(rite: dict) -> None:
     if rite.get("operation") not in OPERATIONS:
         raise InitiationError(f"unknown operation {rite.get('operation')!r}; expected one of {list(OPERATIONS)}")
     check_operation_matches_the_names(rite)
     check_not_self_attested(rite)
+    check_authority_does_not_derive_from_the_subject(rite)

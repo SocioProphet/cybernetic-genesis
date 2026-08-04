@@ -52,6 +52,18 @@
     },
     "governance": {
       "$ref": "common.schema.json#/$defs/Governance"
+    },
+    "attestor_origin": {
+      "$comment": "Where the attestor was BROUGHT FORTH from. May legitimately be the subject \u2014 Sophia's raiser is her son. Origin descending from the subject is not the defect.",
+      "$ref": "common.schema.json#/$defs/Ref"
+    },
+    "attestor_authority_chain": {
+      "$comment": "Where the attestor's AUTHORITY comes from. MUST NOT contain the subject: a raiser may be brought forth from the one it raises but may not draw authority from them, or the +1 is the subject wearing another name. Required when a crossing is at stake; unstated provenance is not independence. Enforced in tools/initiation.py \u2014 JSON Schema cannot test membership of one field's value in another field's array.",
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/Ref"
+      },
+      "minItems": 1
     }
   },
   "allOf": [
@@ -64,7 +76,8 @@
       },
       "then": {
         "required": [
-          "attestor"
+          "attestor",
+          "attestor_authority_chain"
         ]
       }
     }

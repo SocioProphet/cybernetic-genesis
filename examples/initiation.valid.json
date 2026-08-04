@@ -10,5 +10,9 @@
   "governance": {
     "admissibility_tier": "GOVERNED",
     "review_status": "APPROVED"
-  }
+  },
+  "attestor_authority_chain": [
+    "identity:moses",
+    "authority:sinai"
+  ]
 }

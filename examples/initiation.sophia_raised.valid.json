@@ -1,0 +1,19 @@
+{
+  "subject": "identity:sophia",
+  "prior_name": "sophia",
+  "new_name": "pistis-sophia",
+  "operation": "insert",
+  "letter": "pistis",
+  "script": "coptic",
+  "enables_threshold": "crossing:pleroma",
+  "attestor": "identity:michael",
+  "attestor_origin": "identity:sophia",
+  "attestor_authority_chain": [
+    "identity:michael",
+    "authority:the-father"
+  ],
+  "governance": {
+    "admissibility_tier": "GOVERNED",
+    "review_status": "APPROVED"
+  }
+}

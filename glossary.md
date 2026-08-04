@@ -100,6 +100,13 @@ schemas MUST use these terms and no synonyms. Each entry is one or two lines.
 - **You cannot rename yourself across a threshold** — An initiation carrying `enables_threshold`
   requires an attestor distinct from the subject. Hoshea did not add his own yod. Self-attested
   passage is refused for the same reason a re-signature by the same party is not a +1 (M.OS.ES).
+- **Sophia's rule (authority vs origin)** — Distinctness of identity is **not** independence.
+  Sophia falls by emanating *alone* and so cannot ascend by herself; her raiser is her son and yet
+  stands as her father — brought forth from below, **sent** from above. So an attestor's `origin`
+  may descend from the subject, but its **`attestor_authority_chain` must not contain the subject**.
+  Without this, a subject mints a derived identity and has it attest on their own behalf, and the
+  +1 is the subject wearing another name. Unstated authority is refused: unknown provenance is not
+  independence.
 - **AD4M** — A *third-party* project (Coasys: Agents/Languages/Perspectives). **Not** ADMN. Keep the
   names firewalled; they are unrelated.
 
