@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://socioprophet.ai/schemas/twin.schema.json",
   "title": "Twin",
-  "description": "The runtime verified twin inceived from a GenesisSeed. Fail-closed lifecycle: a Twin MUST NOT be READY without identity + policy_refs + memory_refs present.",
+  "description": "The runtime verified twin inceived from a GenesisSeed. Fail-closed lifecycle: a Twin MUST NOT be READY without identity + policy_refs + memory_refs. It also carries the MEMBRANE it mediates \u2014 the twin bridge protecting the user's three-space system from the external one \u2014 and may not open that membrane in both directions without a full crossing of the sealed thresholds and an explicit opt-in.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -14,7 +14,8 @@
     "policy_refs",
     "provenance_refs",
     "capabilities",
-    "governance"
+    "governance",
+    "membrane"
   ],
   "properties": {
     "twin_id": {
@@ -67,6 +68,9 @@
     },
     "governance": {
       "$ref": "common.schema.json#/$defs/Governance"
+    },
+    "membrane": {
+      "$ref": "common.schema.json#/$defs/Membrane"
     }
   },
   "allOf": [
@@ -100,6 +104,51 @@
           "memory_refs": {
             "type": "array",
             "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "$comment": "THE THRESHOLD. Bidirectional flow is the only direction that lets the external three-space reach the protected user three-space, so it is gated twice: all 22 sealed thresholds of the topic space crossed, AND an explicit purpose-bound opt-in. 21 is short \u2014 the land was seen, not entered.",
+      "if": {
+        "properties": {
+          "membrane": {
+            "properties": {
+              "flow": {
+                "const": "bidirectional"
+              }
+            },
+            "required": [
+              "flow"
+            ]
+          }
+        },
+        "required": [
+          "membrane"
+        ]
+      },
+      "then": {
+        "properties": {
+          "membrane": {
+            "properties": {
+              "thresholds_crossed": {
+                "minimum": 22
+              },
+              "consent": {
+                "properties": {
+                  "state": {
+                    "const": "opted_in"
+                  }
+                },
+                "required": [
+                  "state"
+                ]
+              }
+            },
+            "required": [
+              "thresholds_crossed",
+              "consent"
+            ]
           }
         }
       }

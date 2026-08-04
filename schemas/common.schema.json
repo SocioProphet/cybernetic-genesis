@@ -172,6 +172,87 @@
         "INFERRED",
         "REPUTED"
       ]
+    },
+    "ConsentGrant": {
+      "$comment": "The Ring/three-space stack governs model serving + updates for OPTED-IN users ONLY. Consent is purpose-bound and fail-closed: anything that is not an explicit `opted_in` is not consent. `not_asked` is the default posture, never an implied yes.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "purpose",
+        "granted_by"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "opted_in",
+            "opted_out",
+            "not_asked"
+          ]
+        },
+        "purpose": {
+          "$comment": "Purpose-bound: consent is for THIS purpose, and does not generalise.",
+          "type": "string",
+          "minLength": 1
+        },
+        "granted_by": {
+          "$ref": "common.schema.json#/$defs/Ref"
+        },
+        "grant_ref": {
+          "$ref": "common.schema.json#/$defs/Ref"
+        },
+        "revocable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Membrane": {
+      "$comment": "The twin bridge is a MEMBRANE, not a pipe. A single 1-space system in which the AI connects to and PROTECTS the user's three-space system from the external three-space system. Flow direction is declared, not assumed; `bidirectional` is the only direction that lets the external space reach the user space, and it is gated on the sealed thresholds (see Twin's threshold rule).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "user_space",
+        "external_space",
+        "flow",
+        "thresholds_crossed",
+        "consent",
+        "scale"
+      ],
+      "properties": {
+        "user_space": {
+          "$comment": "The three-space system being protected.",
+          "$ref": "common.schema.json#/$defs/Ref"
+        },
+        "external_space": {
+          "$comment": "The three-space system being protected FROM.",
+          "$ref": "common.schema.json#/$defs/Ref"
+        },
+        "flow": {
+          "$comment": "inbound = external->user (read into the protected space). outbound = user->external. bidirectional = both, and requires a full threshold crossing.",
+          "enum": [
+            "inbound",
+            "outbound",
+            "bidirectional"
+          ]
+        },
+        "thresholds_crossed": {
+          "$comment": "The hermetically-sealed thresholds of the topic space. The space is 22. 21 is SHORT \u2014 seen, not crossed. Bidirectional flow requires all 22.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 22
+        },
+        "consent": {
+          "$ref": "common.schema.json#/$defs/ConsentGrant"
+        },
+        "scale": {
+          "$comment": "The INCEPTION->GENESYS bridge repeats at each scale: stand up the k3s quorum, the twin bridge scales to k8s, and repeats again for the federated global mesh. One bridge, three frequencies.",
+          "enum": [
+            "k3s_quorum",
+            "k8s",
+            "federated_mesh"
+          ]
+        }
+      }
     }
   }
 }

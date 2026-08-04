@@ -1,5 +1,5 @@
 {
-  "seed_id": "seed:atlas-cartographer.v1",
+  "seed_id": "seed:operator/deploy-v1-solo",
   "archetype": "cartographer",
   "ontology_slice": [
     "geo:Place",
@@ -64,8 +64,7 @@
     "adaptation": "lora",
     "mode": "active_active",
     "pair": [
-      "PATET",
-      "PETER"
+      "PATET"
     ]
   }
 }

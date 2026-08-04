@@ -43,6 +43,11 @@ INVALID_CASES = [
     ("artifact_record.schema.json", "artifact_record.invalid.missing_second_witness.json"),
     ("artifact_record.schema.json", "artifact_record.invalid.bad_boundary_stone.json"),
     ("twin.schema.json", "twin.invalid.ready_without_policy.json"),
+    # The threshold: 21 is short — the land was seen, not entered.
+    ("twin.schema.json", "twin.invalid.bidirectional_at_21.json"),
+    ("twin.schema.json", "twin.invalid.bidirectional_without_consent.json"),
+    ("genesis_seed.schema.json", "genesis_seed.invalid.active_active_single_model.json"),
+    ("genesis_seed.schema.json", "genesis_seed.invalid.no_consent_profile.json"),
 ]
 
 

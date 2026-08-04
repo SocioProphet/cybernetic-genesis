@@ -21,7 +21,7 @@ consumes. Private-first.
 | `schemas/common.schema.json` | Shared `$defs`: `ContentHash`, `Witness(es)`, `WitnessesDualType`, `Measurement`, `Ref`. |
 | `schemas/hologram.schema.json` | The semantic-hologram base object. |
 | `schemas/genesis_seed.schema.json` | The seed a Twin is inceived from. |
-| `schemas/twin.schema.json` | The runtime twin + fail-closed READY gate. |
+| `schemas/twin.schema.json` | The runtime twin + fail-closed READY gate + the membrane threshold gate. |
 | `schemas/twin_event_envelope.schema.json` | Canonical envelope for twin events. |
 | `schemas/artifact_record.schema.json` | Dual-witnessed, boundary-stone-addressed outputs. |
 | `schemas/policy_decision.schema.json` | Fail-closed verdicts (ALLOW/DENY/REQUIRE_APPROVAL). |
@@ -51,6 +51,9 @@ doctrine and the verse→rule table (cited as *doctrinal source, not executable 
 4. **Fail-closed verdicts** — no implicit allow; a Twin is not `READY` without
    identity + policy + memory refs.
 5. **Plumb-line** — `validate.py selftest` is the CI baseline; drift is caught at the gate.
+6. **The threshold** — the membrane opens both ways only on a full crossing of the 22 sealed
+   thresholds **and** an explicit purpose-bound opt-in. 21 is short; the Ring stack serves
+   opted-in users only.
 
 ## Run the checks locally
 

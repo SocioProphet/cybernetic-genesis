@@ -27,5 +27,19 @@
     "policy_basis": [
       "policy:genesis/base"
     ]
+  },
+  "membrane": {
+    "user_space": "space:user/alpha/three-space",
+    "external_space": "space:external/three-space",
+    "flow": "bidirectional",
+    "thresholds_crossed": 22,
+    "consent": {
+      "state": "opted_in",
+      "purpose": "model serving + updates for this twin's mission",
+      "granted_by": "user:alpha",
+      "grant_ref": "grant:consent/alpha/serving-v1",
+      "revocable": true
+    },
+    "scale": "k3s_quorum"
   }
 }

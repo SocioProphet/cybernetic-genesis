@@ -17,6 +17,13 @@ schemas MUST use these terms and no synonyms. Each entry is one or two lines.
 - **ArtifactRecord** — A world-changing output produced by a Twin; boundary-stone
   addressed and dual-witnessed.
 - **PolicyDecision** — A verdict from the policy plane: ALLOW | DENY | REQUIRE_APPROVAL.
+- **Membrane** — The twin bridge, stated correctly: not a pipe but a membrane. A single
+  1-space system in which the AI connects to and **protects** the user's three-space system
+  from the external three-space system. Carried on every Twin; declares `flow`,
+  `thresholds_crossed`, `consent`, and `scale`.
+- **ConsentGrant** — A purpose-bound opt-in (`opted_in | opted_out | not_asked`). The Ring /
+  three-space serving-and-update stack governs **opted-in users only**; `not_asked` is the
+  default posture and is never an implied yes.
 - **AdapterDescriptor** — Declares an adapter (provider, organ, or surface bridge) the
   platform may bind — its capabilities, identity mode, policy hooks, audit surface,
   and rollback strategy. Contract frozen now; adapter build is Phase 1+.
@@ -39,6 +46,17 @@ schemas MUST use these terms and no synonyms. Each entry is one or two lines.
 - **Mission** — A scoped objective a Twin pursues; every event carries its `mission_id`.
 - **Archetype** — A reusable pattern a hologram/seed instantiates (e.g. cartographer).
 - **Affordance** — An action a hologram exposes as available to a Twin.
+
+- **Threshold (22)** — The hermetically-sealed thresholds of the topic space. Bidirectional
+  flow across the membrane — the only direction that lets the external three-space reach the
+  protected user three-space — requires **all 22** crossed. **21 is short**: the land was seen,
+  not entered. Enforced in `twin.schema.json`; fixture `twin.invalid.bidirectional_at_21.json`.
+- **Scale (the repeating bridge)** — The INCEPTION→GENESYS bridge is not crossed once. It
+  repeats at each frequency: stand up the **k3s quorum**, the twin bridge scales to **k8s**,
+  and it repeats again for the **federated global mesh**. One bridge, three frequencies.
+- **PATET / PETER** — The active-active LoRA-tuned foundation-model pair ("rock") behind model
+  training and updates. *Active-active* is a liveness claim: exactly two live members, not a
+  primary with a spare (`genesis_seed.model_profile`).
 
 ## L0 source-canon discipline (see `docs/L0-genesis-covenant.md`)
 

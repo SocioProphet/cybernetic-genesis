@@ -1,40 +1,43 @@
 {
-  "twin_id": "twin:deploy/7c1-ready-without-policy",
+  "twin_id": "twin:deploy/7c1-unconsented",
   "seed_id": "seed:atlas-cartographer.v1",
   "status": "READY",
   "identity": {
-    "principal": "twin:atlas-cartographer.blind",
+    "principal": "twin:atlas-cartographer.001",
     "chart_hash": "sha256:aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44"
   },
   "memory_refs": [
-    "mem:atlas.semantic.001"
+    "mem:atlas.semantic.001",
+    "mem:atlas.episodic.001"
   ],
-  "policy_refs": [],
+  "policy_refs": [
+    "policy:atlas.baseline",
+    "policy:geo.privacy"
+  ],
   "provenance_refs": [
     "prov:seed.atlas-cartographer.v1"
   ],
   "capabilities": [
-    "query_tiles"
+    "query_tiles",
+    "compose_atlas"
   ],
-  "membrane": {
-    "user_space": "space:user/alpha/three-space",
-    "external_space": "space:external/three-space",
-    "flow": "bidirectional",
-    "thresholds_crossed": 22,
-    "consent": {
-      "state": "opted_in",
-      "purpose": "model serving + updates for this twin's mission",
-      "granted_by": "user:alpha",
-      "grant_ref": "grant:consent/alpha/serving-v1",
-      "revocable": true
-    },
-    "scale": "k3s_quorum"
-  },
   "governance": {
     "admissibility_tier": "GOVERNED",
     "review_status": "APPROVED",
     "policy_basis": [
       "policy:genesis/base"
     ]
+  },
+  "membrane": {
+    "user_space": "space:user/alpha/three-space",
+    "external_space": "space:external/three-space",
+    "flow": "bidirectional",
+    "thresholds_crossed": 22,
+    "consent": {
+      "state": "not_asked",
+      "purpose": "model serving + updates",
+      "granted_by": "user:alpha"
+    },
+    "scale": "k3s_quorum"
   }
 }
