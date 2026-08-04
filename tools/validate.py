@@ -37,6 +37,7 @@ VALID_CASES = [
     ("policy_decision.schema.json", "policy_decision.valid.json"),
     ("policy_decision.schema.json", "policy_decision.deny.valid.json"),
     ("adapter_descriptor.schema.json", "adapter_descriptor.valid.json"),
+    ("genesis_braid.schema.json", "genesis_braid.valid.json"),
     # M.OS.ES: a short device may author WITH the +1 (three witnesses, not two).
     ("artifact_record.schema.json", "artifact_record.from_short_device.valid.json"),
 ]
@@ -52,6 +53,9 @@ INVALID_CASES = [
     ("twin.schema.json", "twin.invalid.bidirectional_without_consent.json"),
     ("genesis_seed.schema.json", "genesis_seed.invalid.active_active_single_model.json"),
     ("genesis_seed.schema.json", "genesis_seed.invalid.no_consent_profile.json"),
+    # Each of these is an error found in a real source render of the braid.
+    ("genesis_braid.schema.json", "genesis_braid.invalid.three_spaces.json"),
+    ("genesis_braid.schema.json", "genesis_braid.invalid.ten_steps.json"),
     # M.OS.ES: falling short is a demand that someone else cross with you, not a free pass.
     ("twin.schema.json", "twin.invalid.mobile_authors_direct_while_short.json"),
     ("twin.schema.json", "twin.invalid.attested_without_plus_one.json"),
@@ -93,6 +97,37 @@ def check_boundaries() -> list[str]:
                 print(f"  [ok] {path.name} refused by the norm check ({e})")
             else:
                 failures.append(f"{path.name} boundary refused: {e}")
+    return failures
+
+
+# Braid fixtures whose defect is arithmetic, not vocabulary: JSON Schema pins the enums and the
+# array bounds, but cannot see a backwards range or a repeated phase in the right-sized list.
+BRAID_ARITHMETIC_FALSE = [
+    "genesis_braid.invalid.vav_missing.json",
+    "genesis_braid.invalid.layer_runs_backwards.json",
+]
+
+
+def check_braid() -> list[str]:
+    """Count the spine: four spaces, five phases with vav, twelve contiguous steps, 7x49=343."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from genesis_braid import BraidError, check as check_spine
+
+    failures = []
+    for path in sorted(EXAMPLE_DIR.glob("genesis_braid*.json")):
+        must_be_refused = path.name in BRAID_ARITHMETIC_FALSE or ".invalid." in path.name
+        try:
+            unconfirmed = check_spine(json.loads(path.read_text()))
+            if must_be_refused:
+                failures.append(f"{path.name} SHOULD have been refused by the spine check but passed")
+            else:
+                note = f" ({len(unconfirmed)} label(s) unconfirmed: {unconfirmed})" if unconfirmed else ""
+                print(f"  [ok] {path.name} spine verified{note}")
+        except BraidError as e:
+            if must_be_refused:
+                print(f"  [ok] {path.name} refused by the spine check ({e})")
+            else:
+                failures.append(f"{path.name} spine refused: {e}")
     return failures
 
 
@@ -167,6 +202,12 @@ def cmd_selftest() -> int:
             print(f"  [X] {example_name}: expected REJECTION but it validated (TEETH MISSING)")
         else:
             print(f"  [ok] {example_name} rejected ({errors[0]})")
+
+    print("\n== GENESIS BRAID (counting the schema cannot do) ==")
+    braid_failures = check_braid()
+    for msg in braid_failures:
+        print(f"  [X] {msg}")
+    failures += len(braid_failures)
 
     print("\n== OCTONION BOUNDARY (arithmetic the schema cannot do) ==")
     boundary_failures = check_boundaries()

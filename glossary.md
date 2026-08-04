@@ -81,6 +81,17 @@ schemas MUST use these terms and no synonyms. Each entry is one or two lines.
   group and boundary constraints do **not** compose associatively — order can change the verdict,
   and an unrecorded order is not replayable.
 
+- **The braid** — Four spaces (atzilut → beriah → yetzirah → assiah), five phases
+  (**YHShVH**: yod-heh-shin-**vav**-heh), twelve contiguous steps `T0..T11`, and the 343-trit
+  surface (7 × 49 = 7³). Counts are the contract; enforced by `tools/genesis_braid.py`.
+- **Vav** — The fourth phase; the letter means *hook*. It is the connector/bridge phase. Renders
+  that dropped it also dropped its steps — the join vanishing is how the braid silently loses its
+  bridge. See `docs/genesis-braid.md`.
+- **Carry (the goose)** — Advancement you did not walk. On the board a goose doubles your throw;
+  21 and 22 are walked but **23 can only be carried**. The estate's forms are the +1 attestation
+  (M.OS.ES) and Guard Goose. **A carry chain must be capped** — uncapped, it overshoots the goal
+  and lands exactly on the restart square.
+
 ## L0 source-canon discipline (see `docs/L0-genesis-covenant.md`)
 
 - **Dual witness** — A world-changing record is established only by two or more
