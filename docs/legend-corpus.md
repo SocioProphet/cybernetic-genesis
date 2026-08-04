@@ -487,18 +487,20 @@ Rudolf Steiner, in GA 117 (Deeper Secrets of Human History in the Light of the G
 
 ### Design principle
 
-REFERENCED, NOT OPERATIONALISED, AND MARKED AS CONTESTED. This is an esoteric doctrine about a named people's spiritual mission and lineage, and Steiner's writings on peoples and races are a matter of substantial and continuing scholarly criticism. It is recorded here because it was raised and because recording it accurately is better than a vague allusion — typed as TRADITION, never as attested history, and bound to no mechanism. The separable and defensible insight it points at already lives in `foreknowledge-shortcut`: a capacity that skips the process voids a measurement of the process. That entry carries the mechanism; this one carries the citation and the caveat.
+A capacity that skips the process voids a measurement OF the process. Steiner's account — that an older atavistic seership was set aside in favour of thinking, and that seership must henceforth be reached THROUGH thinking rather than around it — is a claim about how a faculty is exchanged for a method, and it binds to the same mechanism as foreknowledge-shortcut: the walked path is the thing being priced, so a shortcut past it is not a faster measurement, it is a different and emptier one. Recorded with its citation and its scholarly contestation, and left for the author to work with on its own terms.
 
 ### Sources
 
 - **tradition** — Rudolf Steiner, GA 117, 'Deeper Secrets of Human History in the Light of the Gospel of St. Matthew' (1909): atavistic clairvoyance not tolerated among the ancient Hebrew people; seership to be reached through rational thinking — <https://rsarchive.org/Lectures/DeepSecrets/19091109p01.html>
-- **boundary** — Steiner's doctrines concerning peoples, races and lineages are substantially contested in scholarship; this entry is reference-only and binds to no code
 - **gap** — The 'mission fulfilled, reconciliation not yet' reading is the author's. CITATION PENDING: a specific passage to anchor it has not yet been pinned here.
 - **tradition** — The horse as the animal figuring human clairvoyance — and horse sacrifice as the marking of its loss — is discussed explicitly by Steiner per the author, who is writing the book this register serves. CITATION PENDING: the specific GA/lecture reference is still to be pinned. My own searches did not surface it, which is a fact about my searching and not about the corpus; the earlier note claiming it was 'not in Steiner' was an overreach and is withdrawn.
+- **tradition** — Steiner's writings on peoples, races and lineages are contested in scholarship — recorded so a reader can weigh the source, NOT as a bar on its use. Citing carefully is scholarship; refusing the binding was an editorial call this register withdraws.
 
 ### Mechanism
 
-**None, deliberately.** This entry is referenced and not operationalised.
+`cybernetic-genesis` → `tools/genesis_braid.py`
+
+> carry_terminus() reports the path actually walked — a capacity that skips the process voids a measurement OF the process
 
 ### Related
 

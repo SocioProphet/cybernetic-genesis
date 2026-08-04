@@ -246,18 +246,21 @@ the development of **rational thinking**. His further claim is that seership mus
 reached *through* that thinking rather than around it: what was once had atavistically must now be
 attained by other methods.
 
-**It is recorded here and it stops there.** This is an esoteric doctrine about a named people's
-spiritual mission and lineage, and **Steiner's writings concerning peoples, races and lineages are a
-matter of substantial and continuing scholarly criticism.** It is typed **`tradition`** — never
-attested history — and carries a **`boundary`**, so `tools/legend_registry.py` enforces that it
-binds to **no mechanism**.
+It is typed **`tradition`** — never attested history — and carries the note that **Steiner's
+writings concerning peoples, races and lineages are contested in scholarship**. That note is there
+so a reader can weigh the source, **not as a bar on its use**.
 
-Recording it accurately is better than alluding to it vaguely; adopting it is a different act, and
-this register does not.
+An earlier version of this entry also carried a `boundary`, which made the registry refuse to bind
+it to any mechanism. **That was withdrawn.** Citing a contested source carefully is scholarship;
+deciding it may not attach to the author's own architecture was an editorial call this register had
+no business making. The Lakota entry keeps its boundary for a different and non-editorial reason —
+its custodians have publicly asked that the material not be appropriated, and honouring a living
+community's stated wish is not the same act.
 
-> **The separable, defensible insight it gestures at already has a home**: a capacity that skips the
-> process voids a measurement *of* the process. That is `foreknowledge-shortcut` above, and it
-> carries the mechanism. **This entry carries the citation and the caveat, and nothing else.**
+> **It binds where it belongs**: a capacity that skips the process voids a measurement *of* the
+> process. Steiner's account is a claim about a faculty exchanged for a method, and that is the same
+> mechanism `foreknowledge-shortcut` carries — the walked path is the thing being priced, so a
+> shortcut past it is not a faster measurement but an emptier one.
 
 *Citations pending, not gaps: the "mission fulfilled, reconciliation not yet" reading and the
 horse-as-clairvoyance treatment are the author's, and the specific passages are still to be pinned
