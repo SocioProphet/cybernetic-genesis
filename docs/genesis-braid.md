@@ -44,11 +44,34 @@ The Game of the Goose (`Jeu de l'Oie`) is the mechanism, and its arithmetic is e
 - **Exact landing.** You must hit 63 exactly; overshoot counts back from the goal. The membrane's
   `thresholds_crossed` is capped at 22 and the bidirectional rule demands ≥ 22, so it is exactly
   22 by construction — overshoot is unrepresentable.
-- **An uncapped carry cascade terminates on death.** From 5 throwing 9 the goose chain doubles:
-  `14 → 23 → 32 → 41 → 50 → 59 → 68`. 68 overshoots 63 by five and bounces back to **58 — the
-  death square, restart the game.** This is the arithmetic argument for `CAP(K)` / `H_max`: a hop
-  budget is not a performance knob, it is what stops an unbounded chain of carries from
-  overshooting into a reset.
+- **THE OPTIMAL IS FORBIDDEN.** A 9 on the first throw carries `9 → 18 → 27 → 36 → 45 → 54 → 63`
+  — exact arrival, first throw, no decisions. The board's own printed legend bars it: rolling 9
+  first sends you to 26 or 53 instead. And the two ways of making 9 land 27 squares apart
+  (`6+3 → 26`, `5+4 → 53`) — **same sum, different decomposition, different fate**, which is the
+  octonion non-associativity again: magnitude is insufficient, composition is load-bearing. Both
+  punishments leave you exactly **one short** of a saving square (27, 54).
+
+- **Two chains, opposite fates — and 23 is on the fatal one.**
+  `9,18,27,36,45,54 → 63` arrives exactly. `5,14,23,32,41,50,59 → 68` overshoots and bounces to
+  **58, the death square.** Every fatal square sits exactly **5 above** a saving square (and 4
+  below the next), and `5 + 4 = 9` — the two escapes are the two parts of the throw. **Descend
+  before ascend:** from 23, down 5 to 18, and the carry then runs clean to the goal.
+
+- **⚠️ CORRECTION — a cap is NOT the control.** An earlier draft of this document claimed `CAP(K)`
+  / `H_max` is what stops the cascade. The board disproves it: the 9-chain runs **six uncapped
+  carries and arrives exactly** (a cap would have truncated a legitimate ascent), while the 5-chain
+  dies at seven (a cap would not save it, only relocate the failure). A cap **punishes the aligned
+  chain and fails the misaligned one.**
+
+  The real condition is arithmetic — **63 = 7 × 9**: nine divides the goal, five does not.
+
+  > **A carry chain may be unbounded iff its step divides the distance to the goal.**
+
+  That is *authority derived from above* — the step is anchored to the terminus rather than chosen
+  locally. *Validated from below* is the exact-landing rule applied at **every hop** rather than
+  only at the goal; the 5-chain fails precisely because nothing checks it until it has already
+  overshot. A cap remains the honest **degraded mode**: where a chain cannot be shown aligned,
+  bound it — and say that is what you are doing. See `carry_is_aligned` / `carry_terminus`.
 
 **Guard Goose** (the goose-notes security layer — scan, classify `public→restricted`, redact,
 stamp `policyRefs`, emit a receipt, and gate sync so restricted content does not leave) is the

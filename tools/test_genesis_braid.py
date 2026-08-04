@@ -101,3 +101,43 @@ def test_the_two_missing_steps_are_the_vav_phase():
     unconfirmed = [s for s in CANON["steps"] if s.get("unconfirmed")]
     assert [s["id"] for s in unconfirmed] == ["T9", "T10"]
     assert {s["phase"] for s in unconfirmed} == {"vav"}
+
+
+# --- the carry: alignment, not a cap ----------------------------------------------------------
+GOAL = 63
+GEESE = set(list(range(5, GOAL, 9)) + list(range(9, GOAL, 9)))
+
+
+def test_nine_divides_the_goal_and_five_does_not():
+    from genesis_braid import carry_is_aligned
+    assert carry_is_aligned(9, GOAL), "63 = 7 x 9"
+    assert not carry_is_aligned(5, GOAL)
+
+
+def test_the_aligned_chain_arrives_exactly_with_no_cap():
+    from genesis_braid import carry_terminus
+    final, path = carry_terminus(0, 9, GOAL, goose=GEESE)
+    assert path == [9, 18, 27, 36, 45, 54, 63]
+    assert final == GOAL, "an aligned carry needs no bound — it terminates on the goal"
+
+
+def test_the_unaligned_chain_overshoots_into_the_death_square():
+    from genesis_braid import carry_terminus
+    final, path = carry_terminus(0, 9, GOAL, goose=GEESE - {9, 18, 27, 36, 45, 54} | {5, 14, 23, 32, 41, 50, 59})
+    # walk the 5-chain explicitly
+    final, path = carry_terminus(5, 9, GOAL, goose={5, 14, 23, 32, 41, 50, 59})
+    assert path[-1] == 68 and final == 58, "overshoot bounces back onto the death square"
+
+
+def test_a_cap_would_truncate_the_perfect_ascent():
+    """The cap is a substitute for alignment: it cuts the good chain and does not save the bad one."""
+    from genesis_braid import carry_terminus
+    _, good = carry_terminus(0, 9, GOAL, goose=GEESE)
+    assert len(good) == 6 + 1, "six carries to arrive; any cap below that forbids arriving"
+
+
+def test_every_fatal_square_is_five_above_a_saving_square():
+    """Descend before ascend: the correction off the unaligned chain is a constant 5."""
+    saving, fatal = [9, 18, 27, 36, 45, 54, 63], [14, 23, 32, 41, 50, 59]
+    assert all((f - 5) in saving for f in fatal)
+    assert all((f + 4) in saving for f in fatal)

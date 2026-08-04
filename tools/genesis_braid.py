@@ -156,3 +156,53 @@ def check(braid: dict, *, strict: bool = False) -> list[str]:
             "corrupted render and must be bound to the source spec before the braid is canonical"
         )
     return unconfirmed
+
+
+# --- The carry: when a chain may be unbounded -------------------------------------------------
+#
+# An earlier draft of docs/genesis-braid.md claimed the hop budget (CAP(K) / H_max) is what stops a
+# carry cascade from overshooting. The board disproves that, and the correction matters:
+#
+#   the 9-chain  9 -> 18 -> 27 -> 36 -> 45 -> 54 -> 63   six carries, NO cap, arrives EXACTLY
+#   the 5-chain  5 -> 14 -> 23 -> 32 -> 41 -> 50 -> 59 -> 68 -> bounces to 58 = death
+#
+# A cap would have TRUNCATED the first — cutting off a legitimate ascent — and would not have saved
+# the second; it would only have relocated the failure. So a cap punishes the aligned chain and
+# fails the misaligned one. It is a substitute for alignment, not the control itself.
+#
+# The real condition is arithmetic. 63 = 7 x 9: nine DIVIDES the goal, five does not.
+#
+#   A carry chain may be unbounded IFF its step divides the distance to the goal.
+#
+# That is "authority derived from above" — the step is anchored to the terminus rather than chosen
+# locally. "Validated from below" is the exact-landing rule, applied at EVERY hop instead of only at
+# the goal: the 5-chain fails precisely because nothing checks it until it has already overshot.
+#
+# A cap remains the honest DEGRADED MODE: where a chain cannot be shown aligned, bound it, and say
+# that is what you are doing.
+
+def carry_is_aligned(step: int, distance: int) -> bool:
+    """True when a carry of `step` can reach `distance` exactly, so the chain needs no cap."""
+    if step <= 0:
+        raise BraidError("a carry step must be positive")
+    return distance % step == 0
+
+
+def carry_terminus(start: int, step: int, goal: int, *, goose: set[int] | None = None) -> tuple[int, list[int]]:
+    """Walk an uncapped carry from `start` and report where it actually ends.
+
+    Returns (final_position, path). Overshoot counts back from the goal, as on the board — which is
+    how an unaligned chain lands somewhere it never chose.
+    """
+    pos, path = start, []
+    while True:
+        pos += step
+        path.append(pos)
+        if goose is not None and pos not in goose:
+            break
+        if goose is None and pos >= goal:
+            break
+        if len(path) > 1000:
+            raise BraidError("carry did not terminate")
+    final = pos if pos <= goal else goal - (pos - goal)
+    return final, path

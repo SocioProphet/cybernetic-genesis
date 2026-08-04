@@ -89,8 +89,13 @@ schemas MUST use these terms and no synonyms. Each entry is one or two lines.
   bridge. See `docs/genesis-braid.md`.
 - **Carry (the goose)** — Advancement you did not walk. On the board a goose doubles your throw;
   21 and 22 are walked but **23 can only be carried**. The estate's forms are the +1 attestation
-  (M.OS.ES) and Guard Goose. **A carry chain must be capped** — uncapped, it overshoots the goal
-  and lands exactly on the restart square.
+  (M.OS.ES) and Guard Goose. **A carry chain may be unbounded iff its step divides the distance to
+  the goal** (63 = 7×9: the 9-chain arrives exactly in six uncapped carries; the 5-chain overshoots
+  into the death square). Alignment is the control; a **cap is the degraded mode** for a chain that
+  cannot be shown aligned — it truncates a good chain and does not save a bad one.
+- **Descend before ascend** — The correction off an unaligned chain. Every fatal square sits exactly
+  5 above a saving square and 4 below the next, and 5 + 4 = 9, the throw: the two escapes are the
+  two parts of the roll. From 23, down 5 to 18, and the carry runs clean to the goal.
 
 - **Initiation (the rename)** — A name change as a governed event: a letter inserted, swapped, or
   dropped. Abram→Abraham (heh in), Sarai→Sarah (yod for heh), Hoshea→**Ye**hoshua (yod added **by
