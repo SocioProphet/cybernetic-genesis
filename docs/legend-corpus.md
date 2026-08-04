@@ -593,3 +593,226 @@ THE RECORD DISAGREES WITH ITSELF ABOUT A NAME, IN AN ENTRY ABOUT A MAN CONDEMNED
 
 `wanderer-no-arrival`, `initiation-rename`, `tamanend-reception`, `sophia-authority`
 
+## Mesingw — the guardian worn in the bear's own skin
+
+`id: mesingw-guardian-of-the-game`
+
+### Narrative
+
+The Mesingw (Misingw, Misinghalikun, 'Living Solid Face') is the Lenape Mask Spirit: guardian and keeper of the game animals — deer, bear and the rest — a sacred medicine being who appears to men in dreams, and a focus of the Big House ceremony. He is impersonated in the bear's OWN SKIN. Harrington (1921) p.34: 'To the back of the mask is fastened the skin of the bear's head, which effectively conceals the head and neck of the impersonator, while the bear's ears, projecting, add to the uncanny effect.' And at p.41, quoting Brainerd's 1745 account — the earliest we have — 'a coat of bear skins, dressed with the hair on, and hanging down to his toes; a pair of bear skin stockings; and a great wooden face painted', red on the right and black on the left, with a stick, a turtle-shell rattle and a bearskin bag. His charge from the creator was to reconcile the people's need for meat with the resentment of the animals eaten.
+
+### Design principle
+
+THE GUARDIAN WEARS WHAT IT GUARDS. The kinship a bear's track only suggests is here PUT ON — a man in the animal's own hide, its ears still projecting. A keeper of the game is not outside the game; it is bound into the thing it protects, and its authority comes from that binding rather than from standing apart. Which is the counterweight to the independence rules elsewhere in this register: a witness must be independent of what it attests, but a GUARDIAN is precisely not — it is answerable to both sides at once, and that is what makes it a guardian rather than an inspector.
+
+### Sources
+
+- **attested** — M. R. Harrington, Religion and Ceremonies of the Lenape (1921), pp. 34, 41 — public domain — <https://www.gutenberg.org/ebooks/72988>
+- **attested** — David Brainerd's 1745 account of the costume, quoted in Harrington p.41
+- **attested** — Mesingw as Keeper/Master of the Game and focus of the Big House ceremony — <http://www.native-languages.org/mesingw.htm>
+- **gap** — The garb being SHED during the ceremony is NOT attested in Harrington, who has the impersonator moving about the camp and following the hunters but never describes it coming off
+- **gap** — A first-bear-hunt coming-of-age legend — a young man skinning his first bear and seeing how like a man it looks — is NOT attested to the Lenape in what could be checked. The MOTIF is real and widespread among northern hunting peoples; 'widespread motif' and 'this people's legend' are different claims
+- **gap** — A Lenape returning-god tied to the bear could not be verified. Mesingw is a GUARDIAN, not a returner
+
+### Mechanism
+
+`bearbrowser` → `scripts/bearbrowser-verify-bearfoot.py`
+
+> the kinship motif is public and general (plantigrade gait, human-like tracks); the ceremonial material is cited from published ethnography and claimed no further
+
+### Related
+
+`bearfoot-uniformity`, `guard-goose-gate`, `tamanend-reception`
+
+## INCEPTION → ADMN → GENESYS → SYSTEM, and ADMN is Adam-N
+
+`id: genesys-space-stack`
+
+### Narrative
+
+The four spaces run idea → identity → admission → runtime. INCEPTION is the seed; ADMN is the user/identity space; GENESYS is admission and provenance (never 'Genesis' — a doc that spells it so is misspelled); SYSTEM is the runtime. ADMN is a play on ADAM-N, not on ADMIN: Adam is the first human whose primordial act is NAMING (Gen 2:19 — the original I-AM), and N is the instance index, the Nth user. It reads as ADMIN and means Adam-N, and it is bijective through angelic chains, each Adam-N paired with a guardian.
+
+### Design principle
+
+IDENTITY IS A NAMING SPACE, NOT AN ACCOUNT TABLE. Putting the user space between the seed and the admission plane says that WHO is asking is resolved before WHAT is admitted — identity is upstream of provenance, not a field on it. And the pun is doing work: the first act of the first user is to name, so the naming operation and the identity operation are the same operation, which is why initiation (a letter changed in a name) belongs to this layer and not to a settings page.
+
+### Sources
+
+- **attested** — Gen 2:19 — the naming of the animals
+- **interpretation** — The INCEPTION→ADMN→GENESYS→SYSTEM stack and the Adam-N reading are Michael Heller's own framework, stated by him and recorded verbatim
+- **tradition** — The angelic-chain pairing, with Michael as guardian, is the author's framework
+
+### Mechanism
+
+`cybernetic-genesis` → `schemas/initiation.schema.json`
+
+> a rename is a first-class governed event at the identity layer, with an attestor distinct from the subject
+
+### Related
+
+`initiation-rename`, `braid-yhshvh`, `membrane-twin-bridge`
+
+## The four Hopf fibrations — and the tower stops at the octonions
+
+`id: hopf-tower-terminates`
+
+### Narrative
+
+Every Hopf fibration is built the same way from a normed division algebra A: the fiber is the unit sphere IN A, the base is the projective line AP¹, the total space is the unit sphere in A². So S⁰→S¹→S¹ (ℝ), S¹→S³→S² (ℂ), S³→S⁷→S⁴ (ℍ), S⁷→S¹⁵→S⁸ (𝕆) — and the fiber index is ALWAYS exactly one below the base index. The source diagrams wrote the quaternionic and octonionic rungs backwards (S⁴→S⁷→S³, S⁸→S¹⁵→S⁷): fiber and base transposed. Dimension arithmetic cannot catch it — 3+4=7 and 7+8=15 hold either way — and the only rung drawn correctly was the one where fiber and base are both S¹ and a swap is invisible.
+
+### Design principle
+
+THE GOVERNANCE BOUNDARY IS A FIBER, NOT A REGION. The octonion shell's halting surface ‖b‖=1 is the unit sphere in 𝕆≅ℝ⁸ — that is S⁷, the FIBER — so governance sits over every point of the base and there is no position from which one is outside it. Transposed, the shell becomes somewhere you could stand beyond. And the tower TERMINATES: Hurwitz gives only ℝ,ℂ,ℍ,𝕆 and Adams (1960) proves Hopf invariant one exists only in dimensions 1,2,4,8, so the eight axes are provably the top rung — non-negotiable as a matter of fact rather than preference.
+
+### Sources
+
+- **attested** — The four Hopf fibrations and their construction from the normed division algebras
+- **attested** — Hurwitz's theorem (only ℝ,ℂ,ℍ,𝕆) and Adams (1960) on Hopf invariant one in dims 1,2,4,8
+- **attested** — Octonion multiplication is non-associative, so S⁷ is not a group and the octonionic fibration is not a principal bundle
+- **gap** — The source diagrams also labelled S¹² twice and placed S¹³ in a Klein-bottle figure; neither has a place in the tower
+
+### Mechanism
+
+`cybernetic-genesis` → `schemas/common.schema.json`
+
+> OctonionBoundary: eight axes, ‖b‖>=1 halts, evaluation_order required in full because composition at a non-associative boundary is order-dependent
+
+### Related
+
+`braid-yhshvh`, `membrane-twin-bridge`, `walking-purchase-instrument`
+
+## The braid — four spaces, five phases, twelve steps, 343 trits
+
+`id: braid-yhshvh`
+
+### Narrative
+
+Four spaces in emanation order: atzilut → beriah → yetzirah → assiah. Five phases spelling YHShVH — yod, heh, SHIN, VAV, heh — the Tetragrammaton with a shin set into it. Twelve contiguous steps T0..T11. And a 343-trit holographic surface: seven layers of forty-nine, 7³, contiguous and non-overlapping across a0..a342, with a harmonic ladder where 111 = 1+10+100, 343 = 7³, and 777+111 = 888. Renders of it dropped beriah from the four spaces, dropped VAV from the phases, skipped T9 and T10 while still calling itself twelve-step, and had trit layers that overlapped and ran backwards.
+
+### Design principle
+
+COUNTS ARE THE CONTRACT, AND VAV IS THE TELL. Every corrupted render failed the same way — dropping a member of a fixed-size set — so the counts live as arithmetic and the diagram is generated from them rather than drawn beside them. And the deletions correlate: the renders that lost VAV also lost T9/T10, which are the vav phase. Vav means HOOK — it is the connector — so the join vanished from both places at once, which is how a braid silently loses its bridge.
+
+### Sources
+
+- **attested** — The four worlds of Kabbalistic cosmology in emanation order
+- **tradition** — YHShVH, the pentagrammaton — a Renaissance kabbalistic construction, not scripture
+- **attested** — 343 = 7³; the harmonic ladder arithmetic checks (111 = 1+10+100, 777+111 = 888)
+- **gap** — T9 and T10 appear in NO source render; their labels are carried as unconfirmed and check(strict=True) refuses them
+
+### Mechanism
+
+`cybernetic-genesis` → `tools/genesis_braid.py`
+
+> four spaces in order, five phases with vav present, twelve contiguous steps, seven contiguous 49-trit layers covering a0..a342 exactly
+
+### Related
+
+`genesys-space-stack`, `hopf-tower-terminates`, `initiation-rename`
+
+## The twin bridge is a membrane, and the bridge repeats at every scale
+
+`id: membrane-twin-bridge`
+
+### Narrative
+
+The Ring/three-space stack governs model serving and updates for OPTED-IN users only, not universally. The twin bridge is a single 1-space system in which the AI connects to and PROTECTS the user's three-space system from the external three-space system — a membrane, not a pipe. Bidirectional flow, the only direction that lets the external space reach the protected one, requires all 22 hermetically-sealed thresholds crossed plus an explicit purpose-bound opt-in; 21 is short. And the INCEPTION→GENESYS bridge is not crossed once: it repeats as the k3s quorum is stood up, again as the twin bridge scales to k8s, and again for the federated global mesh. One bridge, three frequencies.
+
+### Design principle
+
+A PROTECTIVE BOUNDARY MUST DECLARE ITS DIRECTION. Flow direction is stated, not assumed, and the permissive direction costs more than the restrictive one. Consent is purpose-bound and 'not_asked' is never an implied yes. And because the bridge recurs at each scale rather than being crossed once, the same gate must hold at quorum, cluster and mesh — a control that only holds at one frequency is not a control.
+
+### Sources
+
+- **interpretation** — The membrane reading, the 22/21 threshold and the repeating bridge are Michael Heller's framework, stated by him and recorded
+- **attested** — Deut 34 — Moses sees from Pisgah and does not enter, the source of the 21/22 shortfall reading
+
+### Mechanism
+
+`cybernetic-genesis` → `schemas/twin.schema.json`
+
+> flow=bidirectional requires thresholds_crossed>=22 AND consent.state=opted_in; scale is k3s_quorum|k8s|federated_mesh
+
+### Related
+
+`moses-threshold`, `patet-peter-active-active`, `genesys-space-stack`
+
+## PATET / PETER — the active-active pair, and 'active' is a liveness claim
+
+`id: patet-peter-active-active`
+
+### Narrative
+
+Model training and updates run as an ACTIVE-ACTIVE pair of LoRA-tuned foundation models: PATET and PETER. Peter is Kephas, the rock — Simon renamed at John 1:42, which puts the pair inside the same renaming operation the rest of this register turns on. Active-active means both members are live, not a primary with a spare waiting.
+
+### Design principle
+
+'ACTIVE-ACTIVE' IS A CLAIM ABOUT LIVENESS AND MUST BE CHECKABLE. A pair declared active-active with one member idle is the same defect as a quorum satisfied by one repeated signer, or two witnesses with one standing behind the other: the form is satisfied and the substance is not. So the schema demands exactly two live members when the mode is active_active — a claim about redundancy that cannot be verified is a claim about nothing.
+
+### Sources
+
+- **interpretation** — PATET/PETER as the active-active LoRA pair is Michael Heller's framework, stated by him
+- **attested** — John 1:42 — Simon renamed Kephas, 'rock'
+
+### Mechanism
+
+`cybernetic-genesis` → `schemas/genesis_seed.schema.json`
+
+> model_profile.mode=active_active requires exactly two members in pair
+
+### Related
+
+`membrane-twin-bridge`, `initiation-rename`, `quorum-independence`
+
+## The allowlist that killed a pipeline without a red mark
+
+`id: silent-workflow-death`
+
+### Narrative
+
+goose-notes CI reported startup_failure in 0s on every branch from 2026-07-01 to 2026-08-04. The YAML was valid. The repo's Actions policy is `selected` — GitHub-owned and verified-creator actions only — and the workflow used dtolnay/rust-toolchain, which is neither. A disallowed action does not fail a step; it stops the WHOLE WORKFLOW from starting, and GitHub reports it as 'likely a workflow file issue', pointing at the wrong thing. main did not compile for five weeks. check-ui.sh — added precisely because CI had missed a JS syntax error that left the entire capture layer inert in a running app — had never run either.
+
+### Design principle
+
+A CONTROL CAN BE DISABLED BY CONFIGURATION WITHOUT LEAVING A RED MARK. The failure was not in the code, not in the workflow, and not in any test — it was in a policy that silently withdrew permission to start, and its symptom was ABSENCE. So the guard has to run where a human looks: a check that refuses a disallowed `uses:` AT REVIEW TIME, before the pipeline it would disable is the thing meant to catch it.
+
+### Sources
+
+- **attested** — goose-notes CI startup_failure 2026-07-01 to 2026-08-04; repo Actions policy allowed_actions=selected; consent-plane-surface.yml using only actions/* succeeded on the same pushes
+
+### Mechanism
+
+`goose-notes` → `scripts/check-workflow-actions.sh`
+
+> refuses any `uses:` outside the Actions allowlist, in the one job that can still start
+
+### Related
+
+`martha-and-mary`, `hellebore-dead-or-dormant`, `guard-goose-gate`
+
+## Consent decides the act; the gate decides the departure
+
+`id: consent-versus-gate`
+
+### Narrative
+
+goose-guard now carries four parts — two that observe and two that refuse. `scan` classifies and redacts; `receipt` emits the evidence record; `consent` is the decision engine that admits or denies a tool invocation fail-closed, in-process, before it happens; `gate` refuses egress of an already-classified artifact above a destination's ceiling. The two enforcement halves arrived from different directions and were kept apart rather than merged.
+
+### Design principle
+
+PERMISSION TO ACT IS NOT PERMISSION TO SEND. An act can be entirely legitimate and its payload still be too sensitive for the destination it was headed to — so the two questions need two gates, asked at two moments, against two different facts. Collapsing them into one check would make each answer stand in for the other, which is how a control ends up approving something it never examined.
+
+### Sources
+
+- **interpretation** — The act/artifact split is this estate's reading of two independently-built modules
+
+### Mechanism
+
+`goose-notes` → `crates/goose-guard/src/gate.rs`
+
+> consent gates the invocation; gate gates the artifact's departure by destination ceiling, and refuses an unscanned artifact outright
+
+### Related
+
+`guard-goose-gate`, `feet-guarantors`, `silent-workflow-death`
+
